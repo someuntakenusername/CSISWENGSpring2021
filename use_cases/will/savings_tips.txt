@@ -1,0 +1,29 @@
+author: will henderson
+
+Savings Suggestions
+
+Scope: Personal Budgeting App
+Level: user-goal
+Primary Actor: User
+Stakeholders:
+- User: wants advice on saving money by controlling expenses.
+
+Preconditions:
+- Transactions are recorded in the app.
+Postconditions:
+- Adivce displayed to user.
+- Category-specific advice highlights related category.
+
+Main flow:
+1. User request savings advice or triggers advice generation during other action.
+2. All recent recorded transactions, statistics, and display context are applied to an advice rule table.
+3. Localized advice string displayed to user from rule table.
+
+Alternate flow:
+2-5a. No recorded expenses.
+	1. Notify user of inability to generate statistics.
+3a. Number of categories below display limit.
+	1. Display categories up to existing amount.
+4. User wants data sorted differently.
+	1. User selects label of data column to sort by.
+	2. Chart toggles between ascending/descending.
