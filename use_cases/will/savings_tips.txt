@@ -20,10 +20,7 @@ Main flow:
 3. Localized advice string displayed to user from rule table.
 
 Alternate flow:
-2-5a. No recorded expenses.
-	1. Notify user of inability to generate statistics.
-3a. Number of categories below display limit.
-	1. Display categories up to existing amount.
-4. User wants data sorted differently.
-	1. User selects label of data column to sort by.
-	2. Chart toggles between ascending/descending.
+2a. No table entry matches the current conditions.
+	1. No advice is displayed
+2b. Multiple entries match current conditions.
+	1. Select an advice string at random.
