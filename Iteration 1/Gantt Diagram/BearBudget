@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2021-02-17" view-index="1" gantt-divider-location="300" resource-divider-location="300" version="3.0.3002" locale="en_US">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2021-02-17" view-index="0" gantt-divider-location="300" resource-divider-location="300" version="3.0.3002" locale="en_US">
     <description/>
     <view zooming-state="default:1" id="gantt-chart">
         <field id="tpd3" name="Name" width="167" order="0"/>
@@ -33,7 +33,7 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="0" name="prototype" meeting="false" start="2021-02-22" duration="14" complete="0" expand="true">
+        <task id="0" name="Iteration I" meeting="false" start="2021-02-22" duration="14" complete="0" expand="true">
             <task id="4" name="requirement analysis" color="#8cb6ce" meeting="false" start="2021-02-22" duration="2" complete="0" thirdDate="2021-03-01" thirdDate-constraint="0" expand="true">
                 <depend id="6" type="2" difference="0" hardness="Strong"/>
             </task>
@@ -50,7 +50,7 @@
                 <depend id="15" type="2" difference="0" hardness="Strong"/>
             </task>
         </task>
-        <task id="13" name="development" color="#000000" meeting="false" start="2021-03-12" duration="19" complete="0" thirdDate="2021-03-01" thirdDate-constraint="0" expand="true">
+        <task id="13" name="Iteration II" color="#000000" meeting="false" start="2021-03-12" duration="19" complete="0" thirdDate="2021-03-01" thirdDate-constraint="0" expand="true">
             <task id="15" name="analysis" meeting="false" start="2021-03-12" duration="3" complete="0" expand="true">
                 <depend id="17" type="2" difference="0" hardness="Strong"/>
             </task>
@@ -67,7 +67,7 @@
                 <depend id="36" type="2" difference="0" hardness="Strong"/>
             </task>
         </task>
-        <task id="25" name="production" meeting="false" start="2021-04-08" duration="17" complete="0" expand="true">
+        <task id="25" name="Iteration III" color="#000000" meeting="false" start="2021-04-08" duration="17" complete="0" thirdDate="2021-04-08" thirdDate-constraint="0" expand="true">
             <task id="36" name="analysis" meeting="false" start="2021-04-08" duration="3" complete="0" expand="true">
                 <depend id="37" type="2" difference="0" hardness="Strong"/>
             </task>
