@@ -1,5 +1,5 @@
 package esc.baylor.edu.groupProject;
 
-public class Expense {
-
+public class Expense extends Transaction{
+	
 }
