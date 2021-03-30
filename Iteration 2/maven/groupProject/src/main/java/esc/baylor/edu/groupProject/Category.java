@@ -24,7 +24,4 @@ public class Category {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
-	public void addTransaction(Transaction t) {
-		index.add(t.getId());
-	}
 }
