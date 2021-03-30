@@ -1,7 +1,6 @@
 package esc.baylor.edu.groupProject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class TransactionLog {
 	ArrayList<Transaction> tLog;
