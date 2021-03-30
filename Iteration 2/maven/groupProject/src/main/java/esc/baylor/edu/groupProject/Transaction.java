@@ -5,12 +5,8 @@ import java.util.Date;
 public class Transaction {
 	Double amount;
 	Date date;
-	String title;
-	private static int index = -1;
-	
-	public Transaction() {
-		++index;
-	}
+	String title, comment;
+	int id;
 	
 	public Double getAmount() {
 		return amount;
@@ -30,7 +26,11 @@ public class Transaction {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public int getIndex() {
-		return index;
+	public void setId(int id) {
+		this.id = id;
 	}
+	public int getId() {
+		return id;
+	}
+
 }

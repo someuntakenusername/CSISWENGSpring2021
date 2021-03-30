@@ -1,5 +1,5 @@
 package esc.baylor.edu.groupProject;
 
-public class RecurringTransaction {
-
+public class RecurringTransaction extends Transaction {
+	
 }
