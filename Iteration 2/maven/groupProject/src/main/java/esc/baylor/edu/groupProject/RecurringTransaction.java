@@ -1,5 +1,5 @@
 package esc.baylor.edu.groupProject;
 
-public class Subscription {
+public class RecurringTransaction {
 
 }
