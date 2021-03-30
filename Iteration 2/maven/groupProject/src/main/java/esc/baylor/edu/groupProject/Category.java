@@ -3,15 +3,13 @@ package esc.baylor.edu.groupProject;
 import java.util.ArrayList;
 
 public class Category {
-    Category parent = null;
+	Category parent = null;
+    ArrayList<Category> children = null;
     String name, notes;
     
-	public Category getParent() {
-		return parent;
-	}
-	public void setParent(Category parent) {
-		this.parent = parent;
-	}
+    public Category() {
+    	children = new ArrayList<Category>();
+    }
 	public String getName() {
 		return name;
 	}
