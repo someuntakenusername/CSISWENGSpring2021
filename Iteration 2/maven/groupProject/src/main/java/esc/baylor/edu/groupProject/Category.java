@@ -5,11 +5,6 @@ import java.util.ArrayList;
 public class Category {
     Category parent = null;
     String name, notes;
-    ArrayList<Integer> index;
-    
-    public Category() {
-    	index = new ArrayList<Integer>();
-    }
     
 	public Category getParent() {
 		return parent;

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class TransactionLog {
 	ArrayList<Transaction> tLog;
-	ArrayList<Category> cList;
 	
 	public TransactionLog() {
 		tLog = new ArrayList<Transaction>();
