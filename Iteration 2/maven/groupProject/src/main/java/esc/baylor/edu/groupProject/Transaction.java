@@ -6,6 +6,11 @@ public class Transaction {
 	Double amount;
 	Date date;
 	String title;
+	private static int index = -1;
+	
+	public Transaction() {
+		++index;
+	}
 	
 	public Double getAmount() {
 		return amount;
@@ -24,5 +29,8 @@ public class Transaction {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public int getIndex() {
+		return index;
 	}
 }
