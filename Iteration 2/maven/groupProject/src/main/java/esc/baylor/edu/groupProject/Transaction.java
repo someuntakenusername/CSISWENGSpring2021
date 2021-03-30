@@ -3,10 +3,15 @@ package esc.baylor.edu.groupProject;
 import java.util.Date;
 
 public class Transaction {
+	Type type;
 	Double amount;
 	Date date;
 	String title, comment;
 	int id;
+	
+	public Transaction(Type type) {
+		this.type = type;
+	}
 	
 	public Double getAmount() {
 		return amount;
