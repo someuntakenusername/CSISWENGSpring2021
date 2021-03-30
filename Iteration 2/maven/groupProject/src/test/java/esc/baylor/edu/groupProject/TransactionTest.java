@@ -13,11 +13,4 @@ public class TransactionTest {
 	void init() {
 		transaction = new Transaction();
 	}
-	
-	@Test
-	void indexCheck() {
-		transaction = null;
-		transaction = new Transaction();
-		assertEquals(2, transaction.getIndex());
-	}
 }
