@@ -8,11 +8,12 @@ public class Transaction {
 	Date date;
 	String title, comment;
 	int id;
+	boolean recurring;
 	
-	public Transaction(Type type) {
+	public Transaction(Type type, boolean recurring) {
 		this.type = type;
+		this.recurring = recurring;
 	}
-	
 	public Double getAmount() {
 		return amount;
 	}
@@ -36,6 +37,18 @@ public class Transaction {
 	}
 	public int getId() {
 		return id;
+	}
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+	public boolean isRecurring() {
+		return recurring;
+	}
+	public void setRecurring(boolean recurring) {
+		this.recurring = recurring;
 	}
 	
 	@Override

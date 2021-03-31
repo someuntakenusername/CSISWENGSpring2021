@@ -1,6 +1,7 @@
 package esc.baylor.edu.groupProject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class TransactionLog {
@@ -10,9 +11,15 @@ public class TransactionLog {
 	public TransactionLog() {
 		tLog = new HashMap<Integer, Transaction>();
 	}
-	public void addTransaction(Transaction t) {
+	public void addTransaction(Type type, String title, Date date, Double amount, int id, boolean recurring) {
+		Transaction t = new Transaction(type, recurring);
+		t.setTitle(title);
+		t.setDate(date);
+		t.setAmount(amount);
+		t.setId(id);
 		tLog.put(t.getId(), t);
 	}
+	
 	public void removeTransaction(Transaction t) {
 		tLog.remove(t.getId());
 	}

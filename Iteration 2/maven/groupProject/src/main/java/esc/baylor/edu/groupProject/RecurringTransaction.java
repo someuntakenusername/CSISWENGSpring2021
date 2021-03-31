@@ -2,11 +2,12 @@ package esc.baylor.edu.groupProject;
 
 public class RecurringTransaction extends Transaction {
 	
-	public RecurringTransaction(Type type) {
-		super(type);
-	}
-
 	int recurrence;
+	
+	public RecurringTransaction(Type type, int recurrence) {
+		super(type);
+		this.recurrence = recurrence;
+	}
 
 	public int getRecurrence() {
 		return recurrence;
@@ -37,6 +38,6 @@ public class RecurringTransaction extends Transaction {
 			return false;
 		return true;
 	}
-	
-	
+
+
 }
