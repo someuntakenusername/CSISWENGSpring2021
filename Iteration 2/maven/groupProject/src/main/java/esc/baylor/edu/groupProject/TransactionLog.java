@@ -10,6 +10,7 @@ public class TransactionLog {
 	
 	public TransactionLog() {
 		tLog = new HashMap<Integer, Transaction>();
+		cList = new HashMap<Category, ArrayList<Integer>>();
 	}
 	public void addTransaction(Type type, String title, Date date, Double amount, int id, boolean recurring) {
 		Transaction t = new Transaction(type, recurring);
@@ -43,5 +44,8 @@ public class TransactionLog {
 	}
 	public void setcList(HashMap<Category, ArrayList<Integer>> cList) {
 		this.cList = cList;
+	}
+	public void load() {
+		
 	}
 }
