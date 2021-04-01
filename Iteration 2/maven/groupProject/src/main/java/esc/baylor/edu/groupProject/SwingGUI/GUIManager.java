@@ -33,7 +33,7 @@ public class GUIManager {
                 Container content = baseWindow.getContentPane();
                 content.setLayout(new BorderLayout());
                 
-                userTray = new GUIMUserInfoTray();
+                userTray = new GUIUserInfoTray();
                 content.add(userTray,BorderLayout.PAGE_START);
                 
                 //add content panels here
@@ -58,6 +58,6 @@ public class GUIManager {
 		mgr.startGUI();
 	}
 	
-	private GUIMUserInfoTray userTray;
+	private GUIUserInfoTray userTray;
 	private JFrame baseWindow;
 }

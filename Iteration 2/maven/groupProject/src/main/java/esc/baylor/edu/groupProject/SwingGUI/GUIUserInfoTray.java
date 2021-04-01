@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class GUIMUserInfoTray extends JPanel{
+public class GUIUserInfoTray extends JPanel{
 	public JButton getUserSettingBtn() {
 		return userSettingBtn;
 	}
@@ -26,7 +26,7 @@ public class GUIMUserInfoTray extends JPanel{
 	public void setNetDisplay(JTextField netDisplay) {
 		this.netDisplay = netDisplay;
 	}
-	public GUIMUserInfoTray() {
+	public GUIUserInfoTray() {
 		setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         
