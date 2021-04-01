@@ -1,32 +1,22 @@
 package esc.baylor.edu.groupProject.SwingGUI;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 
-import esc.baylor.edu.groupProject.Transaction;
 import esc.baylor.edu.groupProject.TransactionLog;
 import esc.baylor.edu.groupProject.Type;
 
@@ -57,6 +47,7 @@ public class ListDisplay extends JPanel implements ActionListener {
 		details.setActionCommand("Details");
 		details.addActionListener(this);
 		details.setEnabled(false);
+		panel.add(details);
 		panel.add(Box.createHorizontalStrut(15));
 
 		//Remove Button
@@ -93,7 +84,11 @@ public class ListDisplay extends JPanel implements ActionListener {
 			case 0: 
 				return tLog.getTransaction(rowIndex).getTitle();
 			case 1: 
-				return tLog.getTransaction(rowIndex).getAmount();
+				double val = tLog.getTransaction(rowIndex).getAmount();
+				if(tLog.getTransaction(rowIndex).getType().equals(Type.Expense)) {
+					return val*-1;
+				}
+				return val;
 			case 2: 
 				return tLog.getTransaction(rowIndex).getDate();      
 			default: return "Error";

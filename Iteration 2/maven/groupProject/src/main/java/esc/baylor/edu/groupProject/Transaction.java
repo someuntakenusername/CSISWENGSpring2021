@@ -14,6 +14,9 @@ public class Transaction {
 		this.type = type;
 		this.recurring = recurring;
 	}
+	public Type getType() {
+		return type;
+	}
 	public Double getAmount() {
 		return amount;
 	}
