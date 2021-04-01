@@ -1,4 +1,4 @@
-package esc.baylor.edu.groupProject;
+package esc.baylor.edu.groupProject.TransactionObjects;
 
 import java.util.ArrayList;
 

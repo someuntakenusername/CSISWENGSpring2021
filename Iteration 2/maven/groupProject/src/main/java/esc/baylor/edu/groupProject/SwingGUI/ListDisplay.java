@@ -20,8 +20,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 
-import esc.baylor.edu.groupProject.TransactionLog;
-import esc.baylor.edu.groupProject.Types;
+import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
+import esc.baylor.edu.groupProject.TransactionObjects.Types;
 
 public class ListDisplay extends JPanel implements ActionListener {
 	protected TransactionLog tLog;

@@ -13,8 +13,6 @@ import java.awt.event.WindowEvent;
 import java.util.Calendar;
 import java.util.Date;
 
-import esc.baylor.edu.groupProject.Types;
-
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -22,6 +20,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import esc.baylor.edu.groupProject.TransactionObjects.Types;
 
 public class AddFrame extends JFrame implements ActionListener {
 	private ListDisplay parent;
