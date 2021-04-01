@@ -27,44 +27,17 @@ public class GUIManager {
                 Container content = baseWindow.getContentPane();
                 content.setLayout(new BorderLayout());
                 
-                JPanel userTray = new JPanel();
-                userTray.setLayout(new GridBagLayout());
-                GridBagConstraints c = new GridBagConstraints();
-                c.fill = GridBagConstraints.HORIZONTAL;
-                
-                c.weightx = 0;
-                c.gridx = 0;
-                c.gridy = 0;
-                c.ipadx = 10;
-                c.ipady = 10;
-                c.gridheight = 2;
-                userTray.add(new JButton("Button"),c);
-                
-                c.weightx = 0.5;
-                c.gridx = 1;
-                c.gridy = 0;
-                c.ipadx = 0;
-                c.ipady = 0;
-                c.gridheight = 1;
-                userTray.add(new JTextField(),c);
-                
-                c.weightx = 0.5;
-                c.gridx = 1;
-                c.gridy = 1;
-                c.ipadx = 0;
-                c.ipady = 0;
-                userTray.add(new JTextField(),c);
-                
+                userTray = new GUIMUserInfoTray();
                 content.add(userTray,BorderLayout.PAGE_START);
                 
                 JTabbedPane tabs = new JTabbedPane();
-                tabs.addTab("Tab 1", new JPanel());
+                tabs.addTab("Tab 1", new ListDisplay());
                 tabs.addTab("Tab 2", new JPanel());
                 tabs.addTab("Tab 3", new JPanel());
                 
                 content.add(tabs,BorderLayout.CENTER);
             	
-            	baseWindow.pack();
+            	baseWindow.setSize(640, 480);
             	baseWindow.setVisible(true);
             }
         });
@@ -75,5 +48,6 @@ public class GUIManager {
 		mgr.startGUI();
 	}
 	
+	private GUIMUserInfoTray userTray;
 	private JFrame baseWindow;
 }
