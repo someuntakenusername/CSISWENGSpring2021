@@ -12,10 +12,12 @@ import javax.swing.*;
 
 public class GUIManager {
 	//all UI components should use this as the event handler
-	public static class ActionHandler implements ActionListener{
+	public class ActionHandler implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+			if(e.equals(ExpensesPanel.CMD_ADD_EXPENSE)){
+				expensePane.showAddExpenseDialog();
+			}
 		}		
 	}
 	
@@ -25,8 +27,9 @@ public class GUIManager {
 	 *	Builds & displays the main window. Should be called only once on start-up
 	 */
 	public void startGUI() {
+		//create new thread
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
+            public void run() {            	
             	baseWindow = new JFrame("BearBudget");            	
             	baseWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 
@@ -38,9 +41,8 @@ public class GUIManager {
                 
                 //add content panels here
                 JTabbedPane tabs = new JTabbedPane();
-                tabs.addTab("Tab 1", new ListDisplay());
-                tabs.addTab("Tab 2", new JPanel());
-                tabs.addTab("Tab 3", new JPanel());
+                tabs.addTab("Overview", new OverviewPanel());
+                tabs.addTab("Expenses", new ExpensesPanel());
                 
                 content.add(tabs,BorderLayout.CENTER);
             	
@@ -58,6 +60,7 @@ public class GUIManager {
 		mgr.startGUI();
 	}
 	
+	private ExpensesPanel expensePane;
 	private GUIUserInfoTray userTray;
 	private JFrame baseWindow;
 }
