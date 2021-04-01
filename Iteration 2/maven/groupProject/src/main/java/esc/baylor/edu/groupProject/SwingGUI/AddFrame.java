@@ -5,6 +5,8 @@ import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
@@ -32,6 +34,18 @@ public class AddFrame extends JFrame implements ActionListener {
 		//Setup title and amount fields
 		title = new JTextField(50);
 		amount = new JTextField(20);
+		//Limit amount to numbers
+		amount.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent ke) {
+				if((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyChar() == '.' && !amount.getText().contains(".")) {
+					amount.setEditable(true);
+				}  else if(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
+					amount.setEditable(true);
+				} else {
+					amount.setEditable(false);
+				}
+			}
+		});
 
 		//Recurrence checkbox
 		recurring = new JCheckBox();
