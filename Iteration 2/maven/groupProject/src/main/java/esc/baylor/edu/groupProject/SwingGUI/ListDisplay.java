@@ -34,7 +34,6 @@ public class ListDisplay extends JPanel implements ActionListener {
 		super(new BorderLayout());
 		//Load Transaction List and Populate List Model
 		tLog = new TransactionLog();
-		tLog.load();
 		model = new TransactionTableModel();
 		table = new JTable(model);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -48,6 +47,7 @@ public class ListDisplay extends JPanel implements ActionListener {
 		panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
 		
+		/*
 		//Add Button
 		add = new JButton("New Transaction");
 		add.setActionCommand("New");
@@ -63,7 +63,7 @@ public class ListDisplay extends JPanel implements ActionListener {
 		details.setEnabled(false);
 		panel.add(details);
 		panel.add(Box.createHorizontalStrut(30));
-
+		
 		//Remove Button
 		remove = new JButton("Remove");
 		remove.setActionCommand("Remove");
@@ -72,6 +72,7 @@ public class ListDisplay extends JPanel implements ActionListener {
 		panel.add(remove);
 		panel.setBounds(new Rectangle(100, 100));
 		add(panel, BorderLayout.PAGE_END);
+		*/
 	}
 	
 	class TransactionTableModel extends AbstractTableModel {
@@ -120,8 +121,8 @@ public class ListDisplay extends JPanel implements ActionListener {
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
 			if(table.getSelectedRow() == -1) {
-				details.setEnabled(false);
-				remove.setEnabled(false);
+				//details.setEnabled(false);
+				//remove.setEnabled(false);
 			}
 			else {
 				//details.setEnabled(true);
@@ -132,7 +133,16 @@ public class ListDisplay extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getActionCommand().equals("CMD_ADD_EXPENSE")) {
+			new AddFrame(this);
+		} else if(e.getActionCommand().equals("CMD_DELETE_EXPENSE")) {
+			int i = JOptionPane.showConfirmDialog (this, "Are you sure you want to delete this transaction?", "Warning", JOptionPane.YES_NO_OPTION);
+			if(i == JOptionPane.YES_OPTION) {
+				tLog.removeTransaction(tLog.getTransaction(table.getSelectedRow()));
+				model.fireTableDataChanged();
+			}
+			
+		}
 		
 	}
 }

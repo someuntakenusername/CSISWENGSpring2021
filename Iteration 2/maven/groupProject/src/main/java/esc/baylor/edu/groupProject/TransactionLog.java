@@ -25,13 +25,14 @@ public class TransactionLog {
 		t.setId(id);
 		tSort.add(id++);
 		tLog.put(t.getId(), t);
-		sort();
+		//sort();
 	}
 	
 	public Transaction getTransaction(int index) {
 		return tLog.get(tSort.get(index));
 	}
 	public void removeTransaction(Transaction t) {
+		tSort.remove(tSort.indexOf(t.getId()));
 		tLog.remove(t.getId());
 	}
 	

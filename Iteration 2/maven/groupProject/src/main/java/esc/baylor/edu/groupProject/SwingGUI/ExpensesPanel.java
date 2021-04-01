@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class ExpensesPanel extends JPanel implements ActionListener{
+public class ExpensesPanel extends JPanel{
 	public ExpensesPanel() {
 		setLayout(new BorderLayout());
 		
@@ -18,7 +18,7 @@ public class ExpensesPanel extends JPanel implements ActionListener{
 		
 		addBtn = new JButton("Add Expense");
 		addBtn.setActionCommand(CMD_ADD_EXPENSE);
-		addBtn.addActionListener(this);
+		addBtn.addActionListener(list);
 		subpanel.add(addBtn);
 		
 		editBtn = new JButton("Edit Expense");
@@ -26,6 +26,7 @@ public class ExpensesPanel extends JPanel implements ActionListener{
 		subpanel.add(editBtn);
 		
 		deleteBtn = new JButton("Delete Expense");
+		deleteBtn.addActionListener(list);
 		deleteBtn.setActionCommand(CMD_DELETE_EXPENSE);
 		subpanel.add(deleteBtn);
 		
@@ -38,12 +39,4 @@ public class ExpensesPanel extends JPanel implements ActionListener{
 	public static final String CMD_ADD_EXPENSE = "CMD_ADD_EXPENSE",
 								CMD_EDIT_EXPENSE = "CND_EDIT_EXPENSE",
 								CMD_DELETE_EXPENSE = "CMD_DELETE_EXPENSE";
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals(CMD_ADD_EXPENSE)) {
-			new AddFrame(list);
-		} else if(e.getActionCommand().equals(CMD_DELETE_EXPENSE)){
-			
-		}
-	}
 }
