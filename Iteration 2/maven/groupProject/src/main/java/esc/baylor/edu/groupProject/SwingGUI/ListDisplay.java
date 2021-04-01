@@ -21,7 +21,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 
 import esc.baylor.edu.groupProject.TransactionLog;
-import esc.baylor.edu.groupProject.Type;
+import esc.baylor.edu.groupProject.Types;
 
 public class ListDisplay extends JPanel implements ActionListener {
 	private TransactionLog tLog;
@@ -104,7 +104,7 @@ public class ListDisplay extends JPanel implements ActionListener {
 				return tLog.getTransaction(rowIndex).getTitle();
 			case 1: 
 				double val = tLog.getTransaction(rowIndex).getAmount();
-				if(tLog.getTransaction(rowIndex).getType().equals(Type.Expense)) {
+				if(tLog.getTransaction(rowIndex).getType().equals(Types.Expense)) {
 					return val*-1;
 				}
 				return val;

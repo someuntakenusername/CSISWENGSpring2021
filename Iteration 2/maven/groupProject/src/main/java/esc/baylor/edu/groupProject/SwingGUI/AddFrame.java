@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
+import esc.baylor.edu.groupProject.Types;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -29,7 +30,13 @@ public class AddFrame extends JFrame implements ActionListener {
 		super("Add New Transaction");
 		this.parent = parent;
 		//Setup 4x2 panel
-		panel = new JPanel(new GridLayout(5, 2));
+		panel = new JPanel(new GridLayout(6, 2));
+		
+		//Type options
+		Object [] options = {Types.Expense, Types.Income};
+		type.setOptions(options);
+		panel.add(new JLabel("Type"));
+		panel.add(type);
 
 		//Setup title and amount fields
 		title = new JTextField(50);
