@@ -3,6 +3,7 @@ package esc.baylor.edu.groupProject.SwingGUI;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -31,7 +32,7 @@ public class GUIUserInfoTray extends JPanel{
         GridBagConstraints c = new GridBagConstraints();
         
         //user settings button
-        userSettingBtn = new JButton("User");  
+        userSettingBtn = new JButton(new ImageIcon("./resources/ui/user_default_64res.png"));
         //take up the same height as the two text displays
         c.weightx = 0;
         c.gridx = 0;
