@@ -44,9 +44,7 @@ public class ListDisplay extends JPanel implements ListSelectionListener {
 		JScrollPane listPane = new JScrollPane(list);
 		
 		//Add List to panel and then to frame
-		panel = new JPanel();
-		panel.add(listPane);
-		add(panel, BorderLayout.PAGE_START);
+		add(listPane, BorderLayout.PAGE_START);
 		
 		//Button Panel
 		panel = new JPanel(new GridLayout(1, 2));
@@ -55,32 +53,37 @@ public class ListDisplay extends JPanel implements ListSelectionListener {
 		details = new JButton("Details");
 		details.setActionCommand("Details");
 		details.addActionListener(new DetailListener());
+		details.setEnabled(false);
 		panel.add(details);
 		
 		//Remove Button
 		remove = new JButton("Remove");
 		remove.setActionCommand("Remove");
 		remove.addActionListener(new RemoveListener());
+		remove.setEnabled(false);
 		panel.add(remove);
 		
-		panel.setBounds(new Rectangle(100, 100));
 		add(panel, BorderLayout.PAGE_END);
 	}
 	
 	class DetailListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			//Fetch Selected Tranasction and remove from list
 			Transaction t = (Transaction)list.getSelectedValue();
 			listModel.remove(list.getSelectedIndex());
+			
+			//Reset Selection
+			list.setSelectedIndex(-1);
+			details.setEnabled(false);
+			remove.setEnabled(false);
 		}
 		
 	}
 	
 	class RemoveListener implements ActionListener {
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 		
@@ -91,11 +94,11 @@ public class ListDisplay extends JPanel implements ListSelectionListener {
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting() == false) {
             if (list.getSelectedIndex() == -1) {
-            //No selection, disable fire button.
+            //No selection, disable detail and remove buttons
                 details.setEnabled(false);
                 remove.setEnabled(false);
             } else {
-            //Selection, enable the fire button.
+            //Opposite of above
             	details.setEnabled(true);
                 remove.setEnabled(true);
             }
