@@ -9,8 +9,4 @@ public class TransactionTest {
 	
 	Transaction transaction;
 	
-	@BeforeEach
-	void init() {
-		transaction = new Transaction();
-	}
 }

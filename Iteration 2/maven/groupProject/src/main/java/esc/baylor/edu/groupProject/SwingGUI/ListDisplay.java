@@ -11,28 +11,34 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 
 import esc.baylor.edu.groupProject.TransactionLog;
-import esc.baylor.edu.groupProject.Type;
+import esc.baylor.edu.groupProject.Types;
 
 public class ListDisplay extends JPanel implements ActionListener {
-	private TransactionLog tLog;
-	private JTable table;
+	protected TransactionLog tLog;
+	protected JTable table;
+	protected TransactionTableModel model;
 	JPanel panel;
-	JButton details, remove;
+	JButton add, details, remove;
 
 	public ListDisplay() {
 		super(new BorderLayout());
 		//Load Transaction List and Populate List Model
 		tLog = new TransactionLog();
 		tLog.load();
-		table = new JTable(new TransactionTableModel());
+		model = new TransactionTableModel();
+		table = new JTable(model);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.getSelectionModel().addListSelectionListener(new TableListSelection());
 		JScrollPane scroll = new JScrollPane(table);
 		
 		add(scroll, BorderLayout.PAGE_START);
@@ -41,6 +47,14 @@ public class ListDisplay extends JPanel implements ActionListener {
 		panel = new JPanel(new GridLayout(1, 2));
 		panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
+		
+		//Add Button
+		add = new JButton("New Transaction");
+		add.setActionCommand("New");
+		add.addActionListener(this);
+		add.setEnabled(true);
+		panel.add(add);
+		panel.add(Box.createHorizontalStrut(30));
 
 		//Details Button
 		details = new JButton("Details");
@@ -48,7 +62,7 @@ public class ListDisplay extends JPanel implements ActionListener {
 		details.addActionListener(this);
 		details.setEnabled(false);
 		panel.add(details);
-		panel.add(Box.createHorizontalStrut(15));
+		panel.add(Box.createHorizontalStrut(30));
 
 		//Remove Button
 		remove = new JButton("Remove");
@@ -77,6 +91,11 @@ public class ListDisplay extends JPanel implements ActionListener {
 		public String getColumnName(int columnIndex) {
 			return columnNames[columnIndex];
 		}
+		
+		@Override
+		public boolean isCellEditable(int rowIndex, int columnIndex) {
+			return false;
+		}
 
 		@Override
 		public Object getValueAt(int rowIndex, int columnIndex) {
@@ -85,7 +104,7 @@ public class ListDisplay extends JPanel implements ActionListener {
 				return tLog.getTransaction(rowIndex).getTitle();
 			case 1: 
 				double val = tLog.getTransaction(rowIndex).getAmount();
-				if(tLog.getTransaction(rowIndex).getType().equals(Type.Expense)) {
+				if(tLog.getTransaction(rowIndex).getType().equals(Types.Expense)) {
 					return val*-1;
 				}
 				return val;
@@ -93,37 +112,27 @@ public class ListDisplay extends JPanel implements ActionListener {
 				return tLog.getTransaction(rowIndex).getDate();      
 			default: return "Error";
 			}
-		}
-		
+		}	
 	}
-
 	
-	private static void createAndShowGUI() {
-        //Create and set up the window.
-        JFrame frame = new JFrame("ListDemo");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	class TableListSelection implements ListSelectionListener{
 
-        //Create and set up the content pane.
-        JComponent newContentPane = new ListDisplay();
-        newContentPane.setOpaque(true); //content panes must be opaque
-        frame.setContentPane(newContentPane);
-
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
-    }
+		@Override
+		public void valueChanged(ListSelectionEvent e) {
+			if(table.getSelectedRow() == -1) {
+				details.setEnabled(false);
+				remove.setEnabled(false);
+			}
+			else {
+				//details.setEnabled(true);
+				//remove.setEnabled(true);
+			}
+		}
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
-
 }

@@ -1,6 +1,6 @@
 package esc.baylor.edu.groupProject;
 
-public enum Type {
+public enum Types {
 	Income,
 	Expense
 }
