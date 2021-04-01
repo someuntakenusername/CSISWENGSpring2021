@@ -2,6 +2,7 @@ package esc.baylor.edu.groupProject.SwingGUI;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -32,7 +33,8 @@ public class GUIUserInfoTray extends JPanel{
         GridBagConstraints c = new GridBagConstraints();
         
         //user settings button
-        userSettingBtn = new JButton(new ImageIcon("./resources/ui/user_default_64res.png"));
+        userSettingBtn = new JButton(new ImageIcon("./resources/ui/user_default_32res.png"));
+        userSettingBtn.setMargin(new Insets(0,0,0,0));
         //take up the same height as the two text displays
         c.weightx = 0;
         c.gridx = 0;
