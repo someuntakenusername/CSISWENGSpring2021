@@ -10,6 +10,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -43,11 +45,12 @@ public class ListDisplay extends JPanel implements ListSelectionListener {
 		list.setVisibleRowCount(15);
 		JScrollPane listPane = new JScrollPane(list);
 		
-		//Add List to panel and then to frame
+		//Add List to frame
 		add(listPane, BorderLayout.PAGE_START);
 		
 		//Button Panel
-		panel = new JPanel(new GridLayout(1, 2));
+		panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
 		
 		//Details Button
 		details = new JButton("Details");
@@ -55,6 +58,7 @@ public class ListDisplay extends JPanel implements ListSelectionListener {
 		details.addActionListener(new DetailListener());
 		details.setEnabled(false);
 		panel.add(details);
+		panel.add(Box.createHorizontalStrut(15));
 		
 		//Remove Button
 		remove = new JButton("Remove");
@@ -62,21 +66,14 @@ public class ListDisplay extends JPanel implements ListSelectionListener {
 		remove.addActionListener(new RemoveListener());
 		remove.setEnabled(false);
 		panel.add(remove);
-		
+
 		add(panel, BorderLayout.PAGE_END);
 	}
 	
 	class DetailListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			//Fetch Selected Tranasction and remove from list
-			Transaction t = (Transaction)list.getSelectedValue();
-			listModel.remove(list.getSelectedIndex());
 			
-			//Reset Selection
-			list.setSelectedIndex(-1);
-			details.setEnabled(false);
-			remove.setEnabled(false);
 		}
 		
 	}
@@ -84,7 +81,13 @@ public class ListDisplay extends JPanel implements ListSelectionListener {
 	class RemoveListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			//Fetch Selected Transaction and remove from list
+			listModel.remove(list.getSelectedIndex());
 			
+			//Reset Selection
+			list.setSelectedIndex(-1);
+			details.setEnabled(false);
+			remove.setEnabled(false);
 		}
 		
 	}
