@@ -3,6 +3,7 @@ package esc.baylor.edu.groupProject.SwingGUI;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -10,24 +11,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class GUIUserInfoTray extends JPanel{
-	public JButton getUserSettingBtn() {
-		return userSettingBtn;
+	public void updateBalanceDisplay(String str) {
+		balanceDisplay.setText(str);
 	}
-	public void setUserSettingBtn(JButton userSettingBtn) {
-		this.userSettingBtn = userSettingBtn;
+	
+	public void updateNetDisplay(String str) {
+		netDisplay.setText(str);
 	}
-	public JTextField getBalanceDisplay() {
-		return balanceDisplay;
-	}
-	public void setBalanceDisplay(JTextField balanceDisplay) {
-		this.balanceDisplay = balanceDisplay;
-	}
-	public JTextField getNetDisplay() {
-		return netDisplay;
-	}
-	public void setNetDisplay(JTextField netDisplay) {
-		this.netDisplay = netDisplay;
-	}
+	
 	public GUIUserInfoTray() {
 		setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -60,6 +51,10 @@ public class GUIUserInfoTray extends JPanel{
         c.gridx = 1;
         c.gridy = 1;
         add(netDisplay,c);
+	}
+	
+	public void addActionListener(ActionListener l) {
+		userSettingBtn.addActionListener(l);
 	}
 	
 	private JButton	userSettingBtn;
