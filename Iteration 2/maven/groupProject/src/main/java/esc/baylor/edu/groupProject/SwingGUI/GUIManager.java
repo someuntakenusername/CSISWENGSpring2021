@@ -11,16 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class GUIManager {
-	//all UI components should use this as the event handler
-	public class ActionHandler implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if(e.equals(ExpensesPanel.CMD_ADD_EXPENSE)){
-				expensePane.showAddExpenseDialog();
-			}
-		}		
-	}
-	
+
 	/*
 	 *	startGUI
 	 *

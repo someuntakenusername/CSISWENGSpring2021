@@ -5,31 +5,45 @@ import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
+import java.util.Calendar;
+import java.util.Date;
+
+import esc.baylor.edu.groupProject.Types;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class AddFrame extends JFrame implements ActionListener {
-	private JPanel parent;
+public class AddFrame extends JFrame implements ActionListener, ItemListener {
+	private ListDisplay parent;
 	private JPanel panel;
 	private JTextField title, amount;
 	private JCheckBox recurring;
-	private JOptionPane type;
+	private JComboBox<Types> type;
 	private JButton confirm, cancel;
+	private boolean recur = false;
 
-	public AddFrame(JPanel parent) {
+	public AddFrame(ListDisplay parent) {
 		super("Add New Transaction");
 		this.parent = parent;
 		//Setup 4x2 panel
-		panel = new JPanel(new GridLayout(5, 2));
+		panel = new JPanel(new GridLayout(6, 2));
+		
+		//Type options
+		Types [] options = {Types.Expense, Types.Income};
+		type = new JComboBox<Types>(options);
+		panel.add(new JLabel("Type"));
+		panel.add(type);
 
 		//Setup title and amount fields
 		title = new JTextField(50);
@@ -49,6 +63,7 @@ public class AddFrame extends JFrame implements ActionListener {
 
 		//Recurrence checkbox
 		recurring = new JCheckBox();
+		recurring.addActionListener(this);
 
 		//Buttons
 		confirm = new JButton("Confirm");
@@ -74,12 +89,23 @@ public class AddFrame extends JFrame implements ActionListener {
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
+	
+	public void itemStateChanged(ItemEvent e) {
+        if (e.getStateChange() == ItemEvent.DESELECTED) {
+            recur = false;
+        } else {
+        	recur = true;
+        }
+    }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton clicked = (JButton)e.getSource();
 		if(clicked.equals(confirm)) {
-			
+			//Types type, String title, Date date, Double amount, boolean recurring
+			parent.tLog.addTransaction((Types)type.getSelectedItem(), title.getText(), new Date(), Double.parseDouble(amount.getText()), recur);
+			parent.model.fireTableDataChanged();
+			this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		}  else if (clicked.equals(cancel)) {
 			this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		}

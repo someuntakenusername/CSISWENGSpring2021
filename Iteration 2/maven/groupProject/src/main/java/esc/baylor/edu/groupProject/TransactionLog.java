@@ -17,7 +17,7 @@ public class TransactionLog {
 		tSort = new ArrayList<Integer>();
 		load();
 	}
-	public void addTransaction(Type type, String title, Date date, Double amount, int id, boolean recurring) {
+	public void addTransaction(Types type, String title, Date date, Double amount, boolean recurring) {
 		Transaction t = new Transaction(type, recurring);
 		t.setTitle(title);
 		t.setDate(date);
@@ -61,7 +61,7 @@ public class TransactionLog {
 	}
 	public void load() {
 		id = 0;
-		Transaction t = new Transaction(Type.Expense, false);
+		Transaction t = new Transaction(Types.Expense, false);
 		t.setTitle("Test Title");
 		t.setAmount(15.0);
 		t.setDate(new Date());

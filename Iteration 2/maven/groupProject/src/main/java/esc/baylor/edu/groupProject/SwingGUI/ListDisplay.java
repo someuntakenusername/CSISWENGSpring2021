@@ -21,12 +21,12 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 
 import esc.baylor.edu.groupProject.TransactionLog;
-import esc.baylor.edu.groupProject.Type;
+import esc.baylor.edu.groupProject.Types;
 
 public class ListDisplay extends JPanel implements ActionListener {
-	private TransactionLog tLog;
-	private JTable table;
-	private TransactionTableModel model;
+	protected TransactionLog tLog;
+	protected JTable table;
+	protected TransactionTableModel model;
 	JPanel panel;
 	JButton add, details, remove;
 
@@ -104,7 +104,7 @@ public class ListDisplay extends JPanel implements ActionListener {
 				return tLog.getTransaction(rowIndex).getTitle();
 			case 1: 
 				double val = tLog.getTransaction(rowIndex).getAmount();
-				if(tLog.getTransaction(rowIndex).getType().equals(Type.Expense)) {
+				if(tLog.getTransaction(rowIndex).getType().equals(Types.Expense)) {
 					return val*-1;
 				}
 				return val;
@@ -124,48 +124,15 @@ public class ListDisplay extends JPanel implements ActionListener {
 				remove.setEnabled(false);
 			}
 			else {
-				details.setEnabled(true);
-				remove.setEnabled(true);
+				//details.setEnabled(true);
+				//remove.setEnabled(true);
 			}
 		}
-		
 	}
-
-	
-	private static void createAndShowGUI() {
-        //Create and set up the window.
-        JFrame frame = new JFrame("ListDemo");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //Create and set up the content pane.
-        JComponent newContentPane = new ListDisplay();
-        newContentPane.setOpaque(true); //content panes must be opaque
-        frame.setContentPane(newContentPane);
-
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
-    }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("Remove")) {
-			int i = JOptionPane.showConfirmDialog(this,  "Are you sure you want to delete this transaction?");
-			if(i == JOptionPane.YES_OPTION) {
-				tLog.removeTransaction(tLog.getTransaction(table.getSelectedRow()));
-				model.fireTableDataChanged();
-			}
-		} else if(e.getActionCommand().equals("New")) {
-			new AddFrame(this);
-		}
+		// TODO Auto-generated method stub
+		
 	}
-
 }

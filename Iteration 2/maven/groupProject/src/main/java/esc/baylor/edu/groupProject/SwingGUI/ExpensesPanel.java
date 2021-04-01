@@ -32,21 +32,6 @@ public class ExpensesPanel extends JPanel implements ActionListener{
 		add(subpanel, BorderLayout.PAGE_END);
 	}
 	
-	public void showAddExpenseDialog() {
-		AddFrame add = new AddFrame(this);
-	}
-	
-	/*
-	 * 	addActionListener
-	 * 
-	 * 	relays action listeners to child elements
-	 */
-	public void addActionListener(ActionListener l) {
-		addBtn.addActionListener(l);
-		editBtn.addActionListener(l);
-		deleteBtn.addActionListener(l);
-	}
-	
 	public ListDisplay list;
 	private JButton addBtn, editBtn, deleteBtn;
 	//action commands
@@ -55,6 +40,10 @@ public class ExpensesPanel extends JPanel implements ActionListener{
 								CMD_DELETE_EXPENSE = "CMD_DELETE_EXPENSE";
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		new AddFrame(this);		
+		if(e.getActionCommand().equals(CMD_ADD_EXPENSE)) {
+			new AddFrame(list);
+		} else if(e.getActionCommand().equals(CMD_DELETE_EXPENSE)){
+			
+		}
 	}
 }
