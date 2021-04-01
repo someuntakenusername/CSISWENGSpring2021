@@ -19,100 +19,88 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.AbstractTableModel;
 
 import esc.baylor.edu.groupProject.Transaction;
 import esc.baylor.edu.groupProject.TransactionLog;
 import esc.baylor.edu.groupProject.Type;
 
-public class ListDisplay extends JPanel implements ListSelectionListener {
-	private JList list;
-	private DefaultListModel listModel;
-	TransactionLog tLog;
+public class ListDisplay extends JPanel implements ActionListener {
+	private TransactionLog tLog;
+	private JTable table;
 	JPanel panel;
 	JButton details, remove;
-	
+
 	public ListDisplay() {
 		super(new BorderLayout());
 		//Load Transaction List and Populate List Model
 		tLog = new TransactionLog();
-		populateList();
-		list = new JList(listModel);
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.addListSelectionListener(this);
-		list.setVisibleRowCount(15);
-		JScrollPane listPane = new JScrollPane(list);
-	
-		//Intermediate JPanel confuses renderer and make list small
-		//panel = new JPanel();
-		//panel.add(listPane);
-
-		//Add List to frame
-		add(listPane, BorderLayout.PAGE_START);
+		tLog.load();
+		table = new JTable(new TransactionTableModel());
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		JScrollPane scroll = new JScrollPane(table);
 		
+		add(scroll, BorderLayout.PAGE_START);
+
 		//Button Panel
 		panel = new JPanel(new GridLayout(1, 2));
 		panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
-		
+
 		//Details Button
 		details = new JButton("Details");
 		details.setActionCommand("Details");
-		details.addActionListener(new DetailListener());
+		details.addActionListener(this);
 		details.setEnabled(false);
 		panel.add(details);
 		panel.add(Box.createHorizontalStrut(15));
-		
+
 		//Remove Button
 		remove = new JButton("Remove");
 		remove.setActionCommand("Remove");
-		remove.addActionListener(new RemoveListener());
+		remove.addActionListener(this);
 		remove.setEnabled(false);
 		panel.add(remove);
 		panel.setBounds(new Rectangle(100, 100));
-
-		add(panel, BorderLayout.PAGE_END);
+		add(panel, BorderLayout.CENTER);
 	}
 	
-	class DetailListener implements ActionListener {
+	class TransactionTableModel extends AbstractTableModel {
+		
+		private String[] columnNames = {"Title", "Amount", "Date"};
+		
 		@Override
-		public void actionPerformed(ActionEvent e) {
-			
+		public int getRowCount() {
+			return tLog.size();
+		}
+
+		@Override
+		public int getColumnCount() {
+			return columnNames.length;
+		}
+		
+		public String getColumnName(int columnIndex) {
+			return columnNames[columnIndex];
+		}
+
+		@Override
+		public Object getValueAt(int rowIndex, int columnIndex) {
+			switch (columnIndex) {
+			case 0: 
+				return tLog.getTransaction(rowIndex).getTitle();
+			case 1: 
+				return tLog.getTransaction(rowIndex).getAmount();
+			case 2: 
+				return tLog.getTransaction(rowIndex).getDate();      
+			default: return "Error";
+			}
 		}
 		
 	}
-	
-	class RemoveListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			//Fetch Selected Transaction and remove from list
-			listModel.remove(list.getSelectedIndex());
-			
-			//Reset Selection
-			list.setSelectedIndex(-1);
-			details.setEnabled(false);
-			remove.setEnabled(false);
-		}
-		
-	}
-	
-
-	//This method is required by ListSelectionListener.
-    public void valueChanged(ListSelectionEvent e) {
-        if (e.getValueIsAdjusting() == false) {
-            if (list.getSelectedIndex() == -1) {
-            //No selection, disable detail and remove buttons
-                details.setEnabled(false);
-                remove.setEnabled(false);
-            } else {
-            //Opposite of above
-            	details.setEnabled(true);
-                remove.setEnabled(true);
-            }
-        }
-    }
 
 	
 	private static void createAndShowGUI() {
@@ -137,15 +125,10 @@ public class ListDisplay extends JPanel implements ListSelectionListener {
             }
         });
     }
-    
-    private void populateList() {
-    	tLog.load();
-    	listModel = new DefaultListModel();
-    	Transaction t = new Transaction(Type.Expense, false);
-    	t.setTitle("Test Title");
-    	t.setAmount(5.0);
-    	t.setDate(new Date());
-    	listModel.addElement(t.getTitle());
-    }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+	}
 
 }
