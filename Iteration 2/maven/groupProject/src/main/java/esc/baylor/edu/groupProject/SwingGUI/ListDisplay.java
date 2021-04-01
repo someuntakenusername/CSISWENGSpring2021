@@ -44,11 +44,16 @@ public class ListDisplay extends JPanel implements ListSelectionListener {
 		list.addListSelectionListener(this);
 		list.setVisibleRowCount(15);
 		JScrollPane listPane = new JScrollPane(list);
-		
+	
+		//Intermediate JPanel confuses renderer and make list small
+		//panel = new JPanel();
+		//panel.add(listPane);
+
 		//Add List to frame
 		add(listPane, BorderLayout.PAGE_START);
 		
 		//Button Panel
+		panel = new JPanel(new GridLayout(1, 2));
 		panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
 		
@@ -66,6 +71,7 @@ public class ListDisplay extends JPanel implements ListSelectionListener {
 		remove.addActionListener(new RemoveListener());
 		remove.setEnabled(false);
 		panel.add(remove);
+		panel.setBounds(new Rectangle(100, 100));
 
 		add(panel, BorderLayout.PAGE_END);
 	}
