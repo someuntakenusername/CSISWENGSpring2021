@@ -1,6 +1,7 @@
 package esc.baylor.edu.groupProject.SwingGUI;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
@@ -56,7 +57,6 @@ public class ListDisplay extends JPanel implements ActionListener {
 		details.setActionCommand("Details");
 		details.addActionListener(this);
 		details.setEnabled(false);
-		panel.add(details);
 		panel.add(Box.createHorizontalStrut(15));
 
 		//Remove Button
@@ -66,7 +66,7 @@ public class ListDisplay extends JPanel implements ActionListener {
 		remove.setEnabled(false);
 		panel.add(remove);
 		panel.setBounds(new Rectangle(100, 100));
-		add(panel, BorderLayout.CENTER);
+		add(panel, BorderLayout.PAGE_END);
 	}
 	
 	class TransactionTableModel extends AbstractTableModel {
