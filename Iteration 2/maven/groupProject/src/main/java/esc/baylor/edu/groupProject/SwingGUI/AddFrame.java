@@ -16,14 +16,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class AddFrame extends JFrame implements ActionListener {
-	private ListDisplay parent;
+	private JPanel parent;
 	private JPanel panel;
 	private JTextField title, amount;
 	private JCheckBox recurring;
 	private JOptionPane type;
 	private JButton confirm, cancel;
 
-	public AddFrame(ListDisplay parent) {
+	public AddFrame(JPanel parent) {
 		super("Add New Transaction");
 		this.parent = parent;
 		//Setup 4x2 panel
