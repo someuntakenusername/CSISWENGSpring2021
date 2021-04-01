@@ -10,7 +10,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class GUIManager {	
+public class GUIManager {
+	//all UI components should use this as the event handler
 	public static class ActionHandler implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -18,6 +19,11 @@ public class GUIManager {
 		}		
 	}
 	
+	/*
+	 *	startGUI
+	 *
+	 *	Builds & displays the main window. Should be called only once on start-up
+	 */
 	public void startGUI() {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -30,6 +36,7 @@ public class GUIManager {
                 userTray = new GUIMUserInfoTray();
                 content.add(userTray,BorderLayout.PAGE_START);
                 
+                //add content panels here
                 JTabbedPane tabs = new JTabbedPane();
                 tabs.addTab("Tab 1", new ListDisplay());
                 tabs.addTab("Tab 2", new JPanel());
@@ -43,6 +50,9 @@ public class GUIManager {
         });
 	}
 	
+	/*
+	 * 	tester
+	 */
 	public static void main(String args[]) {
 		GUIManager mgr = new GUIManager();
 		mgr.startGUI();
