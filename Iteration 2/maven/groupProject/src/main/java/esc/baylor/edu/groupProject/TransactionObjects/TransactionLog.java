@@ -7,13 +7,13 @@ import java.util.HashMap;
 
 public class TransactionLog {
 	HashMap<Integer, Transaction> tLog;
-	HashMap<Category, ArrayList<Integer>> cList;
+	ArrayList<Category> cList;
 	ArrayList<Integer> tSort;
 	private int id;
 	
 	public TransactionLog() {
 		tLog = new HashMap<Integer, Transaction>();
-		cList = new HashMap<Category, ArrayList<Integer>>();
+		cList = new ArrayList<Category>();
 		tSort = new ArrayList<Integer>();
 		load();
 	}
@@ -39,11 +39,11 @@ public class TransactionLog {
 	public void addCategory(String name) {
 		Category c = new Category();
 		c.setName(name);
-		cList.put(c, null);
+		cList.add(c);
 	}
 	
 	public void removeCategory(Category c) {
-		cList.remove(c);	
+		cList.remove(c);
 	}
 	
 	public HashMap<Integer, Transaction> gettLog() {
@@ -52,16 +52,17 @@ public class TransactionLog {
 	public void settLog(HashMap<Integer, Transaction> tLog) {
 		this.tLog = tLog;
 	}
-	public HashMap<Category, ArrayList<Integer>> getcList() {
+	public ArrayList<Category> getcList() {
 		return cList;
 	}
-	public void setcList(HashMap<Category, ArrayList<Integer>> cList) {
+	public void setcList(ArrayList<Category> cList) {
 		this.cList = cList;
 	}
-
 	public int size() {
 		return tLog.size();
 	}
+	
+	
 	public void load() {
 		id = 0;
 		Transaction t = new Transaction(Types.Expense, false);
