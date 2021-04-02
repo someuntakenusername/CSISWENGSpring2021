@@ -40,39 +40,7 @@ public class ListDisplay extends JPanel implements ActionListener {
 		table.getSelectionModel().addListSelectionListener(new TableListSelection());
 		JScrollPane scroll = new JScrollPane(table);
 		
-		add(scroll, BorderLayout.PAGE_START);
-
-		//Button Panel
-		panel = new JPanel(new GridLayout(1, 2));
-		panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
-		
-		/*
-		//Add Button
-		add = new JButton("New Transaction");
-		add.setActionCommand("New");
-		add.addActionListener(this);
-		add.setEnabled(true);
-		panel.add(add);
-		panel.add(Box.createHorizontalStrut(30));
-
-		//Details Button
-		details = new JButton("Details");
-		details.setActionCommand("Details");
-		details.addActionListener(this);
-		details.setEnabled(false);
-		panel.add(details);
-		panel.add(Box.createHorizontalStrut(30));
-		
-		//Remove Button
-		remove = new JButton("Remove");
-		remove.setActionCommand("Remove");
-		remove.addActionListener(this);
-		remove.setEnabled(false);
-		panel.add(remove);
-		panel.setBounds(new Rectangle(100, 100));
-		add(panel, BorderLayout.PAGE_END);
-		*/
+		add(scroll, BorderLayout.PAGE_START);	
 	}
 	
 	class TransactionTableModel extends AbstractTableModel {
