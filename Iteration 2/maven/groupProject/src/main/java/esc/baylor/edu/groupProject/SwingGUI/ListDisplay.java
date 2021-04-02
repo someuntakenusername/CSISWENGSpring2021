@@ -37,7 +37,6 @@ public class ListDisplay extends JPanel implements ActionListener {
 		model = new TransactionTableModel();
 		table = new JTable(model);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.getSelectionModel().addListSelectionListener(new TableListSelection());
 		JScrollPane scroll = new JScrollPane(table);
 		
 		add(scroll, BorderLayout.PAGE_START);	
@@ -82,21 +81,6 @@ public class ListDisplay extends JPanel implements ActionListener {
 			default: return "Error";
 			}
 		}	
-	}
-	
-	class TableListSelection implements ListSelectionListener{
-
-		@Override
-		public void valueChanged(ListSelectionEvent e) {
-			if(table.getSelectedRow() == -1) {
-				//details.setEnabled(false);
-				//remove.setEnabled(false);
-			}
-			else {
-				//details.setEnabled(true);
-				//remove.setEnabled(true);
-			}
-		}
 	}
 
 	@Override
