@@ -52,16 +52,17 @@ public class TransactionLog {
 	public void settLog(HashMap<Integer, Transaction> tLog) {
 		this.tLog = tLog;
 	}
-	public HashMap<Category, ArrayList<Integer>> getcList() {
+	public ArrayList<Category> getcList() {
 		return cList;
 	}
-	public void setcList(HashMap<Category, ArrayList<Integer>> cList) {
+	public void setcList(ArrayList<Category> cList) {
 		this.cList = cList;
 	}
-
 	public int size() {
 		return tLog.size();
 	}
+	
+	
 	public void load() {
 		id = 0;
 		Transaction t = new Transaction(Types.Expense, false);
