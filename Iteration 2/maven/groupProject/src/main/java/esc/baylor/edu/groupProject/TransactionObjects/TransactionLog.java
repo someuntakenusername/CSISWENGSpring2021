@@ -1,4 +1,4 @@
-package esc.baylor.edu.groupProject;
+package esc.baylor.edu.groupProject.TransactionObjects;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -25,17 +25,20 @@ public class TransactionLog {
 		t.setId(id);
 		tSort.add(id++);
 		tLog.put(t.getId(), t);
-		sort();
+		//sort();
 	}
 	
 	public Transaction getTransaction(int index) {
 		return tLog.get(tSort.get(index));
 	}
 	public void removeTransaction(Transaction t) {
+		tSort.remove(tSort.indexOf(t.getId()));
 		tLog.remove(t.getId());
 	}
 	
-	public void addCategory(Category c) {
+	public void addCategory(String name) {
+		Category c = new Category();
+		c.setName(name);
 		cList.put(c, null);
 	}
 	

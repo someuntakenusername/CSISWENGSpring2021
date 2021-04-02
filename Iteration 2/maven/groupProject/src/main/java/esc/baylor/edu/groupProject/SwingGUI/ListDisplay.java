@@ -20,8 +20,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 
-import esc.baylor.edu.groupProject.TransactionLog;
-import esc.baylor.edu.groupProject.Types;
+import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
+import esc.baylor.edu.groupProject.TransactionObjects.Types;
 
 public class ListDisplay extends JPanel implements ActionListener {
 	protected TransactionLog tLog;
@@ -34,44 +34,12 @@ public class ListDisplay extends JPanel implements ActionListener {
 		super(new BorderLayout());
 		//Load Transaction List and Populate List Model
 		tLog = new TransactionLog();
-		tLog.load();
 		model = new TransactionTableModel();
 		table = new JTable(model);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.getSelectionModel().addListSelectionListener(new TableListSelection());
 		JScrollPane scroll = new JScrollPane(table);
 		
-		add(scroll, BorderLayout.PAGE_START);
-
-		//Button Panel
-		panel = new JPanel(new GridLayout(1, 2));
-		panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
-		
-		//Add Button
-		add = new JButton("New Transaction");
-		add.setActionCommand("New");
-		add.addActionListener(this);
-		add.setEnabled(true);
-		panel.add(add);
-		panel.add(Box.createHorizontalStrut(30));
-
-		//Details Button
-		details = new JButton("Details");
-		details.setActionCommand("Details");
-		details.addActionListener(this);
-		details.setEnabled(false);
-		panel.add(details);
-		panel.add(Box.createHorizontalStrut(30));
-
-		//Remove Button
-		remove = new JButton("Remove");
-		remove.setActionCommand("Remove");
-		remove.addActionListener(this);
-		remove.setEnabled(false);
-		panel.add(remove);
-		panel.setBounds(new Rectangle(100, 100));
-		add(panel, BorderLayout.PAGE_END);
+		add(scroll, BorderLayout.PAGE_START);	
 	}
 	
 	class TransactionTableModel extends AbstractTableModel {
@@ -114,25 +82,19 @@ public class ListDisplay extends JPanel implements ActionListener {
 			}
 		}	
 	}
-	
-	class TableListSelection implements ListSelectionListener{
-
-		@Override
-		public void valueChanged(ListSelectionEvent e) {
-			if(table.getSelectedRow() == -1) {
-				details.setEnabled(false);
-				remove.setEnabled(false);
-			}
-			else {
-				//details.setEnabled(true);
-				//remove.setEnabled(true);
-			}
-		}
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getActionCommand().equals("CMD_ADD_EXPENSE")) {
+			new AddFrame(this);
+		} else if(e.getActionCommand().equals("CMD_DELETE_EXPENSE")) {
+			int i = JOptionPane.showConfirmDialog (this, "Are you sure you want to delete this transaction?", "Warning", JOptionPane.YES_NO_OPTION);
+			if(i == JOptionPane.YES_OPTION) {
+				tLog.removeTransaction(tLog.getTransaction(table.getSelectedRow()));
+				model.fireTableDataChanged();
+			}
+			
+		}
 		
 	}
 }

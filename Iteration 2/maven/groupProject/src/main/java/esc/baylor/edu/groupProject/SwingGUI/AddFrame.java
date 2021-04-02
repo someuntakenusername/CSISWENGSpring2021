@@ -13,18 +13,17 @@ import java.awt.event.WindowEvent;
 import java.util.Calendar;
 import java.util.Date;
 
-import esc.baylor.edu.groupProject.Types;
-
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class AddFrame extends JFrame implements ActionListener, ItemListener {
+import esc.baylor.edu.groupProject.TransactionObjects.Types;
+
+public class AddFrame extends JFrame implements ActionListener {
 	private ListDisplay parent;
 	private JPanel panel;
 	private JTextField title, amount;
@@ -63,6 +62,7 @@ public class AddFrame extends JFrame implements ActionListener, ItemListener {
 
 		//Recurrence checkbox
 		recurring = new JCheckBox();
+		recurring.setActionCommand("Recur");
 		recurring.addActionListener(this);
 
 		//Buttons
@@ -90,24 +90,19 @@ public class AddFrame extends JFrame implements ActionListener, ItemListener {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
-	public void itemStateChanged(ItemEvent e) {
-        if (e.getStateChange() == ItemEvent.DESELECTED) {
-            recur = false;
-        } else {
-        	recur = true;
-        }
-    }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JButton clicked = (JButton)e.getSource();
-		if(clicked.equals(confirm)) {
+		if(e.getActionCommand().equals("Confirm")) {
 			//Types type, String title, Date date, Double amount, boolean recurring
 			parent.tLog.addTransaction((Types)type.getSelectedItem(), title.getText(), new Date(), Double.parseDouble(amount.getText()), recur);
 			parent.model.fireTableDataChanged();
 			this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-		}  else if (clicked.equals(cancel)) {
+		}  else if (e.getActionCommand().equals("Cancel")) {
 			this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+		} else if(e.getActionCommand().equals("Recur")) {
+			if(recur) recur = false;
+			if(!recur) recur = true;
 		}
 	}
 }
