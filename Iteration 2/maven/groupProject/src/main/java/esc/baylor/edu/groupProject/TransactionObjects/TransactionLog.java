@@ -36,7 +36,9 @@ public class TransactionLog {
 		tLog.remove(t.getId());
 	}
 	
-	public void addCategory(Category c) {
+	public void addCategory(String name) {
+		Category c = new Category();
+		c.setName(name);
 		cList.put(c, null);
 	}
 	
