@@ -1,14 +1,16 @@
-package esc.baylor.edu.groupProject;
+package esc.baylor.edu.groupProject.TransactionObjects;
 
 import java.util.ArrayList;
 
 public class Category {
 	Category parent = null;
     ArrayList<Category> children = null;
+    ArrayList<Transaction> transactions;
     String name, notes;
     
     public Category() {
     	children = new ArrayList<Category>();
+    	transactions = new ArrayList<Transaction>();
     }
 	public String getName() {
 		return name;

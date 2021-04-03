@@ -5,12 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import esc.baylor.edu.groupProject.TransactionObjects.Transaction;
+
 public class TransactionTest {
 	
 	Transaction transaction;
 	
-	@BeforeEach
-	void init() {
-		transaction = new Transaction();
-	}
 }

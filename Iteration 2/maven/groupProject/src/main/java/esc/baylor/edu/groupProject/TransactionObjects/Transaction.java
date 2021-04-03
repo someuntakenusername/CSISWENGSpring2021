@@ -1,20 +1,20 @@
-package esc.baylor.edu.groupProject;
+package esc.baylor.edu.groupProject.TransactionObjects;
 
 import java.util.Date;
 
 public class Transaction {
-	Type type;
+	Types type;
 	Double amount;
 	Date date;
 	String title, comment;
 	int id;
 	boolean recurring;
 	
-	public Transaction(Type type, boolean recurring) {
+	public Transaction(Types type, boolean recurring) {
 		this.type = type;
 		this.recurring = recurring;
 	}
-	public Type getType() {
+	public Types getType() {
 		return type;
 	}
 	public Double getAmount() {

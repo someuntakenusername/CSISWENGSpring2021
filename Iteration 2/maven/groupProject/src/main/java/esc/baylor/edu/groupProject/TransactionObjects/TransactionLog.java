@@ -1,4 +1,4 @@
-package esc.baylor.edu.groupProject;
+package esc.baylor.edu.groupProject.TransactionObjects;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -7,17 +7,17 @@ import java.util.HashMap;
 
 public class TransactionLog {
 	HashMap<Integer, Transaction> tLog;
-	HashMap<Category, ArrayList<Integer>> cList;
+	ArrayList<Category> cList;
 	ArrayList<Integer> tSort;
 	private int id;
 	
 	public TransactionLog() {
 		tLog = new HashMap<Integer, Transaction>();
-		cList = new HashMap<Category, ArrayList<Integer>>();
+		cList = new ArrayList<Category>();
 		tSort = new ArrayList<Integer>();
 		load();
 	}
-	public void addTransaction(Type type, String title, Date date, Double amount, int id, boolean recurring) {
+	public void addTransaction(Types type, String title, Date date, Double amount, boolean recurring) {
 		Transaction t = new Transaction(type, recurring);
 		t.setTitle(title);
 		t.setDate(date);
@@ -25,22 +25,25 @@ public class TransactionLog {
 		t.setId(id);
 		tSort.add(id++);
 		tLog.put(t.getId(), t);
-		sort();
+		//sort();
 	}
 	
 	public Transaction getTransaction(int index) {
 		return tLog.get(tSort.get(index));
 	}
 	public void removeTransaction(Transaction t) {
+		tSort.remove(tSort.indexOf(t.getId()));
 		tLog.remove(t.getId());
 	}
 	
-	public void addCategory(Category c) {
-		cList.put(c, null);
+	public void addCategory(String name) {
+		Category c = new Category();
+		c.setName(name);
+		cList.add(c);
 	}
 	
 	public void removeCategory(Category c) {
-		cList.remove(c);	
+		cList.remove(c);
 	}
 	
 	public HashMap<Integer, Transaction> gettLog() {
@@ -49,19 +52,20 @@ public class TransactionLog {
 	public void settLog(HashMap<Integer, Transaction> tLog) {
 		this.tLog = tLog;
 	}
-	public HashMap<Category, ArrayList<Integer>> getcList() {
+	public ArrayList<Category> getcList() {
 		return cList;
 	}
-	public void setcList(HashMap<Category, ArrayList<Integer>> cList) {
+	public void setcList(ArrayList<Category> cList) {
 		this.cList = cList;
 	}
-
 	public int size() {
 		return tLog.size();
 	}
+	
+	
 	public void load() {
 		id = 0;
-		Transaction t = new Transaction(Type.Expense, false);
+		Transaction t = new Transaction(Types.Expense, false);
 		t.setTitle("Test Title");
 		t.setAmount(15.0);
 		t.setDate(new Date());
