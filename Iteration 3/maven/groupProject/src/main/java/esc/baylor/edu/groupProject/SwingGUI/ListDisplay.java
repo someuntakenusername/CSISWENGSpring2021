@@ -36,7 +36,7 @@ public class ListDisplay extends JPanel implements ActionListener {
 		table.getColumnModel().getColumn(1).setCellRenderer(new DecimalFormatRenderer());
 		JScrollPane scroll = new JScrollPane(table);
 		
-		format = new SimpleDateFormat("mm-dd-yyyy");
+		format = new SimpleDateFormat("MMMMM dd, yyyy");
 		
 		add(scroll, BorderLayout.PAGE_START);	
 	}
