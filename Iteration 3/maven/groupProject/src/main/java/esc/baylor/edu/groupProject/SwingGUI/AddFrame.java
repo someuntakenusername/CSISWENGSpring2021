@@ -33,7 +33,7 @@ public class AddFrame extends JFrame implements ActionListener {
 		super("Add New Transaction");
 		this.parent = parent;
 		//Setup 4x2 panel
-		panel = new JPanel(new GridLayout(6, 2));
+		panel = new JPanel(new GridLayout(7, 2));
 		
 		//Type options
 		Object [] options = {"----", Types.Expense, Types.Income};
@@ -45,6 +45,7 @@ public class AddFrame extends JFrame implements ActionListener {
 		title = new JTextField(50);
 		amount = new JTextField(20);
 		recurrence = new JTextField(5);
+		recurrence.setEditable(false);
 		//Limit amount to numbers
 		amount.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent ke) {
@@ -88,6 +89,8 @@ public class AddFrame extends JFrame implements ActionListener {
 		panel.add(new JLabel("Date"));
 		panel.add(new JLabel("Recurring"));
 		panel.add(recurring);
+		panel.add(new JLabel("Recurrence"));
+		panel.add(recurrence);
 		panel.add(confirm);
 		panel.add(cancel);
 
@@ -120,8 +123,7 @@ public class AddFrame extends JFrame implements ActionListener {
 				recur = false;
 				recurrence.setText(null);
 				recurrence.setEditable(false);
-			}
-			if(!recur) {
+			} else if(!recur) {
 				recur = true;
 				recurrence.setText(null);
 				recurrence.setEditable(true);
