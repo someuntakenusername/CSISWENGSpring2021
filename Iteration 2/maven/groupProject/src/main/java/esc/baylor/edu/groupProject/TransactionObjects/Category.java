@@ -2,6 +2,11 @@ package esc.baylor.edu.groupProject.TransactionObjects;
 
 import java.util.ArrayList;
 
+/*
+ * Storage object for the information of each category,
+ * including the parent and sub-categories
+ * @author Trae
+ */
 public class Category {
 	Category parent = null;
     ArrayList<Category> children = null;
