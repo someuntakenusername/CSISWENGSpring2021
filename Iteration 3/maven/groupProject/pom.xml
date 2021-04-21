@@ -71,14 +71,6 @@
 			          </mainClass>
 		          </manifest>
 	          </archive>
-	          <includes>
-	          	<include>
-	          		./src/
-	          	</include>
-	          	<include>
-	          		./resources/
-	          	</include>
-	          </includes>
           </configuration>
         </plugin>
         <plugin>
