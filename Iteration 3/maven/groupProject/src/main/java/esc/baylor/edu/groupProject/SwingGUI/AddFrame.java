@@ -86,7 +86,6 @@ public class AddFrame extends JFrame implements ActionListener {
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
-	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
