@@ -47,23 +47,10 @@ public class AddFrame extends JFrame implements ActionListener {
 		recurrence = new JTextField(5);
 		recurrence.setEditable(false);
 		//Limit amount to numbers
-		amount.addKeyListener(new KeyAdapter() {
-			public void keyPressed(KeyEvent ke) {
-				if((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyChar() == '.' && !amount.getText().contains(".")) {
-					amount.setEditable(true);
-				}  else if(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
-					amount.setEditable(true);
-				} else {
-					amount.setEditable(false);
-				}
-			}
-		});
 		recurrence.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent ke) {
-				if((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
-					amount.setEditable(true);
-				} else {
-					amount.setEditable(false);
+				if((ke.getKeyChar() < '0' || ke.getKeyChar() > '9') && ke.getKeyChar() != KeyEvent.VK_BACK_SPACE) {
+					recurrence.setText(recurrence.getText().substring(0, recurrence.getText().length()));
 				}
 			}
 		});
@@ -104,17 +91,23 @@ public class AddFrame extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("Confirm")) {
-			if(type.getSelectedIndex() == 0 || title.getText().equals("") || /*Date*/ amount.getText().equals("")
+			if(type.getSelectedIndex() == 0 || title.getText().equals(null) || /*Date*/ amount.getText().equals(null)
 					|| (recur && recurrence.getText().equals(null))) {
 				JOptionPane.showMessageDialog(this, "Missing Information", "Warning", JOptionPane.ERROR_MESSAGE);
 			} else {
 				int rec = -1;
-				if(recur = true) {
+				double am = 0.00;
+				if(recur) {
 					rec = Integer.parseInt(recurrence.getText());
 				}
-				parent.tLog.addTransaction((Types)type.getSelectedItem(), title.getText(), new Date(), Double.parseDouble(amount.getText()), rec);
-				parent.model.fireTableDataChanged();
-				this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+				try {
+					am = Double.parseDouble(amount.getText());
+					parent.tLog.addTransaction((Types)type.getSelectedItem(), title.getText(), new Date(), am, rec);
+					parent.model.fireTableDataChanged();
+					this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+				} catch (NumberFormatException ex){
+					JOptionPane.showMessageDialog(this, "Double Formatted Incorrectly", "Warning", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		}  else if (e.getActionCommand().equals("Cancel")) {
 			this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
