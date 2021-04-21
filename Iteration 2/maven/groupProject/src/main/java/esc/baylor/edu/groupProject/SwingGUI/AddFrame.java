@@ -14,7 +14,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -23,9 +22,9 @@ import esc.baylor.edu.groupProject.TransactionObjects.Types;
 public class AddFrame extends JFrame implements ActionListener {
 	private ListDisplay parent;
 	private JPanel panel;
-	private JTextField title, amount, recurrence;
+	private JTextField title, amount;
 	private JCheckBox recurring;
-	private JComboBox<Object> type;
+	private JComboBox<Types> type;
 	private JButton confirm, cancel;
 	private boolean recur = false;
 
@@ -36,30 +35,20 @@ public class AddFrame extends JFrame implements ActionListener {
 		panel = new JPanel(new GridLayout(6, 2));
 		
 		//Type options
-		Object [] options = {"----", Types.Expense, Types.Income};
-		type = new JComboBox<Object>(options);
+		Types [] options = {Types.Expense, Types.Income};
+		type = new JComboBox<Types>(options);
 		panel.add(new JLabel("Type"));
 		panel.add(type);
 
 		//Setup title and amount fields
 		title = new JTextField(50);
 		amount = new JTextField(20);
-		recurrence = new JTextField(5);
 		//Limit amount to numbers
 		amount.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent ke) {
 				if((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyChar() == '.' && !amount.getText().contains(".")) {
 					amount.setEditable(true);
 				}  else if(ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
-					amount.setEditable(true);
-				} else {
-					amount.setEditable(false);
-				}
-			}
-		});
-		recurrence.addKeyListener(new KeyAdapter() {
-			public void keyPressed(KeyEvent ke) {
-				if((ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9') || ke.getKeyChar() == KeyEvent.VK_BACK_SPACE) {
 					amount.setEditable(true);
 				} else {
 					amount.setEditable(false);
@@ -102,26 +91,14 @@ public class AddFrame extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("Confirm")) {
 			//Types type, String title, Date date, Double amount, boolean recurring
-			if(type.getSelectedIndex() == 0 || title.getText().equals("") || /*Date*/ amount.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "Missing Information", "Warning", JOptionPane.ERROR_MESSAGE);
-			} else {
-				parent.tLog.addTransaction((Types)type.getSelectedItem(), title.getText(), new Date(), Double.parseDouble(amount.getText()), recur);
-				parent.model.fireTableDataChanged();
-				this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-			}
+			parent.tLog.addTransaction((Types)type.getSelectedItem(), title.getText(), new Date(), Double.parseDouble(amount.getText()), recur);
+			parent.model.fireTableDataChanged();
+			this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		}  else if (e.getActionCommand().equals("Cancel")) {
 			this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		} else if(e.getActionCommand().equals("Recur")) {
-			if(recur) {
-				recur = false;
-				recurrence.setText(null);
-				recurrence.setEditable(false);
-			}
-			if(!recur) {
-				recur = true;
-				recurrence.setText(null);
-				recurrence.setEditable(true);
-			}
+			if(recur) recur = false;
+			if(!recur) recur = true;
 		}
 	}
 }
