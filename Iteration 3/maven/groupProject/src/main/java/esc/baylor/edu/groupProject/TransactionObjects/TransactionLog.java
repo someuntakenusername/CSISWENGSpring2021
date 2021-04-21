@@ -89,7 +89,7 @@ public class TransactionLog {
 		id = 0;
 		Transaction t = new Transaction(Types.Expense, -1);
 		t.setTitle("Test Title");
-		t.setAmount(15.0);
+		t.setAmount(15.439);
 		t.setDate(new Date());
 		t.setId(id);
 		tLog.put(id, t);
