@@ -7,12 +7,11 @@ public class Transaction {
 	Double amount;
 	Date date;
 	String title, comment;
-	int id;
-	boolean recurring;
+	int id, recur;
 	
-	public Transaction(Types type, boolean recurring) {
+	public Transaction(Types type, int recur) {
 		this.type = type;
-		this.recurring = recurring;
+		this.recur = recur;
 	}
 	public Types getType() {
 		return type;
@@ -48,10 +47,10 @@ public class Transaction {
 		this.comment = comment;
 	}
 	public boolean isRecurring() {
-		return recurring;
+		return recur != -1;
 	}
-	public void setRecurring(boolean recurring) {
-		this.recurring = recurring;
+	public int getRecur() {
+		return recur;
 	}
 	
 	@Override
@@ -62,7 +61,9 @@ public class Transaction {
 		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + id;
+		result = prime * result + recur;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 	@Override
@@ -91,12 +92,17 @@ public class Transaction {
 			return false;
 		if (id != other.id)
 			return false;
+		if (recur != other.recur)
+			return false;
 		if (title == null) {
 			if (other.title != null)
 				return false;
 		} else if (!title.equals(other.title))
 			return false;
+		if (type != other.type)
+			return false;
 		return true;
 	}
+	
 
 }

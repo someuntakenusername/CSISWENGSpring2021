@@ -11,14 +11,27 @@ public class TransactionLog {
 	ArrayList<Integer> tSort;
 	private int id;
 	
+	/*
+	 * Initializes the transaction log and calls for the program to load stored data
+	 */
 	public TransactionLog() {
 		tLog = new HashMap<Integer, Transaction>();
 		cList = new ArrayList<Category>();
 		tSort = new ArrayList<Integer>();
 		load();
 	}
-	public void addTransaction(Types type, String title, Date date, Double amount, boolean recurring) {
-		Transaction t = new Transaction(type, recurring);
+	
+	/*
+	 * Adds a transaction to the Transaction Log
+	 * 
+	 * @param type The enumerated type of the transaction, either Income or Expense
+	 * @param title The name of the transaction
+	 * @param date The date on which the transaction occurred
+	 * @param amount The amount of the transaction
+	 * @param recur How often this transaction recurs. Null if it is not recurring
+	 */
+	public void addTransaction(Types type, String title, Date date, Double amount, Integer recur) {
+		Transaction t = new Transaction(type, recur);
 		t.setTitle(title);
 		t.setDate(date);
 		t.setAmount(amount);
@@ -28,6 +41,13 @@ public class TransactionLog {
 		//sort();
 	}
 	
+	/*
+	 * Returns a transaction given its sorted index
+	 * 
+	 * @param index The index of a transaction in the sorted list
+	 * 
+	 * @return The Transaction at the given index in the sorted list
+	 */
 	public Transaction getTransaction(int index) {
 		return tLog.get(tSort.get(index));
 	}
@@ -62,10 +82,12 @@ public class TransactionLog {
 		return tLog.size();
 	}
 	
-	
-	public void load() {
+	/*
+	 * Loads the users saved transactions to the log
+	 */
+	private void load() {
 		id = 0;
-		Transaction t = new Transaction(Types.Expense, false);
+		Transaction t = new Transaction(Types.Expense, -1);
 		t.setTitle("Test Title");
 		t.setAmount(15.0);
 		t.setDate(new Date());
@@ -76,13 +98,16 @@ public class TransactionLog {
 		 * Load previous info
 		 */
 	}
-	public void save() {
+	
+	private void save() {
 		/*
 		 * Save code
 		 */
 	}
 	
-	//Internal Sort Function
+	/*
+	 * Internal sort function for the transaction log. Sorts the transactions by date
+	 */
 	private void sort() {
 		tSort.sort(new Comparator<Object>() {
 			public int compare(Object a, Object b) {
