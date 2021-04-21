@@ -101,11 +101,15 @@ public class AddFrame extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("Confirm")) {
-			//Types type, String title, Date date, Double amount, boolean recurring
-			if(type.getSelectedIndex() == 0 || title.getText().equals("") || /*Date*/ amount.getText().equals("")) {
+			if(type.getSelectedIndex() == 0 || title.getText().equals("") || /*Date*/ amount.getText().equals("")
+					|| (recur && recurrence.getText().equals(null))) {
 				JOptionPane.showMessageDialog(this, "Missing Information", "Warning", JOptionPane.ERROR_MESSAGE);
 			} else {
-				parent.tLog.addTransaction((Types)type.getSelectedItem(), title.getText(), new Date(), Double.parseDouble(amount.getText()), recur);
+				int rec = -1;
+				if(recur = true) {
+					rec = Integer.parseInt(recurrence.getText());
+				}
+				parent.tLog.addTransaction((Types)type.getSelectedItem(), title.getText(), new Date(), Double.parseDouble(amount.getText()), rec);
 				parent.model.fireTableDataChanged();
 				this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 			}
