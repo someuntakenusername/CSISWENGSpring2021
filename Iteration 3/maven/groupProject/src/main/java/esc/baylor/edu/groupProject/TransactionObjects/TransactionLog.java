@@ -38,7 +38,7 @@ public class TransactionLog {
 		t.setId(id);
 		tSort.add(id++);
 		tLog.put(t.getId(), t);
-		//sort();
+		sort();
 	}
 	
 	/*
