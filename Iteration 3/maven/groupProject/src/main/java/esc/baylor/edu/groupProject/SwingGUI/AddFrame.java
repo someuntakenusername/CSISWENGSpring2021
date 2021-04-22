@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -16,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 
 import esc.baylor.edu.groupProject.TransactionObjects.Types;
@@ -25,9 +28,12 @@ public class AddFrame extends JFrame implements ActionListener {
 	private JPanel panel;
 	private JTextField title, amount, recurrence;
 	private JCheckBox recurring;
-	private JComboBox<Object> type;
+	private JComboBox<Object> type, date;
 	private JButton confirm, cancel;
 	private boolean recur = false;
+	private Date selectedDate = null;
+	private final Object [] types = {"----", Types.Expense, Types.Income};
+	private Object [] dates = {"Select Date"};
 
 	public AddFrame(ListDisplay parent) {
 		super("Add New Transaction");
@@ -36,8 +42,7 @@ public class AddFrame extends JFrame implements ActionListener {
 		panel = new JPanel(new GridLayout(7, 2));
 		
 		//Type options
-		Object [] options = {"----", Types.Expense, Types.Income};
-		type = new JComboBox<Object>(options);
+		type = new JComboBox<Object>(types);
 		panel.add(new JLabel("Type"));
 		panel.add(type);
 
@@ -54,6 +59,11 @@ public class AddFrame extends JFrame implements ActionListener {
 				}
 			}
 		});
+		
+		//Date M
+		date = new JComboBox<Object>(dates);
+		date.setActionCommand("Date");
+		date.addActionListener(this);
 
 		//Recurrence checkbox
 		recurring = new JCheckBox();
@@ -73,7 +83,7 @@ public class AddFrame extends JFrame implements ActionListener {
 		panel.add(new JLabel("Amount"));
 		panel.add(amount);
 		panel.add(new JLabel("Date"));
-		panel.add(new JLabel("Date"));
+		panel.add(date);
 		panel.add(new JLabel("Recurring"));
 		panel.add(recurring);
 		panel.add(new JLabel("Recurrence"));
@@ -90,8 +100,8 @@ public class AddFrame extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("Confirm")) {
-			if(type.getSelectedIndex() == 0 || title.getText().equals(null) || /*Date*/ amount.getText().equals(null)
-					|| (recur && recurrence.getText().equals(null))) {
+			if(type.getSelectedIndex() == 0 || title.getText().equals(null) || selectedDate == null 
+					|| amount.getText().equals(null) || (recur && recurrence.getText().equals(null))) {
 				JOptionPane.showMessageDialog(this, "Missing Information", "Warning", JOptionPane.ERROR_MESSAGE);
 			} else {
 				int rec = -1;
@@ -101,7 +111,7 @@ public class AddFrame extends JFrame implements ActionListener {
 				}
 				try {
 					am = Double.parseDouble(amount.getText());
-					parent.tLog.addTransaction((Types)type.getSelectedItem(), title.getText(), new Date(), am, rec);
+					parent.tLog.addTransaction((Types)type.getSelectedItem(), title.getText(), selectedDate, am, rec);
 					parent.model.fireTableDataChanged();
 					this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 				} catch (NumberFormatException ex){
@@ -119,6 +129,13 @@ public class AddFrame extends JFrame implements ActionListener {
 				recur = true;
 				recurrence.setText(null);
 				recurrence.setEditable(true);
+			}
+		} else if(e.getActionCommand().equals("Date")) {
+			String d = new DatePicker(this).setPickedDate();
+			if(!d.equals("")) {
+				selectedDate = new Date(d);
+				date.removeAllItems();
+				date.addItem(d);
 			}
 		}
 	}

@@ -1,12 +1,19 @@
 package esc.baylor.edu.groupProject.SwingGUI;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-public class DatePicker {
+public class DatePicker extends JPanel {
 	int month = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH);
 	int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);;
 	JLabel l = new JLabel("", JLabel.CENTER);
@@ -84,7 +91,7 @@ public class DatePicker {
 		if (day.equals(""))
 			return day;
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(
-				"MM/dd/yyyy");
+				"MMMMM dd, yyyy");
 		java.util.Calendar cal = java.util.Calendar.getInstance();
 		cal.set(year, month, Integer.parseInt(day));
 		return sdf.format(cal.getTime());
