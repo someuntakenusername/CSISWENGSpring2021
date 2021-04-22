@@ -8,6 +8,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -133,7 +134,14 @@ public class AddFrame extends JFrame implements ActionListener {
 		} else if(e.getActionCommand().equals("Date")) {
 			String d = new DatePicker(this).setPickedDate();
 			if(!d.equals("")) {
-				selectedDate = new Date(d);
+				selectedDate = new Date();
+				SimpleDateFormat sdf = new SimpleDateFormat("MMMMM dd, yyyy");
+				try {
+					selectedDate = sdf.parse(d);
+				} catch (ParseException e1) {
+					//Should never be reached
+					e1.printStackTrace();
+				}
 				date.removeAllItems();
 				date.addItem(d);
 			}
