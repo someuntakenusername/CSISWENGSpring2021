@@ -23,6 +23,16 @@ public class GUIManager {
             public void run() {            	
             	baseWindow = new JFrame("BearBudget");            	
             	baseWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            	
+            	//TODO: have GUIManager handle menu bar action events
+            	baseWindow.setJMenuBar(new MainMenuBar(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+				}));
                 
                 Container content = baseWindow.getContentPane();
                 content.setLayout(new BorderLayout());
