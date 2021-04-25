@@ -1,8 +1,12 @@
 package esc.baylor.edu.groupProject.TransactionObjects;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Transaction {
+	Set<Category> cSet;
 	Types type;
 	Double amount;
 	Date date;
@@ -10,6 +14,7 @@ public class Transaction {
 	int id, recur;
 	
 	public Transaction(Types type, int recur) {
+		cSet = new HashSet<Category>();
 		this.type = type;
 		this.recur = recur;
 	}

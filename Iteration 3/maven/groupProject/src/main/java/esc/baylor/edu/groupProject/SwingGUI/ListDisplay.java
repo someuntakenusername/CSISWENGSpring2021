@@ -31,6 +31,7 @@ public class ListDisplay extends JPanel implements ActionListener {
 		model = new TransactionTableModel();
 		table = new JTable(model);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setAutoCreateRowSorter(true);
 		table.getColumnModel().getColumn(1).setCellRenderer(new DecimalFormatRenderer());
 		JScrollPane scroll = new JScrollPane(table);
 		
