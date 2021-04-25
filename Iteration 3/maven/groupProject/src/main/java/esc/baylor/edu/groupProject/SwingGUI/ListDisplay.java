@@ -16,27 +16,25 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import esc.baylor.edu.groupProject.TransactionObjects.Transaction;
 import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
 
 public class ListDisplay extends JPanel implements ActionListener {
-	protected TransactionLog tLog;
 	protected JTable table;
 	protected TransactionTableModel model;
-	private SimpleDateFormat format;
 	JPanel panel;
 	JButton add, details, remove;
 
 	public ListDisplay() {
 		super(new BorderLayout());
 		//Load Transaction List and Populate List Model
-		tLog = new TransactionLog();
 		model = new TransactionTableModel();
 		table = new JTable(model);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.getColumnModel().getColumn(1).setCellRenderer(new DecimalFormatRenderer());
 		JScrollPane scroll = new JScrollPane(table);
 		
-		format = new SimpleDateFormat("MMMMM dd, yyyy");
+
 		
 		add(scroll, BorderLayout.PAGE_START);	
 	}
@@ -56,54 +54,19 @@ public class ListDisplay extends JPanel implements ActionListener {
 	      }
 	   }
 	
-	class TransactionTableModel extends AbstractTableModel {
-		
-		private String[] columnNames = {"Title", "Amount", "Date"};
-		
-		@Override
-		public int getRowCount() {
-			return tLog.size();
-		}
-
-		@Override
-		public int getColumnCount() {
-			return columnNames.length;
-		}
-		
-		public String getColumnName(int columnIndex) {
-			return columnNames[columnIndex];
-		}
-		
-		@Override
-		public boolean isCellEditable(int rowIndex, int columnIndex) {
-			return false;
-		}
-
-		@Override
-		public Object getValueAt(int rowIndex, int columnIndex) {
-			switch (columnIndex) {
-			case 0: 
-				return tLog.getTransaction(rowIndex).getTitle();
-			case 1: 
-				return tLog.getTransaction(rowIndex).getAmount();
-			case 2: 
-				return new String(format.format(tLog.getTransaction(rowIndex).getDate()));
-			default: return "Error";
-			}
-		}	
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("CMD_ADD_EXPENSE")) {
-			new AddFrame(this);
+			new AddFrame(this, -1);
 		} else if(e.getActionCommand().equals("CMD_DELETE_EXPENSE")) {
 			int i = JOptionPane.showConfirmDialog (this, "Are you sure you want to delete this transaction?", "Warning", JOptionPane.YES_NO_OPTION);
 			if(i == JOptionPane.YES_OPTION) {
-				tLog.removeTransaction(tLog.getTransaction(table.getSelectedRow()));
+				table.tLog
 				model.fireTableDataChanged();
 			}
-			
+		} else if(e.getActionCommand().equals("CMD_EDIT_EXPENSE")) {
+			new AddFrame(this, table.getSelectedRow());
 		}
 		
 	}

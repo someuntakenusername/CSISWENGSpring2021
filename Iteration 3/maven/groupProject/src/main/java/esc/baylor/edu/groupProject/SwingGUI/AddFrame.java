@@ -36,7 +36,8 @@ public class AddFrame extends JFrame implements ActionListener {
 	private final Object [] types = {"----", Types.Expense, Types.Income};
 	private Object [] dates = {"Select Date"};
 
-	public AddFrame(ListDisplay parent) {
+	
+	public AddFrame(ListDisplay parent, int rowIndex) {
 		super("Add New Transaction");
 		this.parent = parent;
 		//Setup 4x2 panel
@@ -91,11 +92,17 @@ public class AddFrame extends JFrame implements ActionListener {
 		panel.add(recurrence);
 		panel.add(confirm);
 		panel.add(cancel);
-
+		
+		if(rowIndex != -1) init();
+		
 		this.setContentPane(panel);
 		this.setSize(new Dimension(300, 200));
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	}
+	
+	private void init() {
+		
 	}
 
 	@Override
