@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 
 import javax.swing.table.AbstractTableModel;
 
+import esc.baylor.edu.groupProject.TransactionObjects.Transaction;
 import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
 
 public class TransactionTableModel extends AbstractTableModel {
@@ -15,6 +16,14 @@ public class TransactionTableModel extends AbstractTableModel {
 	public TransactionTableModel() {
 		tLog = new TransactionLog();
 		format = new SimpleDateFormat("MMMMM dd, yyyy");
+	}
+	
+	public TransactionLog getTransactionLog() {
+		return tLog;
+	}
+	
+	public void removeTransaction(int rowIndex) {
+		tLog.removeTransaction(tLog.getTransaction(rowIndex));
 	}
 
 	@Override

@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,13 +18,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 
 import esc.baylor.edu.groupProject.TransactionObjects.Types;
 
 public class AddFrame extends JFrame implements ActionListener {
-	private ListDisplay parent;
+	private TransactionTableModel parent;
 	private JPanel panel;
 	private JTextField title, amount, recurrence;
 	private JCheckBox recurring;
@@ -37,7 +35,7 @@ public class AddFrame extends JFrame implements ActionListener {
 	private Object [] dates = {"Select Date"};
 
 	
-	public AddFrame(ListDisplay parent, int rowIndex) {
+	public AddFrame(TransactionTableModel model, int rowIndex) {
 		super("Add New Transaction");
 		this.parent = parent;
 		//Setup 4x2 panel
@@ -119,8 +117,8 @@ public class AddFrame extends JFrame implements ActionListener {
 				}
 				try {
 					am = Double.parseDouble(amount.getText());
-					parent.tLog.addTransaction((Types)type.getSelectedItem(), title.getText(), selectedDate, am, rec);
-					parent.model.fireTableDataChanged();
+					parent.getTransactionLog().addTransaction((Types)type.getSelectedItem(), title.getText(), selectedDate, am, rec);
+					parent.fireTableDataChanged();
 					this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 				} catch (NumberFormatException ex){
 					JOptionPane.showMessageDialog(this, "Double Formatted Incorrectly", "Warning", JOptionPane.ERROR_MESSAGE);

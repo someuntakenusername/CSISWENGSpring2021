@@ -34,8 +34,6 @@ public class ListDisplay extends JPanel implements ActionListener {
 		table.getColumnModel().getColumn(1).setCellRenderer(new DecimalFormatRenderer());
 		JScrollPane scroll = new JScrollPane(table);
 		
-
-		
 		add(scroll, BorderLayout.PAGE_START);	
 	}
 	
@@ -58,15 +56,15 @@ public class ListDisplay extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("CMD_ADD_EXPENSE")) {
-			new AddFrame(this, -1);
+			new AddFrame(model, -1);
 		} else if(e.getActionCommand().equals("CMD_DELETE_EXPENSE")) {
 			int i = JOptionPane.showConfirmDialog (this, "Are you sure you want to delete this transaction?", "Warning", JOptionPane.YES_NO_OPTION);
 			if(i == JOptionPane.YES_OPTION) {
-				table.tLog
+				model.removeTransaction(table.getSelectedRow());
 				model.fireTableDataChanged();
 			}
 		} else if(e.getActionCommand().equals("CMD_EDIT_EXPENSE")) {
-			new AddFrame(this, table.getSelectedRow());
+			new AddFrame(model, table.getSelectedRow());
 		}
 		
 	}
