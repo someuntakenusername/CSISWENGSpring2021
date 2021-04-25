@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 
 import javax.swing.table.AbstractTableModel;
 
-import esc.baylor.edu.groupProject.TransactionObjects.Transaction;
 import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
 
 public class TransactionTableModel extends AbstractTableModel {
