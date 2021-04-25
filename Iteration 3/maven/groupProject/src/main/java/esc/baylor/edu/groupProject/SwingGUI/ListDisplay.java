@@ -35,11 +35,11 @@ public class ListDisplay extends JPanel implements ActionListener {
 		table.getColumnModel().getColumn(1).setCellRenderer(new DecimalFormatRenderer());
 		JScrollPane scroll = new JScrollPane(table);
 		
-		add(scroll, BorderLayout.PAGE_START);	
+		add(scroll);	
 	}
 	
 	static class DecimalFormatRenderer extends DefaultTableCellRenderer {
-	      private static final DecimalFormat formatter = new DecimalFormat( "#.00" );
+		private static final DecimalFormat formatter = new DecimalFormat( "#.00" );
 	 
 	      public Component getTableCellRendererComponent(
 	         JTable table, Object value, boolean isSelected,

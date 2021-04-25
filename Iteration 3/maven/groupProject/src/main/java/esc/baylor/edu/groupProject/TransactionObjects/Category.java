@@ -17,6 +17,13 @@ public class Category {
     	children = new ArrayList<Category>();
     	transactions = new ArrayList<Transaction>();
     }
+    public Category(String name, String notes) {
+    	children = new ArrayList<Category>();
+    	transactions = new ArrayList<Transaction>();
+    	this.name = name;
+    	this.notes = notes;
+    }
+    
 	public String getName() {
 		return name;
 	}
@@ -28,6 +35,11 @@ public class Category {
 	}
 	public void setNotes(String notes) {
 		this.notes = notes;
+	}
+	
+	@Override
+	public String toString() {
+		return name;
 	}
 	@Override
 	public int hashCode() {

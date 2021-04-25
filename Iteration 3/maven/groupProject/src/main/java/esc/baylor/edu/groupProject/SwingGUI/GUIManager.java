@@ -23,16 +23,6 @@ public class GUIManager {
             public void run() {            	
             	baseWindow = new JFrame("BearBudget");            	
             	baseWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            	
-            	//TODO: have GUIManager handle menu bar action events
-            	baseWindow.setJMenuBar(new MainMenuBar(new ActionListener() {
-					
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-				}));
                 
                 Container content = baseWindow.getContentPane();
                 content.setLayout(new BorderLayout());
@@ -43,7 +33,12 @@ public class GUIManager {
                 //add content panels here
                 JTabbedPane tabs = new JTabbedPane();
                 tabs.addTab("Overview", new OverviewPanel());
-                tabs.addTab("Expenses", new ExpensesPanel());
+                tabs.addTab("Expenses", expensePane = new ExpensesPanel());
+                
+            	//TODO: have GUIManager handle menu bar action events
+                menuBar = new JMenuBar();
+                menuBar.add(new CategoryMenu(expensePane.list.model));
+            	baseWindow.setJMenuBar(menuBar);
                 
                 content.add(tabs,BorderLayout.CENTER);
             	
@@ -61,6 +56,7 @@ public class GUIManager {
 		mgr.startGUI();
 	}
 	
+	private JMenuBar menuBar;
 	private ExpensesPanel expensePane;
 	private GUIUserInfoTray userTray;
 	private JFrame baseWindow;

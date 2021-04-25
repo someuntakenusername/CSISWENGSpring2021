@@ -59,14 +59,24 @@ public class TransactionLog {
 		tLog.remove(t.getId());
 	}
 	
-	public void addCategory(String name) {
+	public void addCategory(String name, String notes) {
 		Category c = new Category();
 		c.setName(name);
+		c.setNotes(notes);
 		cList.add(c);
+	}
+	
+	public void editCategory(int index, String name, String notes) {
+		cList.get(index).setName(name);
+		cList.get(index).setNotes(notes);
 	}
 	
 	public void removeCategory(Category c) {
 		cList.remove(c);
+	}
+	
+	public Category getCategory(int index) {
+		return cList.get(index);
 	}
 	
 	public HashMap<Integer, Transaction> gettLog() {
@@ -84,11 +94,20 @@ public class TransactionLog {
 	public int size() {
 		return tLog.size();
 	}
+	public boolean categoryExists(String name) {
+		for(Category c : cList) {
+			if(c.getName().equals(name)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	/*
 	 * Loads the users saved transactions to the log
 	 */
 	private void load() {
+		//Test Transaction
 		id = 0;
 		Transaction t = new Transaction(Types.Expense, -1);
 		t.setTitle("Test Title");
@@ -97,6 +116,14 @@ public class TransactionLog {
 		t.setId(id);
 		tLog.put(id, t);
 		tSort.add(id++);
+		
+		//Test Category
+		Category c = new Category();
+		c.setName("Test Category");
+		c.setNotes(null);
+		cList.add(c);
+		
+		
 		/*
 		 * Load previous info
 		 */
