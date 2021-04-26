@@ -10,7 +10,6 @@ import java.awt.event.WindowEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.jar.Attributes.Name;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;

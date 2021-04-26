@@ -10,11 +10,10 @@ public class TransactionTableModel extends AbstractTableModel {
 
 	private String[] columnNames = {"Title", "Amount", "Date"};
 	private TransactionLog tLog;
-	private SimpleDateFormat format;
+	private final SimpleDateFormat format = new SimpleDateFormat("MMMMM dd, yyyy");
 
 	public TransactionTableModel() {
 		tLog = new TransactionLog();
-		format = new SimpleDateFormat("MMMMM dd, yyyy");
 	}
 	
 	public TransactionLog getTransactionLog() {

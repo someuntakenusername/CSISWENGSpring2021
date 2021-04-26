@@ -2,32 +2,26 @@ package esc.baylor.edu.groupProject.SwingGUI;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
-
-import esc.baylor.edu.groupProject.TransactionObjects.Category;
 
 /*
  * Displays the list of categories for making a selection when editing
  * or removing a category
  * @author Trae
  */
-public class CategoryTableFrame extends JFrame implements ActionListener{
+public class CategoryTableFrame extends JFrame implements ActionListener {
 	private JPanel top, panel;
 	private TransactionTableModel model;
 	private CategoryTable cats;
-	private JButton cancel, edit, delete, add;
+	private JButton cancel, edit, delete, add, addTran;
 
 	public CategoryTableFrame(TransactionTableModel model) {
 		super("Category List");
@@ -52,10 +46,14 @@ public class CategoryTableFrame extends JFrame implements ActionListener{
 		add = new JButton("Add Category");
 		add.setActionCommand("Add");
 		add.addActionListener(this);
+		addTran = new JButton("Add Transactions");
+		addTran.setActionCommand("Tran");
+		addTran.addActionListener(this);
 		panel.add(cancel);
 		panel.add(delete);
 		panel.add(edit);
 		panel.add(add);
+		panel.add(addTran);
 		
 		top.add(panel, BorderLayout.PAGE_END);
 		
