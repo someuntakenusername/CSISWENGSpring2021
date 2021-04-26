@@ -155,22 +155,6 @@ public class TransactionLog {
 	 * Loads the users saved transactions to the log
 	 */
 	private void load() {
-		//Test Transaction
-		id = 0;
-		Transaction t = new Transaction(Types.Expense, -1);
-		t.setTitle("Test Title");
-		t.setAmount(15.439);
-		t.setDate(new Date());
-		t.setId(id);
-		tLog.put(id, t);
-		tSort.add(id++);
-		
-		//Test Category
-		Category c = new Category();
-		c.setName("Test Category");
-		c.setNotes(null);
-		cList.add(c);
-		
 		
 		/*
 		 * Load previous info
