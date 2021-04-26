@@ -10,7 +10,6 @@ import java.awt.event.WindowEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.jar.Attributes.Name;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -23,7 +22,7 @@ import javax.swing.JTextField;
 
 import esc.baylor.edu.groupProject.TransactionObjects.Types;
 
-public class AddFrame extends JFrame implements ActionListener {
+public class TransactionFrame extends JFrame implements ActionListener {
 	private TransactionTableModel model;
 	private JPanel panel;
 	private JTextField title, amount, recurrence;
@@ -37,7 +36,7 @@ public class AddFrame extends JFrame implements ActionListener {
 	private final SimpleDateFormat sdf = new SimpleDateFormat("MMMMM dd, yyyy");
 
 	
-	public AddFrame(TransactionTableModel model, int rowIndex) {
+	public TransactionFrame(TransactionTableModel model, int rowIndex) {
 		super("Add New Transaction");
 		this.model = model;
 		this.rowIndex = rowIndex;
@@ -113,8 +112,15 @@ public class AddFrame extends JFrame implements ActionListener {
 		date.removeAllItems();
 		selectedDate = model.getTransactionLog().getTransaction(rowIndex).getDate();
 		date.addItem(sdf.format(model.getTransactionLog().getTransaction(rowIndex).getDate()));
-		recurring.setSelected(model.getTransactionLog().getTransaction(rowIndex).isRecurring());
-		if(recurring.isSelected()) recurrence.setText(Integer.toString(model.getTransactionLog().getTransaction(rowIndex).getRecur()));
+		if(model.getTransactionLog().getTransaction(rowIndex).isRecurring()) {
+			recurring.setSelected(true);
+			recurrence.setText(Integer.toString(model.getTransactionLog().getTransaction(rowIndex).getRecur()));
+			recurrence.setEditable(true);
+		} else {
+			recurring.setSelected(false);
+			recurrence.setText(null);
+			recurrence.setEditable(false);
+		}
 	}
 
 	@Override
