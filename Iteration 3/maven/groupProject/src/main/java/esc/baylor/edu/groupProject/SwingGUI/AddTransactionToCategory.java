@@ -102,17 +102,6 @@ public class AddTransactionToCategory extends JFrame {
             }
 			return null;
         }
-		
-		@Override
-	    public void setValueAt(Object aValue, int row, int column) {
-	      if (aValue instanceof Boolean && column == 2) {
-	        System.out.println(aValue);
-	        category.addTransaction(tLog.getTransaction(row));
-	        tLog.getTransaction(row).addCategory(category);
-	        fireTableDataChanged();
-	        System.out.println("Hi");
-	      }
-	    }
     };
 	
     static class DecimalFormatRenderer extends DefaultTableCellRenderer {
