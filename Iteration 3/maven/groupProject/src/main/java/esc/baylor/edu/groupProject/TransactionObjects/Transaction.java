@@ -87,6 +87,10 @@ public class Transaction {
 		cSet.remove(cat);
 	}
 	
+	public boolean isInCategory(Category cat) {
+		return cSet.contains(cat);
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

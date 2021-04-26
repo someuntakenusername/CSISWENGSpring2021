@@ -52,8 +52,8 @@ public class GUIManager {
 	 * 	tester
 	 */
 	public static void main(String args[]) {
-		GUIManager mgr = new GUIManager();
-		mgr.startGUI();
+		//GUIManager mgr = new GUIManager();
+		//mgr.startGUI();
 	}
 	
 	private JMenuBar menuBar;
