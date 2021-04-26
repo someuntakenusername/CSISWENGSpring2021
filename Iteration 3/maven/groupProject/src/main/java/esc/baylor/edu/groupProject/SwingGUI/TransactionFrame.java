@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 
 import esc.baylor.edu.groupProject.TransactionObjects.Types;
 
-public class AddFrame extends JFrame implements ActionListener {
+public class TransactionFrame extends JFrame implements ActionListener {
 	private TransactionTableModel model;
 	private JPanel panel;
 	private JTextField title, amount, recurrence;
@@ -37,7 +37,7 @@ public class AddFrame extends JFrame implements ActionListener {
 	private final SimpleDateFormat sdf = new SimpleDateFormat("MMMMM dd, yyyy");
 
 	
-	public AddFrame(TransactionTableModel model, int rowIndex) {
+	public TransactionFrame(TransactionTableModel model, int rowIndex) {
 		super("Add New Transaction");
 		this.model = model;
 		this.rowIndex = rowIndex;

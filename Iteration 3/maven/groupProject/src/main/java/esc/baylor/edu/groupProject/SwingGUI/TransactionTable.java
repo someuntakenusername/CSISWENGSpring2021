@@ -19,13 +19,13 @@ import javax.swing.table.DefaultTableCellRenderer;
 import esc.baylor.edu.groupProject.TransactionObjects.Transaction;
 import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
 
-public class ListDisplay extends JPanel implements ActionListener {
+public class TransactionTable extends JPanel implements ActionListener {
 	protected JTable table;
 	protected TransactionTableModel model;
 	JPanel panel;
 	JButton add, details, remove;
 
-	public ListDisplay() {
+	public TransactionTable() {
 		super(new BorderLayout());
 		//Load Transaction List and Populate List Model
 		model = new TransactionTableModel();
@@ -57,7 +57,7 @@ public class ListDisplay extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("CMD_ADD_EXPENSE")) {
-			new AddFrame(model, -1);
+			new TransactionFrame(model, -1);
 		} else if(e.getActionCommand().equals("CMD_DELETE_EXPENSE")) {
 			int i = JOptionPane.showConfirmDialog (this, "Are you sure you want to delete this transaction?", "Warning", JOptionPane.YES_NO_OPTION);
 			if(i == JOptionPane.YES_OPTION) {
@@ -65,7 +65,7 @@ public class ListDisplay extends JPanel implements ActionListener {
 				model.fireTableDataChanged();
 			}
 		} else if(e.getActionCommand().equals("CMD_EDIT_EXPENSE")) {
-			new AddFrame(model, table.getSelectedRow());
+			new TransactionFrame(model, table.getSelectedRow());
 		}
 		
 	}

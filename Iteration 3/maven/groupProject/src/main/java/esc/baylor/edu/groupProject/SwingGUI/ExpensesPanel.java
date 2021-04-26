@@ -11,7 +11,7 @@ public class ExpensesPanel extends JPanel{
 	public ExpensesPanel() {
 		setLayout(new BorderLayout());
 		
-		list = new ListDisplay();
+		list = new TransactionTable();
 		add(list, BorderLayout.CENTER);
 		
 		JPanel subpanel = new JPanel();
@@ -34,7 +34,7 @@ public class ExpensesPanel extends JPanel{
 		add(subpanel, BorderLayout.PAGE_END);
 	}
 	
-	public ListDisplay list;
+	public TransactionTable list;
 	private JButton addBtn, editBtn, deleteBtn;
 	//action commands
 	public static final String CMD_ADD_EXPENSE = "CMD_ADD_EXPENSE",
