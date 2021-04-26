@@ -17,10 +17,10 @@ public class CategoryMenu extends JMenu implements ActionListener{
 		//Initialize Menu Items and Action Listeners
 		
 		//Add Category
-		addCat = new JMenuItem("New Category");
-		addCat.setActionCommand("New");
-		addCat.addActionListener(this);
-		add(addCat);
+		//addCat = new JMenuItem("New Category");
+		//addCat.setActionCommand("New");
+		//addCat.addActionListener(this);
+		//add(addCat);
 		//Delete Category
 		delCat = new JMenuItem("View Category List");
 		delCat.setActionCommand("List");

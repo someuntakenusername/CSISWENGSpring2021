@@ -23,6 +23,7 @@ public class ExpensesPanel extends JPanel{
 		
 		editBtn = new JButton("Edit Expense");
 		editBtn.setActionCommand(CMD_EDIT_EXPENSE);
+		editBtn.addActionListener(list);
 		subpanel.add(editBtn);
 		
 		deleteBtn = new JButton("Delete Expense");
@@ -37,6 +38,6 @@ public class ExpensesPanel extends JPanel{
 	private JButton addBtn, editBtn, deleteBtn;
 	//action commands
 	public static final String CMD_ADD_EXPENSE = "CMD_ADD_EXPENSE",
-								CMD_EDIT_EXPENSE = "CND_EDIT_EXPENSE",
+								CMD_EDIT_EXPENSE = "CMD_EDIT_EXPENSE",
 								CMD_DELETE_EXPENSE = "CMD_DELETE_EXPENSE";
 }

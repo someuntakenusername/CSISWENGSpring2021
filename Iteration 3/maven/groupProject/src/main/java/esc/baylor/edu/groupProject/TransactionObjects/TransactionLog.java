@@ -54,11 +54,42 @@ public class TransactionLog {
 	public Transaction getTransaction(int index) {
 		return tLog.get(tSort.get(index));
 	}
+	
+	/*
+	 * Replaces the data of the transaction at the given index with the newly provided data
+	 * 
+	 * @param index The index of the transaction in the Transaction Sort list
+	 * @param type The type of the transaction
+	 * @param title The title of the transaction
+	 * @param date The date of the transaction
+	 * @param amount The amount of the transaction
+	 * @param recur The recurrence of the Transaction in days
+	 */
+	public void editTransaction(int index, Types type, String title, Date date, Double amount, Integer recur) {
+		Transaction t = tLog.get(tSort.get(index));
+		t.setType(type);
+		t.setTitle(title);
+		t.setAmount(amount);
+		t.setDate(date);
+		t.setRecur(recur);
+	}
+	
+	/*
+	 * Removes a transaction from the transaction list
+	 * 
+	 * @param t The transaction to be removed from the transaction list
+	 */
 	public void removeTransaction(Transaction t) {
 		tSort.remove(tSort.indexOf(t.getId()));
 		tLog.remove(t.getId());
 	}
 	
+	/*
+	 * Adds a category to the category list
+	 * 
+	 * @param name The name of the category
+	 * @param notes Notes for the category
+	 */
 	public void addCategory(String name, String notes) {
 		Category c = new Category();
 		c.setName(name);
@@ -66,41 +97,58 @@ public class TransactionLog {
 		cList.add(c);
 	}
 	
+	/*
+	 * Edits the category at the given index in the category list
+	 * 
+	 * @param index The index in the category list of the category being edited
+	 * @param name The new name of the Category
+	 * @param notes The new set of notes for the Category
+	 */
 	public void editCategory(int index, String name, String notes) {
 		cList.get(index).setName(name);
 		cList.get(index).setNotes(notes);
 	}
 	
-	public void removeCategory(Category c) {
-		cList.remove(c);
+	/*
+	 * Removes a category from the category list
+	 * 
+	 * @param cat The category to remove from the list
+	 */
+	public void removeCategory(Category cat) {
+		cList.remove(cat);
 	}
 	
+	/*
+	 * @return the category at the given index in the category list
+	 */
 	public Category getCategory(int index) {
 		return cList.get(index);
 	}
 	
-	public HashMap<Integer, Transaction> gettLog() {
-		return tLog;
-	}
-	public void settLog(HashMap<Integer, Transaction> tLog) {
-		this.tLog = tLog;
-	}
-	public ArrayList<Category> getcList() {
-		return cList;
-	}
-	public void setcList(ArrayList<Category> cList) {
-		this.cList = cList;
-	}
+	/*
+	 * @return The size of the Transaction Log
+	 */
 	public int size() {
 		return tLog.size();
 	}
+	
+	/*
+	 * Checks if a category exists with the given name
+	 */
 	public boolean categoryExists(String name) {
 		for(Category c : cList) {
-			if(c.getName().equals(name)) {
+			if(c.getName().equalsIgnoreCase(name)) {
 				return true;
 			}
 		}
 		return false;
+	}
+	
+	/*
+	 * @return The number of categories associated with the transaction log
+	 */
+	public int categoryCount() {
+		return cList.size();
 	}
 	
 	/*
@@ -129,10 +177,15 @@ public class TransactionLog {
 		 */
 	}
 	
-	private void save() {
-		/*
-		 * Save code
-		 */
+	/*
+	 * saves the users transactions when one is added or removed
+	 */
+	private void saveTransactions() {
+		
+	}
+	
+	private void saveCategories() {
+		
 	}
 	
 	/*

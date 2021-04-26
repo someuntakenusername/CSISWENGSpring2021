@@ -61,7 +61,7 @@ public class ListDisplay extends JPanel implements ActionListener {
 		} else if(e.getActionCommand().equals("CMD_DELETE_EXPENSE")) {
 			int i = JOptionPane.showConfirmDialog (this, "Are you sure you want to delete this transaction?", "Warning", JOptionPane.YES_NO_OPTION);
 			if(i == JOptionPane.YES_OPTION) {
-				model.removeTransaction(table.getSelectedRow());
+				model.getTransactionLog().removeTransaction(model.getTransactionLog().getTransaction(table.getSelectedRow()));
 				model.fireTableDataChanged();
 			}
 		} else if(e.getActionCommand().equals("CMD_EDIT_EXPENSE")) {

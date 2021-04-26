@@ -20,10 +20,6 @@ public class TransactionTableModel extends AbstractTableModel {
 	public TransactionLog getTransactionLog() {
 		return tLog;
 	}
-	
-	public void removeTransaction(int rowIndex) {
-		tLog.removeTransaction(tLog.getTransaction(rowIndex));
-	}
 
 	@Override
 	public int getRowCount() {

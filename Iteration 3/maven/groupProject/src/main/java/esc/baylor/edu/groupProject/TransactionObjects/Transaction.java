@@ -18,44 +18,73 @@ public class Transaction {
 		this.type = type;
 		this.recur = recur;
 	}
+
 	public Types getType() {
 		return type;
 	}
+
+	public void setType(Types type) {
+		this.type = type;
+	}
+
 	public Double getAmount() {
 		return amount;
 	}
+
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
+
 	public Date getDate() {
 		return date;
 	}
+
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public int getId() {
-		return id;
-	}
+
 	public String getComment() {
 		return comment;
 	}
+
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getRecur() {
+		return recur;
+	}
+
+	public void setRecur(int recur) {
+		this.recur = recur;
+	}
+
 	public boolean isRecurring() {
 		return recur != -1;
 	}
-	public int getRecur() {
-		return recur;
+	
+	public void addCategory(Category cat) {
+		cSet.add(cat);
+	}
+	
+	public void removeCategory(Category cat) {
+		cSet.remove(cat);
 	}
 	
 	@Override

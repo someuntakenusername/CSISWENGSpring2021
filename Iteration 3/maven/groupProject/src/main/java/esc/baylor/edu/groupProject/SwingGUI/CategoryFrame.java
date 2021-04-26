@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /*
@@ -20,22 +21,21 @@ import javax.swing.JTextField;
 public class CategoryFrame extends JFrame implements ActionListener{
 
 	private CategoryTable table;
-	private TransactionTableModel model;
 	private JButton confirm, cancel;
 	private JPanel panel;
 	private JTextField name, notes;
 	private int rowIndex;
 
-	public CategoryFrame(TransactionTableModel model, CategoryTable table, int rowIndex) {
+	public CategoryFrame(CategoryTable table, int rowIndex) {
 		super("Add Category");
-		this.model = model;
-		this.rowIndex = rowIndex;
 		this.table = table;
+		this.rowIndex = rowIndex;
+		
 		panel = new JPanel(new GridLayout(3, 2));
 
 		//Initialize confirm/cancel buttons
 		name = new JTextField(20);
-		notes = new JTextField(2000);
+		notes = new JTextField(20);
 
 		panel.add(new JLabel("Category Name:"));
 		panel.add(name);
@@ -59,29 +59,30 @@ public class CategoryFrame extends JFrame implements ActionListener{
 		if(rowIndex != -1) init();
 
 		this.pack();
-		this.setSize(new Dimension(300, 500));
+		this.setSize(new Dimension(300, 150));
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 
 	private void init() {
-		name.setText(model.getTransactionLog().getcList().get(rowIndex).getName());
-		notes.setText(model.getTransactionLog().getcList().get(rowIndex).getNotes());
+		name.setText(table.getTransactionLog().getCategory(rowIndex).getName());
+		notes.setText(table.getTransactionLog().getCategory(rowIndex).getNotes());
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("Confirm")) {
 			if(name.getText().equals(null)) {
-				JOptionPane.showMessageDialog(this, "Category must have a name", "Warning", JOptionPane.ERROR_MESSAGE);
-			} else if(model.getTransactionLog().categoryExists(name.getText())) {
-				JOptionPane.showMessageDialog(this, "Category with this name already exists", "Warning", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Category must have a name", "Warning", JOptionPane.ERROR_MESSAGE);	
 			} else if(rowIndex == -1) {
-				model.getTransactionLog().addCategory(name.getText(), notes.getText());
+				if(table.getTransactionLog().categoryExists(name.getText())) {
+					JOptionPane.showMessageDialog(this, "Category with this name already exists", "Warning", JOptionPane.ERROR_MESSAGE);
+				}
+				table.getTransactionLog().addCategory(name.getText(), notes.getText());
 				table.update();
 				quit();
 			} else {
-				model.getTransactionLog().editCategory(rowIndex, name.getText(), notes.getText());
+				table.getTransactionLog().editCategory(rowIndex, name.getText(), notes.getText());
 				table.update();
 				quit();
 			}
