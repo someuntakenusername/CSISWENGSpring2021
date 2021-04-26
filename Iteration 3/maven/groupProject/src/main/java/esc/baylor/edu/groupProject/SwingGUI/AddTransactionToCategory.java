@@ -32,6 +32,7 @@ public class AddTransactionToCategory extends JFrame {
 		model = new TranCatTableModel();
 		table = new JTable(model);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.getColumn(1).setCellRenderer(new DecimalFormatRenderer());
 	
 	}
 	
@@ -49,20 +50,7 @@ public class AddTransactionToCategory extends JFrame {
 		public int getColumnCount() {
 			return columns.length;
 		}
-		
-		@Override
-		public Class getColumnClass(int column) {
-			switch (column) {
-            case 0:
-                return String.class;
-            case 1:
-                return Double.class;
-            case 2:
-                return String.class;
-            case 3:
-                return Boolean.class;
-			return null;
-		}
+
 
 		@Override
 		public Object getValueAt(int rowIndex, int columnIndex) {
@@ -79,9 +67,23 @@ public class AddTransactionToCategory extends JFrame {
 			}
 		}
 		
-	}
+		@Override
+        public Class getColumnClass(int column) {
+            switch (column) {
+                case 0:
+                    return String.class;
+                case 1:
+                    return String.class;
+                case 2:
+                    return Integer.class;
+                case 3:
+                    return Boolean.class;
+            }
+			return null;
+        }
+    };
 	
-	static class DecimalFormatRenderer extends DefaultTableCellRenderer {
+    static class DecimalFormatRenderer extends DefaultTableCellRenderer {
 		private static final DecimalFormat formatter = new DecimalFormat( "#.00" );
 	 
 	      public Component getTableCellRendererComponent(
@@ -95,4 +97,5 @@ public class AddTransactionToCategory extends JFrame {
 	         return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column );
 	      }
 	   }
+	
 }
