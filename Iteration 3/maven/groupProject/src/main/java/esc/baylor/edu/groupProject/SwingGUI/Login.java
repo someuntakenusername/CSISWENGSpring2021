@@ -62,6 +62,12 @@ public class Login implements ActionListener {
 		
 	}
 	
+	public static void storeCredentials(String username, String password) {
+		
+		// Store login
+		
+	}
+	
 	public static Boolean checkCredentials(String username, String password) {
 		
 		// Check login
@@ -80,7 +86,9 @@ public class Login implements ActionListener {
 				failure.setText("Invalid login");
 			}
 		} else if (e.getSource() == registerButton) {
-			//storeCredentials();
+			storeCredentials(usernameText.getText(), passwordText.getText());
+			GUIManager ui = new GUIManager();
+			ui.startGUI();
 		}
 		
 	}
