@@ -8,5 +8,7 @@ public class Main {
 	public static void main(String[] args) {
 		Login g = new Login();
 		g.login();
+      GUIManager ui = new GUIManager();
+      ui.startGUI();
 	}
 }
