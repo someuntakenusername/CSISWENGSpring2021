@@ -2,8 +2,10 @@ package esc.baylor.edu.groupProject.SwingGUI;
 
 import java.text.SimpleDateFormat;
 
+import javax.swing.JComboBox;
 import javax.swing.table.AbstractTableModel;
 
+import esc.baylor.edu.groupProject.TransactionObjects.Category;
 import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
 
 public class TransactionTableModel extends AbstractTableModel {
@@ -11,15 +13,21 @@ public class TransactionTableModel extends AbstractTableModel {
 	private String[] columnNames = {"Title", "Amount", "Date"};
 	private TransactionLog tLog;
 	private final SimpleDateFormat format = new SimpleDateFormat("MMMMM dd, yyyy");
-
-	public TransactionTableModel() {
+	private JComboBox<Object> filter;
+	
+	public TransactionTableModel(JComboBox<Object> filter) {
 		tLog = new TransactionLog();
+		this.filter = filter;
 	}
 	
 	public TransactionLog getTransactionLog() {
 		return tLog;
 	}
 
+	public void refreshFilter() {
+		filter.removeAllItems();
+	}
+	
 	@Override
 	public int getRowCount() {
 		return tLog.size();
@@ -50,5 +58,5 @@ public class TransactionTableModel extends AbstractTableModel {
 			return new String(format.format(tLog.getTransaction(rowIndex).getDate()));
 		default: return "Error";
 		}
-	}	
+	}
 }
