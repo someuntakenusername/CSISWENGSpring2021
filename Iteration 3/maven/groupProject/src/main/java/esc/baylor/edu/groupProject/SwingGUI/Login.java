@@ -95,6 +95,5 @@ public class Login implements ActionListener {
 			GUIManager ui = new GUIManager();
 			ui.startGUI();
 		}
-		
 	}
 }
