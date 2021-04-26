@@ -112,8 +112,15 @@ public class TransactionFrame extends JFrame implements ActionListener {
 		date.removeAllItems();
 		selectedDate = model.getTransactionLog().getTransaction(rowIndex).getDate();
 		date.addItem(sdf.format(model.getTransactionLog().getTransaction(rowIndex).getDate()));
-		recurring.setSelected(model.getTransactionLog().getTransaction(rowIndex).isRecurring());
-		if(recurring.isSelected()) recurrence.setText(Integer.toString(model.getTransactionLog().getTransaction(rowIndex).getRecur()));
+		if(model.getTransactionLog().getTransaction(rowIndex).isRecurring()) {
+			recurring.setSelected(true);
+			recurrence.setText(Integer.toString(model.getTransactionLog().getTransaction(rowIndex).getRecur()));
+			recurrence.setEditable(true);
+		} else {
+			recurring.setSelected(false);
+			recurrence.setText(null);
+			recurrence.setEditable(false);
+		}
 	}
 
 	@Override
