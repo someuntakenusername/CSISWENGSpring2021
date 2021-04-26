@@ -37,16 +37,17 @@ public class CategoryTableFrame extends JFrame implements ActionListener {
 		cancel = new JButton("Cancel");
 		cancel.setActionCommand("Cancel");
 		cancel.addActionListener(this);
-		delete = new JButton("Delete Category");
+		delete = new JButton("Delete");
 		delete.setActionCommand("Delete");
 		delete.addActionListener(this);
-		edit = new JButton("Edit Category");
+		edit = new JButton("Edit");
 		edit.setActionCommand("Edit");
 		edit.addActionListener(this);
-		add = new JButton("Add Category");
+		add = new JButton("New");
 		add.setActionCommand("Add");
 		add.addActionListener(this);
 		addTran = new JButton("Add Transactions");
+		addTran.setSize(100, 100);
 		addTran.setActionCommand("Tran");
 		addTran.addActionListener(this);
 		panel.add(cancel);
@@ -71,12 +72,14 @@ public class CategoryTableFrame extends JFrame implements ActionListener {
 		} else if(e.getActionCommand().equals("Delete") && cats.getTable().getSelectedRow() != -1) {
 			int i = JOptionPane.showConfirmDialog (this, "Are you sure you want to delete this category?", "Warning", JOptionPane.YES_NO_OPTION);
 			if(i == JOptionPane.YES_OPTION) {
-				model.getTransactionLog().removeCategory(model.getTransactionLog().getCategory(model.getRowCount()));
+				model.getTransactionLog().removeCategory(model.getTransactionLog().getCategory(cats.getTable().getSelectedRow()));
 			}
 		} else if(e.getActionCommand().equals("Edit") && cats.getTable().getSelectedRow() != -1) {
 			new CategoryFrame(cats, cats.getTable().getSelectedRow());
 		} else if(e.getActionCommand().equals("Cancel")) {
 			this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+		} else if(e.getActionCommand().equals("Tran") && cats.getTable().getSelectedRow() != -1) {
+			new AddTransactionToCategory(model.getTransactionLog(), model.getTransactionLog().getCategory(cats.getTable().getSelectedRow()));
 		}
 	}
 	

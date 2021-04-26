@@ -19,6 +19,14 @@ public class Category {
     	this.notes = notes;
     }
     
+    public void addTransaction(Transaction t) {
+    	transactions.add(t);
+    }
+    
+    public void removeTransaction(Transaction t) {
+    	transactions.remove(t);
+    }
+    
 	public String getName() {
 		return name;
 	}
