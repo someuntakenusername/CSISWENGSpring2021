@@ -5,10 +5,17 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;;
 
+/*
+ * Contains the list of all transactions and all categories
+ * 
+ * @author Trae
+ */
 public class TransactionLog {
 	ArrayList<Category> cList;
 	ArrayList<Transaction> tLog;
 	private int id;
+	private double savings;
+	private Date saveDate;
 	
 	/*
 	 * Initializes the transaction log and calls for the program to load stored data

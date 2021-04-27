@@ -34,7 +34,6 @@ public class TransactionFrame extends JFrame implements ActionListener {
 	private final Object [] types = {"----", Types.Expense, Types.Income};
 	private int rowIndex;
 	private final SimpleDateFormat sdf = new SimpleDateFormat("MMMMM dd, yyyy");
-
 	
 	public TransactionFrame(TransactionTableModel model, int rowIndex) {
 		super("Add New Transaction");

@@ -16,6 +16,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import esc.baylor.edu.groupProject.TransactionObjects.Category;
+import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
 
 public class TransactionTable extends JPanel implements ActionListener {
 	protected JTable table;
@@ -24,11 +25,11 @@ public class TransactionTable extends JPanel implements ActionListener {
 	JPanel panel;
 	JButton add, details, remove;
 
-	public TransactionTable(JComboBox<Object> filter) {
+	public TransactionTable(TransactionLog tLog, JComboBox<Object> filter) {
 		super(new BorderLayout());
 		this.filter = filter;
 		//Load Transaction List and Populate List Model
-		model = new TransactionTableModel();
+		model = new TransactionTableModel(tLog);
 		table = new JTable(model);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setAutoCreateRowSorter(true);
