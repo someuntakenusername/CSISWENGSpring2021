@@ -18,8 +18,8 @@ import esc.baylor.edu.groupProject.TransactionObjects.Category;
 import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
 
 public class TransactionTable extends JPanel implements ActionListener {
-	protected JTable table;
-	public static TransactionTableModel model;
+	private JTable table;
+	protected static TransactionTableModel model;
 	private JComboBox<Object> filter;
 
 	public TransactionTable(JComboBox<Object> filter) {
