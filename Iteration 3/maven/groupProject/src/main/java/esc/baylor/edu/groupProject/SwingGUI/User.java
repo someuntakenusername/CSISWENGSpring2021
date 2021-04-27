@@ -40,12 +40,12 @@ public class User implements Serializable {
 		this.password = password;
 	}
 	
-	public void writeUser(User serObj) {
+	public void writeUser() {
 		try {
 		    FileOutputStream f = new FileOutputStream(new File("users.txt"));
 		    ObjectOutputStream o = new ObjectOutputStream(f);
 
-		    o.writeObject(serObj);
+		    o.writeObject(this.tLog);
 
 		    o.close();
 		    f.close();
@@ -58,12 +58,12 @@ public class User implements Serializable {
 		
 	}
 	
-	public void load(User serObj) {
+	public void load() {
 		try {
 			FileInputStream fi = new FileInputStream(new File("users.txt"));
 	    	ObjectInputStream oi = new ObjectInputStream(fi);
 	    
-	    	serObj = (User) oi.readObject();
+	    	this.tLog = (TransactionLog) oi.readObject();
 
 	    	oi.close();
 	    	fi.close();
