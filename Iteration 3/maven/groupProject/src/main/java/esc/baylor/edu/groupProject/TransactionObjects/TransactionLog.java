@@ -2,8 +2,7 @@ package esc.baylor.edu.groupProject.TransactionObjects;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.Date;;
 
 public class TransactionLog {
 	ArrayList<Category> cList;
@@ -17,6 +16,10 @@ public class TransactionLog {
 		tLog = new ArrayList<Transaction>();
 		cList = new ArrayList<Category>();
 		load();
+	}
+	
+	public ArrayList<Transaction> getTransactionList(){
+		return tLog;
 	}
 	
 	/*
@@ -124,6 +127,10 @@ public class TransactionLog {
 		return tLog.size();
 	}
 	
+	public boolean isInCategory(int index, Category cat) {
+		return cat.contains(tLog.get(index));
+	}
+	
 	/*
 	 * Checks if a category exists with the given name
 	 */
@@ -174,4 +181,6 @@ public class TransactionLog {
 			}
 		});
 	}
+
+
 }

@@ -56,7 +56,7 @@ public class TranToCatTableModel extends AbstractTableModel {
 		case 2: 
 			return new String(format.format(tLog.getTransaction(rowIndex).getDate()));
 		case 3:
-			return tLog.getTransaction(rowIndex).isInCategory(category);
+			return tLog.isInCategory(rowIndex, category);
 		default: return "Error";
 		}
 	}
@@ -81,10 +81,8 @@ public class TranToCatTableModel extends AbstractTableModel {
 		if (aValue instanceof Boolean && column == 3) {
 			Boolean val = (Boolean) aValue;
 			if(val) {
-				tLog.getTransaction(row).addCategory(category);
 				category.addTransaction(tLog.getTransaction(row));
 			} else {
-				tLog.getTransaction(row).removeCategory(category);
 				category.addTransaction(tLog.getTransaction(row));
 			}
 			fireTableCellUpdated(row, column);

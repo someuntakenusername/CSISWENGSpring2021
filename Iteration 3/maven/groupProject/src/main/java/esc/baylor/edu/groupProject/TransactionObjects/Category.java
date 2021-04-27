@@ -37,6 +37,10 @@ public class Category {
     	return transactions;
     }
     
+    public boolean contains(Transaction t) {
+    	return transactions.contains(t);
+    }
+    
 	public String getName() {
 		return name;
 	}
