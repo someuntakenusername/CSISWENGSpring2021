@@ -13,24 +13,24 @@ public class TransactionTableModel extends AbstractTableModel {
 	private String[] columnNames = {"Title", "Amount", "Date"};
 	private TransactionLog tLog;
 	private final SimpleDateFormat format = new SimpleDateFormat("MMMMM dd, yyyy");
-	private JComboBox<Object> filter;
+	private Category filter;
 	
-	public TransactionTableModel(JComboBox<Object> filter) {
+	public TransactionTableModel() {
 		tLog = new TransactionLog();
-		this.filter = filter;
+		filter = null;
 	}
 	
 	public TransactionLog getTransactionLog() {
 		return tLog;
 	}
-
-	public void refreshFilter() {
-		filter.removeAllItems();
+	
+	public void filterTable(Category category) {
+		filter = category;
 	}
 	
 	@Override
 	public int getRowCount() {
-		return tLog.size();
+		if(filter == null) return tLog.size()
 	}
 
 	@Override
@@ -49,14 +49,7 @@ public class TransactionTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		switch (columnIndex) {
-		case 0: 
-			return tLog.getTransaction(rowIndex).getTitle();
-		case 1: 
-			return tLog.getTransaction(rowIndex).getAmount();
-		case 2: 
-			return new String(format.format(tLog.getTransaction(rowIndex).getDate()));
-		default: return "Error";
+		
 		}
 	}
 }

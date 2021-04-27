@@ -6,18 +6,16 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class TransactionLog {
-	HashMap<Integer, Transaction> tLog;
 	ArrayList<Category> cList;
-	ArrayList<Integer> tSort;
+	ArrayList<Transaction> tLog;
 	private int id;
 	
 	/*
 	 * Initializes the transaction log and calls for the program to load stored data
 	 */
 	public TransactionLog() {
-		tLog = new HashMap<Integer, Transaction>();
+		tLog = new ArrayList<Transaction>();
 		cList = new ArrayList<Category>();
-		tSort = new ArrayList<Integer>();
 		load();
 	}
 	
@@ -36,8 +34,6 @@ public class TransactionLog {
 		t.setDate(date);
 		t.setAmount(amount);
 		t.setId(id);
-		tSort.add(id++);
-		tLog.put(t.getId(), t);
 		sort();
 	}
 	
@@ -49,7 +45,7 @@ public class TransactionLog {
 	 * @return The Transaction at the given index in the sorted list
 	 */
 	public Transaction getTransaction(int index) {
-		return tLog.get(tSort.get(index));
+		return tLog.get(index);
 	}
 	
 	/*
@@ -63,7 +59,7 @@ public class TransactionLog {
 	 * @param recur The recurrence of the Transaction in days
 	 */
 	public void editTransaction(int index, Types type, String title, Date date, Double amount, Integer recur) {
-		Transaction t = tLog.get(tSort.get(index));
+		Transaction t = tLog.get(index);
 		t.setType(type);
 		t.setTitle(title);
 		t.setAmount(amount);
@@ -77,8 +73,7 @@ public class TransactionLog {
 	 * @param t The transaction to be removed from the transaction list
 	 */
 	public void removeTransaction(Transaction t) {
-		tSort.remove(tSort.indexOf(t.getId()));
-		tLog.remove(t.getId());
+		tLog.remove(t);
 	}
 	
 	/*
@@ -173,9 +168,9 @@ public class TransactionLog {
 	 * Internal sort function for the transaction log. Sorts the transactions by date
 	 */
 	private void sort() {
-		tSort.sort(new Comparator<Object>() {
-			public int compare(Object a, Object b) {
-				return tLog.get(a).getDate().compareTo(tLog.get(b).getDate());
+		tLog.sort(new Comparator<Transaction>() {
+			public int compare(Transaction a, Transaction b) {
+				return a.getDate().compareTo(b.getDate());
 			}
 		});
 	}
