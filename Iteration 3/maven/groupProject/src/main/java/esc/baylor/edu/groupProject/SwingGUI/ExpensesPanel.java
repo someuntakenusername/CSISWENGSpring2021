@@ -22,6 +22,11 @@ public class ExpensesPanel extends JPanel{
 		
 		JPanel subpanel = new JPanel();
 		
+		setSave = new JButton("Set Savings");
+		setSave.setActionCommand("Set_Save");
+		setSave.addActionListener(list);
+		subpanel.add(setSave);
+		
 		addBtn = new JButton("Add Expense");
 		addBtn.setActionCommand(CMD_ADD_EXPENSE);
 		addBtn.addActionListener(list);

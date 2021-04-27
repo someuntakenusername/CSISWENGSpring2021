@@ -15,14 +15,13 @@ import javax.swing.JTextField;
 
 public class Login implements ActionListener {
 
-	JFrame frame;
-	JPanel panel;
-	JLabel passwordLabel;
-	JButton loginButton;
-	JButton registerButton;
-	JLabel failure;
-	JTextField usernameText;
-	JTextField passwordText;
+	private JFrame frame;
+	private JPanel panel;
+	private JLabel passwordLabel;
+	private JButton loginButton;
+	private JButton registerButton;
+	private JLabel failure;
+	private JTextField usernameText, passwordText;
 
 	public static User user;
 
@@ -68,9 +67,15 @@ public class Login implements ActionListener {
 		panel.add(failure);
 
 		frame.setVisible(true);
-
 	}
 
+	/*
+	 * Determines if there is a file associated with a user
+	 * and therefore if the user exists
+	 * 
+	 * @param u The user that will be checked
+	 * @return boolean
+	 */
 	public static Boolean fileExists(User u) {
 
 		Boolean isFile = false;

@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
@@ -20,6 +21,8 @@ public class TransactionLog implements Serializable {
 	private int id;
 	private String filename;
 	private static final long serialVersionUID = 2L;
+	private double savings;
+	private Date currDate;
 	
 	/*
 	 * Initializes the transaction log and calls for the program to load stored data
@@ -33,6 +36,11 @@ public class TransactionLog implements Serializable {
 	
 	public Collection<Transaction> getTransactionList(){
 		return (Collection<Transaction>) tLog.clone();
+	}
+
+	public void setCurrentSavings(double amount) {
+		currDate = new Date();
+		savings = amount;
 	}
 	
 	/*
@@ -52,6 +60,7 @@ public class TransactionLog implements Serializable {
 		t.setId(id);
 		tLog.add(t);
 		sort();
+		save();
 	}
 	
 	/*
@@ -82,6 +91,7 @@ public class TransactionLog implements Serializable {
 		t.setAmount(amount);
 		t.setDate(date);
 		t.setRecur(recur);
+		save();
 	}
 	
 	/*
@@ -91,6 +101,7 @@ public class TransactionLog implements Serializable {
 	 */
 	public void removeTransaction(Transaction t) {
 		tLog.remove(t);
+		save();
 	}
 	
 	/*
@@ -104,6 +115,7 @@ public class TransactionLog implements Serializable {
 		c.setName(name);
 		c.setNotes(notes);
 		cList.add(c);
+		save();
 	}
 	
 	/*
@@ -116,6 +128,7 @@ public class TransactionLog implements Serializable {
 	public void editCategory(int index, String name, String notes) {
 		cList.get(index).setName(name);
 		cList.get(index).setNotes(notes);
+		save();
 	}
 	
 	/*
@@ -125,6 +138,7 @@ public class TransactionLog implements Serializable {
 	 */
 	public void removeCategory(Category cat) {
 		cList.remove(cat);
+		save();
 	}
 	
 	/*
