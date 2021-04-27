@@ -15,14 +15,13 @@ import javax.swing.JTextField;
 
 public class Login implements ActionListener {
 
-	JFrame frame;
-	JPanel panel;
-	JLabel passwordLabel;
-	JButton loginButton;
-	JButton registerButton;
-	JLabel failure;
-	JTextField usernameText;
-	JTextField passwordText;
+	private JFrame frame;
+	private JPanel panel;
+	private JLabel passwordLabel;
+	private JButton loginButton;
+	private JButton registerButton;
+	private JLabel failure;
+	private JTextField usernameText, passwordText;
 
 	public static User user;
 
