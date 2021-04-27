@@ -11,6 +11,6 @@ public class Report{
 			savingLo = Double.NaN,
 			expenseAvg = Double.NaN,
 			expenseMed = Double.NaN,
-			ExpenseHi = Double.NaN,
-			ExpenseLo = Double.NaN;
+			expenseHi = Double.NaN,
+			expenseLo = Double.NaN;
 }

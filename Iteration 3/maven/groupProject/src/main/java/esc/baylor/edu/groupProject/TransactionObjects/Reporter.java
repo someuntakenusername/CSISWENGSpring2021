@@ -19,9 +19,32 @@ public class Reporter {
 		report.from = from;
 		report.to = to;
 		
-		final int count = 0;
+		//get expenses within date range
+		List<Transaction> expenses = t.parallelStream()
+				.filter((n) -> n.getDate().after(from) && n.getDate().before(to) && n.getType() == Types.Expense)
+				.collect(Collectors.toList());
 		
-		List<Transaction> reported = t.stream().sorted((a,b) -> a.getDate().compareTo(b.getDate())).collect(Collectors.toList());
+		//compute stats
+		if(!expenses.isEmpty()) {
+			report.expenseAvg = 0;
+			//max,min
+			report.expenseHi = expenses.get(0).getAmount();
+			report.expenseLo = expenses.get(0).getAmount();
+			
+			expenses.parallelStream().forEach((x) -> {
+				report.expenseAvg += x.getAmount();
+				report.expenseHi = report.expenseHi < x.getAmount() ? x.getAmount() : report.expenseHi;
+				report.expenseLo = report.expenseLo > x.getAmount() ? x.getAmount() : report.expenseLo;
+			});
+			
+			//calculate average
+			report.expenseAvg /= expenses.size();
+		}
+		
+		//get savings within range
+		List<Transaction> savings = t.parallelStream()
+				.filter((n) -> n.getDate().after(from) && n.getDate().before(to) && n.getType() == Types.Income)
+				.collect(Collectors.toList());
 		
 		return report;
 	}
