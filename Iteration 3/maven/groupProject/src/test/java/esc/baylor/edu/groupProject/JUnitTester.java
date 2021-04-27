@@ -9,8 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-import java.util.Date;
-
 public class JUnitTester {
     protected TransactionLog log = null;
     protected Category category = null;
