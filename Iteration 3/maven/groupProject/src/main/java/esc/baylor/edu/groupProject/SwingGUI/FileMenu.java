@@ -8,12 +8,10 @@ import javax.swing.JMenuItem;
 
 public class FileMenu extends JMenu implements ActionListener{
 
-	TransactionTableModel model;
-	JMenuItem save;
+	private JMenuItem save;
 	
-	public FileMenu(TransactionTableModel model) {
+	public FileMenu() {
 		super("File");
-		this.model = model;
 
 		save = new JMenuItem("Save");
 		save.setActionCommand("save");
@@ -25,7 +23,7 @@ public class FileMenu extends JMenu implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("save")) {
-			model.getTransactionLog().save();
+			TransactionTable.model.getTransactionLog().save();
 		}
 	}
 }

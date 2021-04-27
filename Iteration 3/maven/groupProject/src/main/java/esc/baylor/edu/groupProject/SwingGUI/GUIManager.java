@@ -37,8 +37,8 @@ public class GUIManager {
                 
             	//TODO: have GUIManager handle menu bar action events
                 menuBar = new JMenuBar();
-                menuBar.add(new FileMenu(expensePane.list.model));
-                menuBar.add(new CategoryMenu(expensePane.list.model));
+                menuBar.add(new FileMenu());
+                menuBar.add(new CategoryMenu());
             	baseWindow.setJMenuBar(menuBar);
                 
                 content.add(tabs,BorderLayout.CENTER);

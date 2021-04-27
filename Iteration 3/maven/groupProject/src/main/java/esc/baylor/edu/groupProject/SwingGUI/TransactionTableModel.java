@@ -8,12 +8,17 @@ import esc.baylor.edu.groupProject.TransactionObjects.Category;
 import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
 import esc.baylor.edu.groupProject.TransactionObjects.Types;
 
+/*
+ * Table model for the Transaction display table
+ * 
+ * @author Trae
+ */
 public class TransactionTableModel extends AbstractTableModel {
 
 	private String[] columnNames = {"Title", "Amount", "Date"};
-	private TransactionLog tLog;
-	private final SimpleDateFormat format = new SimpleDateFormat("MMMMM dd, yyyy");
+	private static final SimpleDateFormat format = new SimpleDateFormat("MMMMM dd, yyyy");
 	private Category filter;
+	private TransactionLog tLog;
 
 	public TransactionTableModel() {
 		tLog = new TransactionLog();

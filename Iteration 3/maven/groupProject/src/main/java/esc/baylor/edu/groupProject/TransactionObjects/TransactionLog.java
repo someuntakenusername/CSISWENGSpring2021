@@ -34,10 +34,16 @@ public class TransactionLog implements Serializable {
 		load();
 	}
 	
+	/*
+	 * @return Returns the collection of transactions associated with this TransactionLog object
+	 */
 	public Collection<Transaction> getTransactionList(){
 		return (Collection<Transaction>) tLog.clone();
 	}
 
+	/*
+	 * @param amount New value of user savings
+	 */
 	public void setCurrentSavings(double amount) {
 		currDate = new Date();
 		savings = amount;
