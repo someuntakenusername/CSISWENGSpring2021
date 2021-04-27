@@ -1,6 +1,7 @@
 package esc.baylor.edu.groupProject.TransactionObjects;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;;
 
@@ -18,8 +19,8 @@ public class TransactionLog {
 		load();
 	}
 	
-	public ArrayList<Transaction> getTransactionList(){
-		return tLog;
+	public Collection<Transaction> getTransactionList(){
+		return (Collection<Transaction>) tLog.clone();
 	}
 	
 	/*
