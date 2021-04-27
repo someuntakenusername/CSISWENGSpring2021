@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -13,11 +14,12 @@ import java.util.Date;
 
 import esc.baylor.edu.groupProject.SwingGUI.Login;;
 
-public class TransactionLog {
+public class TransactionLog implements Serializable {
 	ArrayList<Category> cList;
 	ArrayList<Transaction> tLog;
 	private int id;
 	private String filename;
+	private static final long serialVersionUID = 2L;
 	
 	/*
 	 * Initializes the transaction log and calls for the program to load stored data
