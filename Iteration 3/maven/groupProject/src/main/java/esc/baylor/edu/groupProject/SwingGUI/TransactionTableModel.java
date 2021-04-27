@@ -15,7 +15,7 @@ public class TransactionTableModel extends AbstractTableModel {
 	private Category filter;
 
 	public TransactionTableModel() {
-		//this.tLog = tLog;
+		tLog = new TransactionLog();
 		filter = null;
 	}
 

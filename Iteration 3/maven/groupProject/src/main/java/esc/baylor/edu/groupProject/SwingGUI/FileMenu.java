@@ -18,6 +18,8 @@ public class FileMenu extends JMenu implements ActionListener{
 		save = new JMenuItem("Save");
 		save.setActionCommand("save");
 		save.addActionListener(this);
+		
+		add(save);
 	}
 
 	@Override

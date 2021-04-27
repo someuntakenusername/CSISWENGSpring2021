@@ -9,7 +9,9 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.Date;;
+import java.util.Date;
+
+import esc.baylor.edu.groupProject.SwingGUI.Login;;
 
 public class TransactionLog {
 	ArrayList<Category> cList;
@@ -21,9 +23,9 @@ public class TransactionLog {
 	 * Initializes the transaction log and calls for the program to load stored data
 	 */
 	public TransactionLog() {
+		filename = Login.user.findFilename();
 		tLog = new ArrayList<Transaction>();
 		cList = new ArrayList<Category>();
-		filename = null;
 		load();
 	}
 	
@@ -164,7 +166,13 @@ public class TransactionLog {
 	 * Loads the users saved transactions to the log
 	 */
 	private void load() {
-		if (filename == null) {
+		File f = new File(filename);
+		if (!f.exists()) {
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			return;
 		}
 		try {
@@ -189,7 +197,7 @@ public class TransactionLog {
 	/*
 	 * saves the users transactions when one is added or removed
 	 */
-	private void save() {
+	public void save() {
 		try {
 		    FileOutputStream f = new FileOutputStream(new File(this.filename));
 		    ObjectOutputStream o = new ObjectOutputStream(f);
