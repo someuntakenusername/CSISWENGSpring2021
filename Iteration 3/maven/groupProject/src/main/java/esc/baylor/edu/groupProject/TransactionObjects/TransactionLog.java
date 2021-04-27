@@ -16,8 +16,6 @@ public class TransactionLog {
 	ArrayList<Transaction> tLog;
 	private int id;
 	private String filename;
-	private double currSavings;
-	private Date dateOfsave;
 	
 	/*
 	 * Initializes the transaction log and calls for the program to load stored data
@@ -25,16 +23,10 @@ public class TransactionLog {
 	public TransactionLog() {
 		tLog = new ArrayList<Transaction>();
 		cList = new ArrayList<Category>();
-		id = 0;
-		File f = new File(filename);
-		if (f.isFile()) {
-			load();
-		}
+		filename = null;
+		load();
 	}
 	
-	/*
-	 * @return Returns a clone of the transaction log
-	 */
 	public Collection<Transaction> getTransactionList(){
 		return (Collection<Transaction>) tLog.clone();
 	}
@@ -110,11 +102,6 @@ public class TransactionLog {
 		cList.add(c);
 	}
 	
-	public void setCurrentSavings(double amount, Date date) {
-		currSavings = amount;
-		dateOfsave = date;
-	}
-	
 	/*
 	 * Edits the category at the given index in the category list
 	 * 
@@ -174,9 +161,15 @@ public class TransactionLog {
 	}
 	
 	/*
-	 * Internal function that loads the users saved transactions to the log
+	 * Loads the users saved transactions to the log
 	 */
 	private void load() {
+		if (filename == null) {
+			return;
+		}
+		/*
+		 * Load previous info
+		 */
 		try {
 			FileInputStream fi = new FileInputStream(new File(filename));
 	    	ObjectInputStream oi = new ObjectInputStream(fi);
@@ -197,9 +190,9 @@ public class TransactionLog {
 	}
 	
 	/*
-	 * Saves the function to the file corresponding to this transaction log
+	 * saves the users transactions when one is added or removed
 	 */
-	public void save() {
+	private void save() {
 		try {
 		    FileOutputStream f = new FileOutputStream(new File(this.filename));
 		    ObjectOutputStream o = new ObjectOutputStream(f);
