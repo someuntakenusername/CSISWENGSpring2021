@@ -37,6 +37,10 @@ public class Category {
     	return transactions.get(index);
     }
     
+    public int size() {
+    	return transactions.size();
+    }
+    
     public boolean contains(Transaction t) {
     	return transactions.contains(t);
     }
