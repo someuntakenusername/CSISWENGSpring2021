@@ -23,6 +23,7 @@ public class TransactionLog {
 	public TransactionLog() {
 		tLog = new ArrayList<Transaction>();
 		cList = new ArrayList<Category>();
+		filename = null;
 		load();
 	}
 	
@@ -163,7 +164,9 @@ public class TransactionLog {
 	 * Loads the users saved transactions to the log
 	 */
 	private void load() {
-		
+		if (filename == null) {
+			return;
+		}
 		/*
 		 * Load previous info
 		 */
