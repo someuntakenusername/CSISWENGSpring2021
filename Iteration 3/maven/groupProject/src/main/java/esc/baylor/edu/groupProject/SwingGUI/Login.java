@@ -2,6 +2,8 @@ package esc.baylor.edu.groupProject.SwingGUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -65,32 +67,37 @@ public class Login implements ActionListener {
 			
 	}
 	
-	public static void storeCredentials(String username, String password) {
+	public static Boolean fileExists(String username, String password) {
 		
-		// Store credentials
+		User u = new User(username, password);
+		Boolean isFile = false;
+		String filename = null;
 		
-	}
-	
-	public static Boolean checkCredentials(String username, String password) {
 		
-		// Check login
+		filename = u.findFilename();
+		File f = new File(filename);
+		if (f.isFile()) {
+			isFile = true;
+		}
 		
-		return true;
+		return isFile;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == loginButton) {
-			if (checkCredentials(usernameText.getText(), passwordText.getText())) {
+			if (fileExists(usernameText.getText(), passwordText.getText())) {
+				//load
 				frame.dispose();
 				GUIManager ui = new GUIManager();
 				ui.startGUI();
 			} else {
-				failure.setText("Invalid login");
+				failure.setText("Invalid credentials");
 			}
 		} else if (e.getSource() == registerButton) {
-			storeCredentials(usernameText.getText(), passwordText.getText());
+			//create file for this new person
+			//storeCredentials(usernameText.getText(), passwordText.getText());
 			frame.dispose();
 			GUIManager ui = new GUIManager();
 			ui.startGUI();

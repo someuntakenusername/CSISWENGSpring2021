@@ -1,5 +1,11 @@
 package esc.baylor.edu.groupProject.TransactionObjects;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -16,7 +22,7 @@ public class TransactionLog {
 	public TransactionLog() {
 		tLog = new ArrayList<Transaction>();
 		cList = new ArrayList<Category>();
-		load();
+		//load();
 	}
 	
 	public Collection<Transaction> getTransactionList(){
@@ -155,18 +161,44 @@ public class TransactionLog {
 	/*
 	 * Loads the users saved transactions to the log
 	 */
-	private void load() {
+	private void load(String filename) {
 		
 		/*
 		 * Load previous info
 		 */
+		try {
+			FileInputStream fi = new FileInputStream(new File(filename));
+	    	ObjectInputStream oi = new ObjectInputStream(fi);
+	    
+	    	TransactionLog t = (TransactionLog) oi.readObject();
+	    	this.cList = t.cList;
+	    	this.id = t.id;
+	    	this.tLog = t.tLog;
+
+	    	oi.close();
+	    	fi.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/*
 	 * saves the users transactions when one is added or removed
 	 */
-	private void saveTransactions() {
-		
+	private void saveTransactions(String filename) {
+		try {
+		    FileOutputStream f = new FileOutputStream(new File(filename));
+		    ObjectOutputStream o = new ObjectOutputStream(f);
+		    
+		    o.writeObject(this);
+
+		    o.close();
+		    f.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void saveCategories() {
