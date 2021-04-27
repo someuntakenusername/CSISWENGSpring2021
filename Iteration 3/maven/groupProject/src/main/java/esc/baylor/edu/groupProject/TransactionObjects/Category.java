@@ -1,6 +1,7 @@
 package esc.baylor.edu.groupProject.TransactionObjects;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /*
  * Storage object for the information of each category
@@ -17,6 +18,23 @@ public class Category {
     	transactions = new ArrayList<Transaction>();
     	this.name = name;
     	this.notes = notes;
+    }
+    
+    public void addTransaction(Transaction t) {
+    	transactions.add(t);
+    	transactions.sort(new Comparator<Transaction>() {
+			public int compare(Transaction a, Transaction b) {
+				return a.getDate().compareTo(b.getDate());
+			}
+		});
+    }
+    
+    public void removeTransaction(Transaction t) {
+    	transactions.remove(t);
+    }
+    
+    public ArrayList<Transaction> getTransactions(){
+    	return transactions;
     }
     
 	public String getName() {

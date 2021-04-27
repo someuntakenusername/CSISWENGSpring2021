@@ -11,6 +11,9 @@ import javax.swing.JTextField;
 
 public class Login implements ActionListener {
 	
+	JFrame frame;
+	JPanel panel;
+	JLabel passwordLabel;
 	JButton loginButton;
 	JButton registerButton;
 	JLabel failure;
@@ -19,12 +22,12 @@ public class Login implements ActionListener {
 	
 	public void login() {
 		
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		frame.setSize(350, 200);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		frame.add(panel);
 		panel.setLayout(null);
 
@@ -36,7 +39,7 @@ public class Login implements ActionListener {
 		usernameText.setBounds(100, 20, 165, 25);
 		panel.add(usernameText);
 		
-		JLabel passwordLabel = new JLabel("Password:");
+		passwordLabel = new JLabel("Password:");
 		passwordLabel.setBounds(10, 50, 80, 25);
 		panel.add(passwordLabel);
 		
@@ -52,7 +55,7 @@ public class Login implements ActionListener {
 		registerButton = new JButton("Create Account");
 		registerButton.setBounds(100, 80, 165, 25);
 		panel.add(registerButton);
-		loginButton.addActionListener(this);
+		registerButton.addActionListener(this);
 		
 		failure = new JLabel("");
 		failure.setBounds(10, 110, 300, 25);
@@ -80,6 +83,7 @@ public class Login implements ActionListener {
 
 		if (e.getSource() == loginButton) {
 			if (checkCredentials(usernameText.getText(), passwordText.getText())) {
+				frame.dispose();
 				GUIManager ui = new GUIManager();
 				ui.startGUI();
 			} else {
@@ -87,9 +91,9 @@ public class Login implements ActionListener {
 			}
 		} else if (e.getSource() == registerButton) {
 			storeCredentials(usernameText.getText(), passwordText.getText());
+			frame.dispose();
 			GUIManager ui = new GUIManager();
 			ui.startGUI();
 		}
-		
 	}
 }
