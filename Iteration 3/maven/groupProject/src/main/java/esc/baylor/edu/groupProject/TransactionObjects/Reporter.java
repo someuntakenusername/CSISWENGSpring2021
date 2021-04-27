@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
 public class Reporter {
 	private ArrayList<Report> reports;
 	
+	/*
+	 * Generates a report with all transaction object within the date range
+	 */
 	public Report generateReport(Date from, Date to, Collection<Transaction> t) {
 		Report report = new Report();
 		
@@ -45,6 +48,8 @@ public class Reporter {
 		List<Transaction> savings = t.parallelStream()
 				.filter((n) -> n.getDate().after(from) && n.getDate().before(to) && n.getType() == Types.Income)
 				.collect(Collectors.toList());
+		
+		//do the same thing for savings as we did for expenses
 		
 		return report;
 	}
