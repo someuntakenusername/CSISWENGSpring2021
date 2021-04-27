@@ -1,18 +1,24 @@
 package esc.baylor.edu.groupProject.SwingGUI;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
+
+import esc.baylor.edu.groupProject.TransactionObjects.Category;
 
 public class ExpensesPanel extends JPanel{
 	public ExpensesPanel() {
 		setLayout(new BorderLayout());
 		
-		list = new ListDisplay();
+		filter = new JComboBox<Object>();
+		
+		list = new TransactionTable(filter);
 		add(list, BorderLayout.CENTER);
+		
+		filter.addActionListener(list);
+		filter.setActionCommand("filter");
 		
 		JPanel subpanel = new JPanel();
 		
@@ -29,12 +35,14 @@ public class ExpensesPanel extends JPanel{
 		deleteBtn = new JButton("Delete Expense");
 		deleteBtn.addActionListener(list);
 		deleteBtn.setActionCommand(CMD_DELETE_EXPENSE);
-		subpanel.add(deleteBtn);
+		subpanel.add(deleteBtn);		
+		
+		subpanel.add(filter);
 		
 		add(subpanel, BorderLayout.PAGE_END);
 	}
-	
-	public ListDisplay list;
+	public TransactionTable list;
+	private JComboBox filter;
 	private JButton addBtn, editBtn, deleteBtn;
 	//action commands
 	public static final String CMD_ADD_EXPENSE = "CMD_ADD_EXPENSE",
