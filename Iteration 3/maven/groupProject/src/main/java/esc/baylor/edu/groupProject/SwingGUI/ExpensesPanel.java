@@ -43,7 +43,7 @@ public class ExpensesPanel extends JPanel{
 	}
 	public TransactionTable list;
 	private JComboBox filter;
-	private JButton addBtn, editBtn, deleteBtn;
+	private JButton setSave, addBtn, editBtn, deleteBtn;
 	//action commands
 	public static final String CMD_ADD_EXPENSE = "CMD_ADD_EXPENSE",
 								CMD_EDIT_EXPENSE = "CMD_EDIT_EXPENSE",

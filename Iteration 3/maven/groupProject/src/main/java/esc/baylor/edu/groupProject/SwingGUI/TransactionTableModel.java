@@ -14,8 +14,8 @@ public class TransactionTableModel extends AbstractTableModel {
 	private final SimpleDateFormat format = new SimpleDateFormat("MMMMM dd, yyyy");
 	private Category filter;
 
-	public TransactionTableModel(TransactionLog tLog) {
-		this.tLog = tLog;
+	public TransactionTableModel() {
+		//this.tLog = tLog;
 		filter = null;
 	}
 

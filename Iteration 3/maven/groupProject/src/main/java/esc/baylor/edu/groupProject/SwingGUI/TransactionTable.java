@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -16,20 +15,17 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import esc.baylor.edu.groupProject.TransactionObjects.Category;
-import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
 
 public class TransactionTable extends JPanel implements ActionListener {
 	protected JTable table;
 	protected TransactionTableModel model;
 	private JComboBox<Object> filter;
-	JPanel panel;
-	JButton add, details, remove;
 
-	public TransactionTable(TransactionLog tLog, JComboBox<Object> filter) {
+	public TransactionTable(JComboBox<Object> filter) {
 		super(new BorderLayout());
 		this.filter = filter;
 		//Load Transaction List and Populate List Model
-		model = new TransactionTableModel(tLog);
+		model = new TransactionTableModel();
 		table = new JTable(model);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setAutoCreateRowSorter(true);
