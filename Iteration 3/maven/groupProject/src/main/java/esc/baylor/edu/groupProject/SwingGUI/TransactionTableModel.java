@@ -12,7 +12,6 @@ public class TransactionTableModel extends AbstractTableModel {
 
 	private String[] columnNames = {"Title", "Amount", "Date"};
 	private TransactionLog tLog;
-	private ArrayList<Transaction> list;
 	private final SimpleDateFormat format = new SimpleDateFormat("MMMMM dd, yyyy");
 	private Category filter;
 	
@@ -50,14 +49,8 @@ public class TransactionTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		switch (columnIndex) {
-		case 0: 
-			return tLog.getTransaction(rowIndex).getTitle();
-		case 1: 
-			return tLog.getTransaction(rowIndex).getAmount();
-		case 2: 
-			return new String(format.format(tLog.getTransaction(rowIndex).getDate()));
-		default: return "Error";
+		if(filter == null) {
+			
 		}
 	}
 }

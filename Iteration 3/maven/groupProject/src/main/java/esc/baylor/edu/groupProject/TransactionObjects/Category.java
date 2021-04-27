@@ -33,8 +33,8 @@ public class Category {
     	transactions.remove(t);
     }
     
-    public ArrayList<Transaction> getTransactions(){
-    	return transactions;
+    public Transaction getTransaction(int index) {
+    	return transactions.get(index);
     }
     
     public boolean contains(Transaction t) {
