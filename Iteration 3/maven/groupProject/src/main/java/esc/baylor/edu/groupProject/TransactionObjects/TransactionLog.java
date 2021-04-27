@@ -15,6 +15,7 @@ public class TransactionLog {
 	ArrayList<Category> cList;
 	ArrayList<Transaction> tLog;
 	private int id;
+	private String filename;
 	
 	/*
 	 * Initializes the transaction log and calls for the program to load stored data
@@ -22,7 +23,7 @@ public class TransactionLog {
 	public TransactionLog() {
 		tLog = new ArrayList<Transaction>();
 		cList = new ArrayList<Category>();
-		//load();
+		load();
 	}
 	
 	public Collection<Transaction> getTransactionList(){
@@ -161,7 +162,7 @@ public class TransactionLog {
 	/*
 	 * Loads the users saved transactions to the log
 	 */
-	private void load(String filename) {
+	private void load() {
 		
 		/*
 		 * Load previous info
@@ -174,6 +175,7 @@ public class TransactionLog {
 	    	this.cList = t.cList;
 	    	this.id = t.id;
 	    	this.tLog = t.tLog;
+	    	this.filename = t.filename;
 
 	    	oi.close();
 	    	fi.close();
@@ -187,9 +189,9 @@ public class TransactionLog {
 	/*
 	 * saves the users transactions when one is added or removed
 	 */
-	private void saveTransactions(String filename) {
+	private void saveTransactions() {
 		try {
-		    FileOutputStream f = new FileOutputStream(new File(filename));
+		    FileOutputStream f = new FileOutputStream(new File(this.filename));
 		    ObjectOutputStream o = new ObjectOutputStream(f);
 		    
 		    o.writeObject(this);
@@ -199,10 +201,6 @@ public class TransactionLog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	private void saveCategories() {
-		
 	}
 	
 	/*
