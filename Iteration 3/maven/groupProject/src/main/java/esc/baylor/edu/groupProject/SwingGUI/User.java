@@ -2,7 +2,9 @@ package esc.baylor.edu.groupProject.SwingGUI;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -40,11 +42,47 @@ public class User implements Serializable {
 		this.password = password;
 	}
 	
-	public void writeUser() {
-		try {
-		    FileOutputStream f = new FileOutputStream(new File("users.txt"));
-		    ObjectOutputStream o = new ObjectOutputStream(f);
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
+	
+	/*
+	public void writeUser() {
+		String filename = null;
+		filename = String.valueOf(this.hashCode());
+		filename += ".txt";
+		
+		try {
+		    FileOutputStream f = new FileOutputStream(new File(filename));
+		    ObjectOutputStream o = new ObjectOutputStream(f);
+		    
 		    o.writeObject(this.tLog);
 
 		    o.close();
@@ -54,22 +92,32 @@ public class User implements Serializable {
 		}
     }
 	
-	public void findUser(String username, String password) {
+	public void readUser() throws FileNotFoundException {
+		String filename = null;
+		filename = String.valueOf(this.hashCode());
+		filename += ".txt";
 		
-	}
-	
-	public void load() {
 		try {
-			FileInputStream fi = new FileInputStream(new File("users.txt"));
+			FileInputStream fi = new FileInputStream(new File(filename));
 	    	ObjectInputStream oi = new ObjectInputStream(fi);
 	    
 	    	this.tLog = (TransactionLog) oi.readObject();
 
 	    	oi.close();
 	    	fi.close();
-		} catch (Exception e) {
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+	*/
+	
+	public String findFilename() {
+		String filename = null;
+		filename = String.valueOf(this.hashCode());
+		filename += ".txt";
+		return filename;
 	}
 }
 

@@ -1,21 +1,21 @@
 package esc.baylor.edu.groupProject.TransactionObjects;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;;
 
-/*
- * Contains the list of all transactions and all categories
- * 
- * @author Trae
- */
 public class TransactionLog {
 	ArrayList<Category> cList;
 	ArrayList<Transaction> tLog;
 	private int id;
-	private double savings;
-	private Date saveDate;
+	private String filename;
 	
 	/*
 	 * Initializes the transaction log and calls for the program to load stored data
@@ -167,17 +167,40 @@ public class TransactionLog {
 		/*
 		 * Load previous info
 		 */
+		try {
+			FileInputStream fi = new FileInputStream(new File(filename));
+	    	ObjectInputStream oi = new ObjectInputStream(fi);
+	    
+	    	TransactionLog t = (TransactionLog) oi.readObject();
+	    	this.cList = t.cList;
+	    	this.id = t.id;
+	    	this.tLog = t.tLog;
+	    	this.filename = t.filename;
+
+	    	oi.close();
+	    	fi.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/*
 	 * saves the users transactions when one is added or removed
 	 */
 	private void saveTransactions() {
-		
-	}
-	
-	private void saveCategories() {
-		
+		try {
+		    FileOutputStream f = new FileOutputStream(new File(this.filename));
+		    ObjectOutputStream o = new ObjectOutputStream(f);
+		    
+		    o.writeObject(this);
+
+		    o.close();
+		    f.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/*
