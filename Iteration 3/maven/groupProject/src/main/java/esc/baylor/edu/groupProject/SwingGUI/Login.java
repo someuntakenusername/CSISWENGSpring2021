@@ -67,9 +67,15 @@ public class Login implements ActionListener {
 		panel.add(failure);
 
 		frame.setVisible(true);
-
 	}
 
+	/*
+	 * Determines if there is a file associated with a user
+	 * and therefore if the user exists
+	 * 
+	 * @param u The user that will be checked
+	 * @return boolean
+	 */
 	public static Boolean fileExists(User u) {
 
 		Boolean isFile = false;

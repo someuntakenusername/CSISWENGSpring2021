@@ -85,6 +85,5 @@ public class TransactionTable extends JPanel implements ActionListener {
 				model.filterTable((Category)filter.getSelectedItem());
 			}
 		}
-		
 	}
 }
