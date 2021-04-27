@@ -124,6 +124,10 @@ public class TransactionLog {
 		return tLog.size();
 	}
 	
+	public boolean isInCategory(int index, Category cat) {
+		return cat.contains(tLog.get(index));
+	}
+	
 	/*
 	 * Checks if a category exists with the given name
 	 */
@@ -174,4 +178,6 @@ public class TransactionLog {
 			}
 		});
 	}
+
+
 }

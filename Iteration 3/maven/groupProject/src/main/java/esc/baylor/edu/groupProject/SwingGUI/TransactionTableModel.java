@@ -30,7 +30,7 @@ public class TransactionTableModel extends AbstractTableModel {
 	
 	@Override
 	public int getRowCount() {
-		if(filter == null) return tLog.size()
+		if(filter == null) return tLog.size();
 	}
 
 	@Override

@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Transaction {
-	Set<Category> cSet;
 	Types type;
 	Double amount;
 	Date date;
@@ -14,7 +13,6 @@ public class Transaction {
 	int id, recur;
 	
 	public Transaction(Types type, int recur) {
-		cSet = new HashSet<Category>();
 		this.type = type;
 		this.recur = recur;
 	}
@@ -77,18 +75,6 @@ public class Transaction {
 
 	public boolean isRecurring() {
 		return recur != -1;
-	}
-	
-	public void addCategory(Category cat) {
-		cSet.add(cat);
-	}
-	
-	public void removeCategory(Category cat) {
-		cSet.remove(cat);
-	}
-	
-	public boolean isInCategory(Category cat) {
-		return cSet.contains(cat);
 	}
 	
 	@Override
