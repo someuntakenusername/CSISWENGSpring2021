@@ -189,7 +189,7 @@ public class TransactionLog {
 	/*
 	 * saves the users transactions when one is added or removed
 	 */
-	private void saveTransactions() {
+	private void save() {
 		try {
 		    FileOutputStream f = new FileOutputStream(new File(this.filename));
 		    ObjectOutputStream o = new ObjectOutputStream(f);
