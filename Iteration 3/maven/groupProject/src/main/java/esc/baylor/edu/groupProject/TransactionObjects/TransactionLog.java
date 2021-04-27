@@ -52,6 +52,7 @@ public class TransactionLog implements Serializable {
 		t.setId(id);
 		tLog.add(t);
 		sort();
+		save();
 	}
 	
 	/*
@@ -82,6 +83,7 @@ public class TransactionLog implements Serializable {
 		t.setAmount(amount);
 		t.setDate(date);
 		t.setRecur(recur);
+		save();
 	}
 	
 	/*
@@ -91,6 +93,7 @@ public class TransactionLog implements Serializable {
 	 */
 	public void removeTransaction(Transaction t) {
 		tLog.remove(t);
+		save();
 	}
 	
 	/*
@@ -127,6 +130,7 @@ public class TransactionLog implements Serializable {
 	 */
 	public void removeCategory(Category cat) {
 		cList.remove(cat);
+		save();
 	}
 	
 	/*
