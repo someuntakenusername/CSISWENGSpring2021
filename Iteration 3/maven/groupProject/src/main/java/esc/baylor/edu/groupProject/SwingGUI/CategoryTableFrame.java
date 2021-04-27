@@ -73,6 +73,7 @@ public class CategoryTableFrame extends JFrame implements ActionListener {
 			int i = JOptionPane.showConfirmDialog (this, "Are you sure you want to delete this category?", "Warning", JOptionPane.YES_NO_OPTION);
 			if(i == JOptionPane.YES_OPTION) {
 				model.getTransactionLog().removeCategory(model.getTransactionLog().getCategory(cats.getTable().getSelectedRow()));
+				cats.update();
 			}
 		} else if(e.getActionCommand().equals("Edit") && cats.getTable().getSelectedRow() != -1) {
 			new CategoryFrame(cats, cats.getTable().getSelectedRow());
