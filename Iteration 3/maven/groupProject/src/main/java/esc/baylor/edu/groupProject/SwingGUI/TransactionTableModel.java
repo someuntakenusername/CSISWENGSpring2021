@@ -50,10 +50,6 @@ public class TransactionTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-<<<<<<< HEAD
-		if(filter == null) {
-
-=======
 		if(filter != null) {
 			switch (columnIndex) {
 			case 0: 
@@ -76,7 +72,6 @@ public class TransactionTableModel extends AbstractTableModel {
 			default: 
 				return null;
 			}
->>>>>>> main
 		}
 	}
 }
