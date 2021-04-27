@@ -38,6 +38,7 @@ public class TransactionLog {
 		t.setDate(date);
 		t.setAmount(amount);
 		t.setId(id);
+		tLog.add(t);
 		sort();
 	}
 	
