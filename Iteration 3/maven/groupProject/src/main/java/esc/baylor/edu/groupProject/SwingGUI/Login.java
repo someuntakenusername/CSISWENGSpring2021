@@ -73,7 +73,6 @@ public class Login implements ActionListener {
 		Boolean isFile = false;
 		String filename = null;
 		
-		
 		filename = u.findFilename();
 		File f = new File(filename);
 		if (f.isFile()) {
