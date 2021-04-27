@@ -13,15 +13,13 @@ import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
  * 
  * @author Trae
  */
-public class TranToCatTableModel extends AbstractTableModel {
+public class AddTransactionToCategoryModel extends AbstractTableModel {
 
 	private final String [] columns = {"Title", "Amount", "Date", ""};
 	private final SimpleDateFormat format = new SimpleDateFormat("MMMMM dd, yyyy");
-	private TransactionLog tLog;
 	private Category category;
 
-	public TranToCatTableModel(TransactionLog tLog, Category category) {
-		this.tLog = tLog;
+	public AddTransactionToCategoryModel(Category category) {
 		this.category = category;
 	}
 
@@ -32,7 +30,7 @@ public class TranToCatTableModel extends AbstractTableModel {
 
 	@Override
 	public int getRowCount() {
-		return tLog.size();
+		return TransactionTable.model.getTransactionLog().size();
 	}
 
 	@Override
@@ -50,13 +48,13 @@ public class TranToCatTableModel extends AbstractTableModel {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		switch (columnIndex) {
 		case 0: 
-			return tLog.getTransaction(rowIndex).getTitle();
+			return TransactionTable.model.getTransactionLog().getTransaction(rowIndex).getTitle();
 		case 1: 
-			return tLog.getTransaction(rowIndex).getAmount();
+			return TransactionTable.model.getTransactionLog().getTransaction(rowIndex).getAmount();
 		case 2: 
-			return new String(format.format(tLog.getTransaction(rowIndex).getDate()));
+			return new String(format.format(TransactionTable.model.getTransactionLog().getTransaction(rowIndex).getDate()));
 		case 3:
-			return tLog.isInCategory(rowIndex, category);
+			return TransactionTable.model.getTransactionLog().isInCategory(rowIndex, category);
 		default: return "Error";
 		}
 	}
@@ -81,9 +79,9 @@ public class TranToCatTableModel extends AbstractTableModel {
 		if (aValue instanceof Boolean && column == 3) {
 			Boolean val = (Boolean) aValue;
 			if(val) {
-				category.addTransaction(tLog.getTransaction(row));
+				category.addTransaction(TransactionTable.model.getTransactionLog().getTransaction(row));
 			} else {
-				category.addTransaction(tLog.getTransaction(row));
+				category.addTransaction(TransactionTable.model.getTransactionLog().getTransaction(row));
 			}
 			fireTableCellUpdated(row, column);
 		}

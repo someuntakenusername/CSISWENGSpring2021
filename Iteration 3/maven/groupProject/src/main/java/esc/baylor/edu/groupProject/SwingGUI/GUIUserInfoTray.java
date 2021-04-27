@@ -35,7 +35,7 @@ public class GUIUserInfoTray extends JPanel{
         add(userSettingBtn,c);
         
         //user balance text display
-        balanceDisplay = new JTextField("Sample Text");
+        balanceDisplay = new JTextField("Current Balance: ");
         balanceDisplay.setEditable(false);
         c.weightx = 0.5;
         c.gridx = 1;

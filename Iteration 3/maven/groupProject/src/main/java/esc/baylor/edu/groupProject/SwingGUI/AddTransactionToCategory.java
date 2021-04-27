@@ -20,10 +20,10 @@ import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
 public class AddTransactionToCategory extends JFrame {
 	
 	private JTable table;
-	private TranToCatTableModel model;
+	private AddTransactionToCategoryModel model;
 	
-	public AddTransactionToCategory(TransactionLog tLog, Category category) {
-		model = new TranToCatTableModel(tLog, category);
+	public AddTransactionToCategory(Category category) {
+		model = new AddTransactionToCategoryModel(category);
 		table = new JTable(model);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.getColumnModel().getColumn(1).setCellRenderer(new DecimalFormatRenderer());
