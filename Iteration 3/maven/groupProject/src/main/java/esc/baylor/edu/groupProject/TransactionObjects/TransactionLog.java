@@ -104,6 +104,7 @@ public class TransactionLog implements Serializable {
 		c.setName(name);
 		c.setNotes(notes);
 		cList.add(c);
+		save();
 	}
 	
 	/*
@@ -116,6 +117,7 @@ public class TransactionLog implements Serializable {
 	public void editCategory(int index, String name, String notes) {
 		cList.get(index).setName(name);
 		cList.get(index).setNotes(notes);
+		save();
 	}
 	
 	/*
