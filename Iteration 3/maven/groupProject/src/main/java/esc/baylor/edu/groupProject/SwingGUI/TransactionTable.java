@@ -84,7 +84,8 @@ public class TransactionTable extends JPanel implements ActionListener {
 			} else {
 				model.filterTable((Category)filter.getSelectedItem());
 			}
+		} else if(e.getActionCommand().equals("Set_Save")) {
+			new SaveFrame(model);
 		}
-		
 	}
 }

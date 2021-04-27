@@ -6,6 +6,7 @@ import javax.swing.table.AbstractTableModel;
 
 import esc.baylor.edu.groupProject.TransactionObjects.Category;
 import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
+import esc.baylor.edu.groupProject.TransactionObjects.Types;
 
 public class TransactionTableModel extends AbstractTableModel {
 
@@ -55,7 +56,9 @@ public class TransactionTableModel extends AbstractTableModel {
 			case 0: 
 				return filter.getTransaction(rowIndex).getTitle();
 			case 1:
-				return filter.getTransaction(rowIndex).getAmount();
+				int mul = 1;
+				if(filter.getTransaction(rowIndex).getType() == Types.Expense) mul = -1;
+				return mul * filter.getTransaction(rowIndex).getAmount();
 			case 2:
 				return new String(format.format(filter.getTransaction(rowIndex).getDate()));
 			default:
@@ -66,7 +69,9 @@ public class TransactionTableModel extends AbstractTableModel {
 			case 0: 
 				return tLog.getTransaction(rowIndex).getTitle();
 			case 1: 
-				return tLog.getTransaction(rowIndex).getAmount();
+				int mul = 1;
+				if(tLog.getTransaction(rowIndex).getType() == Types.Expense) mul = -1;
+				return mul * tLog.getTransaction(rowIndex).getAmount();
 			case 2: 
 				return new String(format.format(tLog.getTransaction(rowIndex).getDate()));
 			default: 
