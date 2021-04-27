@@ -167,9 +167,6 @@ public class TransactionLog {
 		if (filename == null) {
 			return;
 		}
-		/*
-		 * Load previous info
-		 */
 		try {
 			FileInputStream fi = new FileInputStream(new File(filename));
 	    	ObjectInputStream oi = new ObjectInputStream(fi);
