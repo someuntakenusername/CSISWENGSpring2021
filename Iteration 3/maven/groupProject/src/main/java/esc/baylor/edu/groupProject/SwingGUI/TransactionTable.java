@@ -5,7 +5,6 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,11 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import esc.baylor.edu.groupProject.TransactionObjects.Transaction;
-import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
+import esc.baylor.edu.groupProject.TransactionObjects.Category;
 
 public class TransactionTable extends JPanel implements ActionListener {
 	protected JTable table;
@@ -39,11 +36,14 @@ public class TransactionTable extends JPanel implements ActionListener {
 		JScrollPane scroll = new JScrollPane(table);
 		
 		populate();
+		filter.setSelectedIndex(1);
 		
 		add(scroll);	
 	}
 	
 	private void populate() {
+		filter.removeAllItems(); 
+		filter.addItem("Refresh List");
 		filter.addItem("None");
 		for(int i = 0; i < model.getTransactionLog().categoryCount(); ++i) {
 			filter.addItem(model.getTransactionLog().getCategory(i));
@@ -78,6 +78,15 @@ public class TransactionTable extends JPanel implements ActionListener {
 			}
 		} else if(e.getActionCommand().equals("CMD_EDIT_EXPENSE")) {
 			new TransactionFrame(model, table.getSelectedRow());
+		} else if(e.getActionCommand().equals("filter")) {
+			if(filter.getSelectedIndex() == 0) {
+				populate();
+				filter.setSelectedIndex(1);
+			} else if (filter.getSelectedIndex() == 1) {
+				model.filterTable(null);
+			} else {
+				model.filterTable((Category)filter.getSelectedItem());
+			}
 		}
 		
 	}

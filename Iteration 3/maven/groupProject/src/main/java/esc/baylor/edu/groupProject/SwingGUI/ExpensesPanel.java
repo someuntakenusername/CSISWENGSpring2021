@@ -12,7 +12,7 @@ public class ExpensesPanel extends JPanel{
 	public ExpensesPanel() {
 		setLayout(new BorderLayout());
 		
-		filter = new JComboBox<Category>();
+		filter = new JComboBox<Object>();
 		
 		list = new TransactionTable(filter);
 		add(list, BorderLayout.CENTER);

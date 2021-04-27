@@ -62,12 +62,12 @@ public class Login implements ActionListener {
 		panel.add(failure);
 		
 		frame.setVisible(true);
-		
+			
 	}
 	
 	public static void storeCredentials(String username, String password) {
 		
-		// Store login
+		// Store credentials
 		
 	}
 	
