@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class Login implements ActionListener {
@@ -21,7 +22,8 @@ public class Login implements ActionListener {
 	private JButton loginButton;
 	private JButton registerButton;
 	private JLabel failure;
-	private JTextField usernameText, passwordText;
+	private JTextField usernameText;
+	private JPasswordField passwordText;
 
 	public static User user;
 
@@ -48,7 +50,7 @@ public class Login implements ActionListener {
 		passwordLabel.setBounds(10, 50, 80, 25);
 		panel.add(passwordLabel);
 
-		passwordText = new JTextField();
+		passwordText = new JPasswordField();
 		passwordText.setBounds(100, 50, 165, 25);
 		panel.add(passwordText);
 
@@ -92,7 +94,7 @@ public class Login implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		User user = new User(usernameText.getText(), passwordText.getText());
+		User user = new User(usernameText.getText(), String.valueOf(passwordText.getPassword()));
 		if (e.getSource() == loginButton) {
 			if (fileExists(user)) {
 				//load
