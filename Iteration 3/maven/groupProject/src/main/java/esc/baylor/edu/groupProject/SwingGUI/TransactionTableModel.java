@@ -36,7 +36,7 @@ public class TransactionTableModel extends AbstractTableModel {
 	}
 	
 	public Transaction getTransaction(int rowIndex) {
-		if(filter == null) {
+		if(filter != null) {
 			return filter.getTransaction(rowIndex);
 		} else {
 			return tLog.getTransaction(rowIndex);
