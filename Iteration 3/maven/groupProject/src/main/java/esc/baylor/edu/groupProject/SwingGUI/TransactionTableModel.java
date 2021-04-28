@@ -6,13 +6,19 @@ import javax.swing.table.AbstractTableModel;
 
 import esc.baylor.edu.groupProject.TransactionObjects.Category;
 import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
+import esc.baylor.edu.groupProject.TransactionObjects.Types;
 
+/*
+ * Table model for the Transaction display table
+ * 
+ * @author Trae
+ */
 public class TransactionTableModel extends AbstractTableModel {
 
 	private String[] columnNames = {"Title", "Amount", "Date"};
-	private TransactionLog tLog;
-	private final SimpleDateFormat format = new SimpleDateFormat("MMMMM dd, yyyy");
+	private static final SimpleDateFormat format = new SimpleDateFormat("MMMMM dd, yyyy");
 	private Category filter;
+	private TransactionLog tLog;
 
 	public TransactionTableModel() {
 		tLog = new TransactionLog();
@@ -55,7 +61,9 @@ public class TransactionTableModel extends AbstractTableModel {
 			case 0: 
 				return filter.getTransaction(rowIndex).getTitle();
 			case 1:
-				return filter.getTransaction(rowIndex).getAmount();
+				int mul = 1;
+				if(filter.getTransaction(rowIndex).getType() == Types.Expense) mul = -1;
+				return mul * filter.getTransaction(rowIndex).getAmount();
 			case 2:
 				return new String(format.format(filter.getTransaction(rowIndex).getDate()));
 			default:
@@ -66,7 +74,9 @@ public class TransactionTableModel extends AbstractTableModel {
 			case 0: 
 				return tLog.getTransaction(rowIndex).getTitle();
 			case 1: 
-				return tLog.getTransaction(rowIndex).getAmount();
+				int mul = 1;
+				if(tLog.getTransaction(rowIndex).getType() == Types.Expense) mul = -1;
+				return mul * tLog.getTransaction(rowIndex).getAmount();
 			case 2: 
 				return new String(format.format(tLog.getTransaction(rowIndex).getDate()));
 			default: 

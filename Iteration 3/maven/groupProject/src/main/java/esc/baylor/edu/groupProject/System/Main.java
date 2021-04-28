@@ -7,9 +7,13 @@ import esc.baylor.edu.groupProject.SwingGUI.Login;
 public class Main {
 	final static Logger LOGGER = Logger.getLogger("logger");
 	
-	public static void main(String[] args) {		
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {        
+	 
+	private static final Logger log = Logger.getLogger(Main.class.getName());
+	
+	public static void main(String[] args) {	
+		log.info("Starting BearBudget...");
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {			
+            public void run() {
             	Login g = new Login();
         		g.login();
             }

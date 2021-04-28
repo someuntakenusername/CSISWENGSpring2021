@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -14,12 +16,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class DatePicker extends JPanel {
-	int month = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH);
-	int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);;
-	JLabel l = new JLabel("", JLabel.CENTER);
-	String day = "";
-	JDialog d;
-	JButton[] button = new JButton[49];
+	private int month = Calendar.getInstance().get(Calendar.MONTH);
+	private int year = Calendar.getInstance().get(Calendar.YEAR);;
+	private JLabel l = new JLabel("", JLabel.CENTER);
+	private String day = "";
+	private JDialog d;
+	private JButton[] button = new JButton[49];
 
 	public DatePicker(JFrame parent) {
 		d = new JDialog();
@@ -75,12 +77,12 @@ public class DatePicker extends JPanel {
 	public void displayDate() {
 		for (int x = 7; x < button.length; x++)
 			button[x].setText("");
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(
+		SimpleDateFormat sdf = new SimpleDateFormat(
 				"MMMM yyyy");
-		java.util.Calendar cal = java.util.Calendar.getInstance();
+		Calendar cal = Calendar.getInstance();
 		cal.set(year, month, 1);
-		int dayOfWeek = cal.get(java.util.Calendar.DAY_OF_WEEK);
-		int daysInMonth = cal.getActualMaximum(java.util.Calendar.DAY_OF_MONTH);
+		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+		int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 		for (int x = 6 + dayOfWeek, day = 1; day <= daysInMonth; x++, day++)
 			button[x].setText("" + day);
 		l.setText(sdf.format(cal.getTime()));
@@ -90,8 +92,8 @@ public class DatePicker extends JPanel {
 	public String setPickedDate() {
 		if (day.equals(""))
 			return day;
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MMMMM dd, yyyy");
-		java.util.Calendar cal = java.util.Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("MMMMM dd, yyyy");
+		Calendar cal = Calendar.getInstance();
 		cal.set(year, month, Integer.parseInt(day));
 		return sdf.format(cal.getTime());
 	}
