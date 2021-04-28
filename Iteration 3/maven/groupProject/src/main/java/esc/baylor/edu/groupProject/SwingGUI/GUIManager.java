@@ -7,10 +7,14 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 import javax.swing.*;
 
+import esc.baylor.edu.groupProject.TransactionObjects.Transaction;
+
 public class GUIManager {
+	private static final Logger log = Logger.getLogger(GUIManager.class.getName());
 
 	/*
 	 *	startGUI
@@ -18,6 +22,7 @@ public class GUIManager {
 	 *	Builds & displays the main window. Should be called only once on start-up
 	 */
 	public void startGUI() {
+		log.entering(GUIManager.class.getName(), "startGUI");
 		//create new thread
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {            	
@@ -47,6 +52,7 @@ public class GUIManager {
             	baseWindow.setVisible(true);
             }
         });
+		log.exiting(GUIManager.class.getName(), "startGUI");
 	}
 	
 	/*
