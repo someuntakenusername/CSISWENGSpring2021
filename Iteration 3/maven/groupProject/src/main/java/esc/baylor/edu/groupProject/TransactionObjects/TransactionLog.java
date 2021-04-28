@@ -34,13 +34,40 @@ public class TransactionLog implements Serializable {
 		load();
 	}
 	
+	/*
+	 * @return Returns the collection of transactions associated with this TransactionLog object
+	 */
 	public Collection<Transaction> getTransactionList(){
 		return (Collection<Transaction>) tLog.clone();
 	}
 
-	public void setCurrentSavings(double amount) {
-		currDate = new Date();
-		savings = amount;
+	/*
+	 * @param amount New value of user savings
+	 */
+	public void setCurrentSavings(double amount, Date date) {
+		currDate = date;
+		savings = 0.00;
+		savings += amount;
+	}
+	
+	/*
+	 * Calculates the users current balance
+	 * 
+	 * @return A double representation of the users current balance calculated 
+	 * by summing transactions after the date set by the balance and subtracting
+	 * the current balance
+	 */
+	public Double getCurrentBalance() {
+		if(currDate != null) {
+			double tranSum = 0.00;
+			for(Transaction t: tLog) {
+				if(t.getDate().compareTo(currDate) < 0) {
+					tranSum += t.getAmount();
+				}
+			}
+			return savings - tranSum;
+		}
+		return null;
 	}
 	
 	/*
@@ -200,9 +227,12 @@ public class TransactionLog implements Serializable {
 	    	this.id = t.id;
 	    	this.tLog = t.tLog;
 	    	this.filename = t.filename;
+	    	this.currDate = t.currDate;
+	    	this.savings = t.savings;
 
 	    	oi.close();
 	    	fi.close();
+	    	
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

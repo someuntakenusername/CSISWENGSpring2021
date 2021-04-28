@@ -11,13 +11,11 @@ import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
 
 public class CategoryTable extends JPanel{
 	
-	private TransactionLog tLog;
 	private CategoryModel model;
 	private JTable table;
 	
-	public CategoryTable(TransactionLog tLog) {
+	public CategoryTable() {
 		super();
-		this.tLog = tLog;
 		model = new CategoryModel();
 		
 		//Sets up CategoryList and model
@@ -27,10 +25,6 @@ public class CategoryTable extends JPanel{
 		
 		add(scroll, BorderLayout.CENTER);
 		setSize(100, 100);
-	}
-	
-	public TransactionLog getTransactionLog() {
-		return tLog;
 	}
 	
 	public JTable getTable() {
@@ -52,7 +46,7 @@ public class CategoryTable extends JPanel{
 		
 		@Override
 		public int getRowCount() {
-			return tLog.categoryCount();
+			return TransactionTable.model.getTransactionLog().categoryCount();
 		}
 
 		@Override
@@ -64,9 +58,9 @@ public class CategoryTable extends JPanel{
 		public Object getValueAt(int rowIndex, int columnIndex) {
 			switch (columnIndex) {
 			case 0: 
-				return tLog.getCategory(rowIndex).getName();
+				return TransactionTable.model.getTransactionLog().getCategory(rowIndex).getName();
 			case 1: 
-				return tLog.getCategory(rowIndex).getNotes();
+				return TransactionTable.model.getTransactionLog().getCategory(rowIndex).getNotes();
 			default: return "Error";
 			}
 		}		
