@@ -75,11 +75,11 @@ public class TransactionTable extends JPanel implements ActionListener {
 		} else if(e.getActionCommand().equals("CMD_DELETE_EXPENSE")) {
 			int i = JOptionPane.showConfirmDialog (this, "Are you sure you want to delete this transaction?", "Warning", JOptionPane.YES_NO_OPTION);
 			if(i == JOptionPane.YES_OPTION) {
-				model.getTransactionLog().removeTransaction(model.getTransactionLog().getTransaction(table.getSelectedRow()));
+				model.getTransactionLog().removeTransaction(model.getTransaction(table.getSelectedRow()));
 				model.fireTableDataChanged();
 			}
 		} else if(e.getActionCommand().equals("CMD_EDIT_EXPENSE") && table.getSelectedRow() != -1) {
-			new TransactionFrame(model.getTransactionLog().getTransaction(table.getSelectedRow()));
+			new TransactionFrame(model.getTransaction(table.getSelectedRow()));
 		} else if(e.getActionCommand().equals("filter")) {
 			if(filter.getSelectedIndex() == 0) {
 				populate();
@@ -90,7 +90,7 @@ public class TransactionTable extends JPanel implements ActionListener {
 				model.filterTable((Category)filter.getSelectedItem());
 			}
 		} else if(e.getActionCommand().equals("Set_Save")) {
-			new SaveFrame(model);
+			new SaveFrame();
 		}
 	}
 }
