@@ -283,7 +283,9 @@ public class TransactionLog implements Serializable {
 
 	    	oi.close();
 	    	fi.close();
+	    	log.info("Successfully loaded \"" + filename + "\"");
 	    	
+	    	log.info("Parsing loaded Transactions...");
 	    	ArrayList<Transaction> newTrans = new ArrayList<Transaction>();
 	    	for(Transaction tr : tLog) {
 				if(tr.isRecurring()) {
@@ -296,6 +298,7 @@ public class TransactionLog implements Serializable {
 					}
 				}
 			}
+	    	log.info("Successfully parsed all loaded Transactions");
 	    	
 		} catch (IOException e) {
 			log.throwing(Transaction.class.getName(), "load", e);
@@ -304,7 +307,7 @@ public class TransactionLog implements Serializable {
 			log.throwing(Transaction.class.getName(), "load", e);
 			e.printStackTrace();
 		}
-		
+		log.exiting(Transaction.class.getName(), "load");
 		
 	}
 	
@@ -312,7 +315,9 @@ public class TransactionLog implements Serializable {
 	 * saves the users transactions when one is added or removed
 	 */
 	public void save() {
+		log.entering(Transaction.class.getName(), "save");
 		try {
+			log.info("Saving \"" + filename + "\"...");
 		    FileOutputStream f = new FileOutputStream(new File(this.filename));
 		    ObjectOutputStream o = new ObjectOutputStream(f);
 		    
@@ -320,21 +325,24 @@ public class TransactionLog implements Serializable {
 
 		    o.close();
 		    f.close();
+		    log.info("Successfully saved \"" + filename + "\"");
 		} catch (Exception e) {
+			log.throwing(Transaction.class.getName(), "save", e);
 			e.printStackTrace();
 		}
+		log.exiting(Transaction.class.getName(), "save");
 	}
 	
 	/**
 	 * Internal sort function for the transaction log. Sorts the transactions by date
 	 */
 	private void sort() {
+		log.entering(Transaction.class.getName(), "sort");
 		tLog.sort(new Comparator<Transaction>() {
 			public int compare(Transaction a, Transaction b) {
 				return a.getDate().compareTo(b.getDate());
 			}
 		});
+		log.exiting(Transaction.class.getName(), "sort");
 	}
-
-
 }
