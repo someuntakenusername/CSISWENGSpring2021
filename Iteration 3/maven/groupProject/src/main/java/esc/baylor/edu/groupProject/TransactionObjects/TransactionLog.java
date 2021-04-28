@@ -88,7 +88,8 @@ public class TransactionLog implements Serializable {
 	}
 	
 	/**
-	 * Adds a transaction to the Transaction Log
+	 * Creates and new transaction and adds it to the Transaction Log given the Transactions information.
+	 * Checks for recurring dates and adds them to the transaction list as well if necessary
 	 * 
 	 * @param type The enumerated type of the transaction, either Income or Expense
 	 * @param title The name of the transaction
@@ -102,7 +103,18 @@ public class TransactionLog implements Serializable {
 		t.setTitle(title);
 		t.setDate(date);
 		t.setAmount(amount);
-		tLog.add(t);
+		if(!tLog.contains(t)) tLog.add(t);
+		
+		if(t.isRecurring()) {
+			Calendar next = Calendar.getInstance();
+			next.setTime(t.getDate());
+			next.add(Calendar.DATE, t.getRecur());
+			if(Calendar.getInstance().compareTo(next) >= 0) {
+				addTransaction(t.getType(), t.getTitle(), next.getTime(), t.getAmount(), t.getRecur());
+				next.add(Calendar.DATE, t.getRecur());
+			}
+		}
+		
 		sort();
 		save();
 		log.exiting(Transaction.class.getName(), "addTransaction");
@@ -122,7 +134,8 @@ public class TransactionLog implements Serializable {
 	}
 	
 	/**
-	 * Replaces the data of the transaction at the given index with the newly provided data
+	 * Replaces the data of the transaction at the given index with the newly provided data. If the transaction is recurring
+	 * it will check for recursive dates and add those to the transaction list as well
 	 * 
 	 * @param index The index of the transaction in the Transaction Sort list
 	 * @param type The type of the transaction
@@ -139,6 +152,17 @@ public class TransactionLog implements Serializable {
 		t.setAmount(amount);
 		t.setDate(date);
 		t.setRecur(recur);
+		
+		if(t.isRecurring()) {
+			Calendar next = Calendar.getInstance();
+			next.setTime(t.getDate());
+			next.add(Calendar.DATE, t.getRecur());
+			if(Calendar.getInstance().compareTo(next) >= 0) {
+				addTransaction(t.getType(), t.getTitle(), next.getTime(), t.getAmount(), t.getRecur());
+				next.add(Calendar.DATE, t.getRecur());
+			}
+		}
+		
 		save();
 		log.exiting(Transaction.class.getName(), "editTransaction");
 	}
@@ -269,8 +293,10 @@ public class TransactionLog implements Serializable {
 			return;
 		}
 		try {
+
 			log.info("Loading \"" + filename + "\"...");
-			FileInputStream fi = new FileInputStream(new File(filename));
+			
+			FileInputStream fi = new FileInputStream(f);
 	    	ObjectInputStream oi = new ObjectInputStream(fi);
 	    
 	    	TransactionLog t = (TransactionLog) oi.readObject();
@@ -285,16 +311,18 @@ public class TransactionLog implements Serializable {
 	    	fi.close();
 	    	log.info("Successfully loaded \"" + filename + "\"");
 	    	
+
 	    	log.info("Parsing loaded Transactions...");
-	    	ArrayList<Transaction> newTrans = new ArrayList<Transaction>();
-	    	for(Transaction tr : tLog) {
+
+	    	ArrayList<Transaction> trans = (ArrayList<Transaction>) tLog.clone();
+	    	for(Transaction tr : trans) {
 				if(tr.isRecurring()) {
 					Calendar next = Calendar.getInstance();
 					next.setTime(tr.getDate());
 					next.add(Calendar.DATE, tr.getRecur());
-					if(Calendar.getInstance().compareTo(next) >= 0) {
-						//Transaction n = new Transaction(tr.getType(), tr.getRecur());
-						
+					while(Calendar.getInstance().compareTo(next) >= 0) {
+						addTransaction(tr.getType(), tr.getTitle(), next.getTime(), tr.getAmount(), tr.getRecur());
+						next.add(Calendar.DATE, tr.getRecur());
 					}
 				}
 			}
@@ -307,8 +335,8 @@ public class TransactionLog implements Serializable {
 			log.throwing(Transaction.class.getName(), "load", e);
 			e.printStackTrace();
 		}
+
 		log.exiting(Transaction.class.getName(), "load");
-		
 	}
 	
 	/**
