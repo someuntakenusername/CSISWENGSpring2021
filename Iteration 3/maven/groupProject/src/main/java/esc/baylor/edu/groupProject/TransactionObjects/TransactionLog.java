@@ -6,29 +6,68 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.Date;;
+import java.util.Date;
 
-public class TransactionLog {
+import esc.baylor.edu.groupProject.SwingGUI.Login;;
+
+public class TransactionLog implements Serializable {
 	ArrayList<Category> cList;
 	ArrayList<Transaction> tLog;
 	private int id;
 	private String filename;
+	private static final long serialVersionUID = 2L;
+	private double savings;
+	private Date currDate;
 	
 	/*
 	 * Initializes the transaction log and calls for the program to load stored data
 	 */
 	public TransactionLog() {
+		filename = Login.user.findFilename();
 		tLog = new ArrayList<Transaction>();
 		cList = new ArrayList<Category>();
-		filename = null;
 		load();
 	}
 	
+	/*
+	 * @return Returns the collection of transactions associated with this TransactionLog object
+	 */
 	public Collection<Transaction> getTransactionList(){
 		return (Collection<Transaction>) tLog.clone();
+	}
+
+	/*
+	 * @param amount New value of user savings
+	 */
+	public void setCurrentSavings(double amount, Date date) {
+		currDate = date;
+		savings = 0.00;
+		savings += amount;
+	}
+	
+	/*
+	 * Calculates the users current balance
+	 * 
+	 * @return A double representation of the users current balance calculated 
+	 * by summing transactions after the date set by the balance and subtracting
+	 * the current balance
+	 */
+	public Double getCurrentBalance() {
+		if(currDate != null) {
+			double tranSum = 0.00;
+			for(Transaction t: tLog) {
+				if(t.getDate().compareTo(currDate) < 0) {
+					tranSum += t.getAmount();
+				}
+			}
+			return savings - tranSum;
+		}
+		return null;
 	}
 	
 	/*
@@ -48,6 +87,7 @@ public class TransactionLog {
 		t.setId(id);
 		tLog.add(t);
 		sort();
+		save();
 	}
 	
 	/*
@@ -78,6 +118,7 @@ public class TransactionLog {
 		t.setAmount(amount);
 		t.setDate(date);
 		t.setRecur(recur);
+		save();
 	}
 	
 	/*
@@ -87,6 +128,7 @@ public class TransactionLog {
 	 */
 	public void removeTransaction(Transaction t) {
 		tLog.remove(t);
+		save();
 	}
 	
 	/*
@@ -100,6 +142,7 @@ public class TransactionLog {
 		c.setName(name);
 		c.setNotes(notes);
 		cList.add(c);
+		save();
 	}
 	
 	/*
@@ -112,6 +155,7 @@ public class TransactionLog {
 	public void editCategory(int index, String name, String notes) {
 		cList.get(index).setName(name);
 		cList.get(index).setNotes(notes);
+		save();
 	}
 	
 	/*
@@ -121,6 +165,7 @@ public class TransactionLog {
 	 */
 	public void removeCategory(Category cat) {
 		cList.remove(cat);
+		save();
 	}
 	
 	/*
@@ -164,12 +209,15 @@ public class TransactionLog {
 	 * Loads the users saved transactions to the log
 	 */
 	private void load() {
-		if (filename == null) {
+		File f = new File(filename);
+		if (!f.exists()) {
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			return;
 		}
-		/*
-		 * Load previous info
-		 */
 		try {
 			FileInputStream fi = new FileInputStream(new File(filename));
 	    	ObjectInputStream oi = new ObjectInputStream(fi);
@@ -179,9 +227,12 @@ public class TransactionLog {
 	    	this.id = t.id;
 	    	this.tLog = t.tLog;
 	    	this.filename = t.filename;
+	    	this.currDate = t.currDate;
+	    	this.savings = t.savings;
 
 	    	oi.close();
 	    	fi.close();
+	    	
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -192,7 +243,7 @@ public class TransactionLog {
 	/*
 	 * saves the users transactions when one is added or removed
 	 */
-	private void save() {
+	public void save() {
 		try {
 		    FileOutputStream f = new FileOutputStream(new File(this.filename));
 		    ObjectOutputStream o = new ObjectOutputStream(f);

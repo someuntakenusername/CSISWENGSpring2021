@@ -1,5 +1,6 @@
 package esc.baylor.edu.groupProject.TransactionObjects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -7,7 +8,8 @@ import java.util.Comparator;
  * Storage object for the information of each category
  * @author Trae
  */
-public class Category {
+public class Category implements Serializable {
+	private static final long serialVersionUID = 4L;
     ArrayList<Transaction> transactions;
     String name, notes;
     

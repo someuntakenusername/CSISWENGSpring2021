@@ -20,10 +20,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import esc.baylor.edu.groupProject.TransactionObjects.Transaction;
+import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
 import esc.baylor.edu.groupProject.TransactionObjects.Types;
 
 public class TransactionFrame extends JFrame implements ActionListener {
-	private TransactionTableModel model;
 	private JPanel panel;
 	private JTextField title, amount, recurrence;
 	private JCheckBox recurring;
@@ -31,15 +32,13 @@ public class TransactionFrame extends JFrame implements ActionListener {
 	private JButton confirm, cancel;
 	private boolean recur = false;
 	private Date selectedDate = null;
-	private final Object [] types = {"----", Types.Expense, Types.Income};
-	private int rowIndex;
-	private final SimpleDateFormat sdf = new SimpleDateFormat("MMMMM dd, yyyy");
-
+	private static final Object [] types = {"----", Types.Expense, Types.Income};
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("MMMMM dd, yyyy");
+	private Transaction transaction;
 	
-	public TransactionFrame(TransactionTableModel model, int rowIndex) {
+	public TransactionFrame(Transaction transaction) {
 		super("Add New Transaction");
-		this.model = model;
-		this.rowIndex = rowIndex;
+		this.transaction = transaction;
 		//Setup 4x2 panel
 		panel = new JPanel(new GridLayout(7, 2));
 		
@@ -65,6 +64,7 @@ public class TransactionFrame extends JFrame implements ActionListener {
 		//Date comboxbox
 		date = new JComboBox<Object>();
 		date.addItem("Select Date");
+		date.setActionCommand("Date");
 		date.addActionListener(this);
 
 		//Recurrence checkbox
@@ -80,7 +80,7 @@ public class TransactionFrame extends JFrame implements ActionListener {
 		cancel.setActionCommand("Cancel");
 		cancel.addActionListener(this);
 		
-		if(rowIndex != -1) init();
+		if(this.transaction != null) init();
 		
 		panel.add(new JLabel("Title"));
 		panel.add(title);
@@ -88,7 +88,6 @@ public class TransactionFrame extends JFrame implements ActionListener {
 		panel.add(amount);
 		panel.add(new JLabel("Date"));
 		panel.add(date);
-		date.setActionCommand("Date");
 		panel.add(new JLabel("Recurring"));
 		panel.add(recurring);
 		panel.add(new JLabel("Recurrence"));
@@ -106,15 +105,15 @@ public class TransactionFrame extends JFrame implements ActionListener {
 	 * Initializes field values if editing an existing transaction
 	 */
 	private void init() {
-		type.setSelectedItem(model.getTransactionLog().getTransaction(rowIndex).getType());
-		title.setText(model.getTransactionLog().getTransaction(rowIndex).getTitle());
-		amount.setText(model.getTransactionLog().getTransaction(rowIndex).getAmount().toString());
+		type.setSelectedItem(transaction.getType());
+		title.setText(transaction.getTitle());
+		amount.setText(transaction.getAmount().toString());
 		date.removeAllItems();
-		selectedDate = model.getTransactionLog().getTransaction(rowIndex).getDate();
-		date.addItem(sdf.format(model.getTransactionLog().getTransaction(rowIndex).getDate()));
-		if(model.getTransactionLog().getTransaction(rowIndex).isRecurring()) {
+		selectedDate = transaction.getDate();
+		date.addItem(sdf.format(transaction.getDate()));
+		if(transaction.isRecurring()) {
 			recurring.setSelected(true);
-			recurrence.setText(Integer.toString(model.getTransactionLog().getTransaction(rowIndex).getRecur()));
+			recurrence.setText(Integer.toString(transaction.getRecur()));
 			recurrence.setEditable(true);
 		} else {
 			recurring.setSelected(false);
@@ -137,12 +136,16 @@ public class TransactionFrame extends JFrame implements ActionListener {
 				}
 				try {
 					am = Double.parseDouble(amount.getText());
-					if(rowIndex == -1) {
-						model.getTransactionLog().addTransaction((Types)type.getSelectedItem(), title.getText(), selectedDate, am, rec);
+					if(transaction == null) {
+						TransactionTable.getTransactionLog().addTransaction((Types)type.getSelectedItem(), title.getText(), selectedDate, am, rec);
 					} else {
-						model.getTransactionLog().editTransaction(rowIndex, (Types)type.getSelectedItem(), title.getText(), selectedDate, am, rec);
+						transaction.setType((Types)type.getSelectedItem());
+						transaction.setTitle(title.getText());
+						transaction.setDate(selectedDate);
+						transaction.setAmount(am);
+						transaction.setRecur(rec);
 					}
-					model.fireTableDataChanged();
+					TransactionTable.model.fireTableDataChanged();
 					this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 				} catch (NumberFormatException ex){
 					JOptionPane.showMessageDialog(this, "Double Formatted Incorrectly", "Warning", JOptionPane.ERROR_MESSAGE);

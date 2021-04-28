@@ -27,17 +27,18 @@ public class GUIManager {
                 Container content = baseWindow.getContentPane();
                 content.setLayout(new BorderLayout());
                 
-                userTray = new GUIUserInfoTray();
-                content.add(userTray,BorderLayout.PAGE_START);
-                
                 //add content panels here
                 JTabbedPane tabs = new JTabbedPane();
                 tabs.addTab("Overview", new OverviewPanel());
                 tabs.addTab("Expenses", expensePane = new ExpensesPanel());
                 
+                userTray = new GUIUserInfoTray();
+                content.add(userTray,BorderLayout.PAGE_START);
+                
             	//TODO: have GUIManager handle menu bar action events
                 menuBar = new JMenuBar();
-                menuBar.add(new CategoryMenu(expensePane.list.model));
+                menuBar.add(new FileMenu());
+                menuBar.add(new CategoryMenu());
             	baseWindow.setJMenuBar(menuBar);
                 
                 content.add(tabs,BorderLayout.CENTER);

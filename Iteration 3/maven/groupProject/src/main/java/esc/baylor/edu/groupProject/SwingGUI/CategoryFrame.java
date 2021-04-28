@@ -11,7 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /*
@@ -65,8 +64,8 @@ public class CategoryFrame extends JFrame implements ActionListener{
 	}
 
 	private void init() {
-		name.setText(table.getTransactionLog().getCategory(rowIndex).getName());
-		notes.setText(table.getTransactionLog().getCategory(rowIndex).getNotes());
+		name.setText(TransactionTable.model.getTransactionLog().getCategory(rowIndex).getName());
+		notes.setText(TransactionTable.model.getTransactionLog().getCategory(rowIndex).getNotes());
 	}
 
 	@Override
@@ -75,14 +74,14 @@ public class CategoryFrame extends JFrame implements ActionListener{
 			if(name.getText().equals(null)) {
 				JOptionPane.showMessageDialog(this, "Category must have a name", "Warning", JOptionPane.ERROR_MESSAGE);	
 			} else if(rowIndex == -1) {
-				if(table.getTransactionLog().categoryExists(name.getText())) {
+				if(TransactionTable.model.getTransactionLog().categoryExists(name.getText())) {
 					JOptionPane.showMessageDialog(this, "Category with this name already exists", "Warning", JOptionPane.ERROR_MESSAGE);
 				}
-				table.getTransactionLog().addCategory(name.getText(), notes.getText());
+				TransactionTable.model.getTransactionLog().addCategory(name.getText(), notes.getText());
 				table.update();
 				quit();
 			} else {
-				table.getTransactionLog().editCategory(rowIndex, name.getText(), notes.getText());
+				TransactionTable.model.getTransactionLog().editCategory(rowIndex, name.getText(), notes.getText());
 				table.update();
 				quit();
 			}

@@ -1,16 +1,18 @@
 package esc.baylor.edu.groupProject.TransactionObjects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Transaction {
+public class Transaction implements Serializable {
 	Types type;
 	Double amount;
 	Date date;
 	String title, comment;
 	int id, recur;
+	private static final long serialVersionUID = 3L;
 	
 	public Transaction(Types type, int recur) {
 		this.type = type;
@@ -127,6 +129,4 @@ public class Transaction {
 			return false;
 		return true;
 	}
-	
-
 }

@@ -8,32 +8,22 @@ import javax.swing.JMenuItem;
 
 public class CategoryMenu extends JMenu implements ActionListener{
 
-	TransactionTableModel model;
-	JMenuItem addCat, delCat, editCat;
+	private JMenuItem catList;
 	
-	public CategoryMenu(TransactionTableModel model) {
+	public CategoryMenu() {
 		super("Category");
-		this.model = model;
-		//Initialize Menu Items and Action Listeners
+		//Initialize Menu Item
 		
-		//Add Category
-		//addCat = new JMenuItem("New Category");
-		//addCat.setActionCommand("New");
-		//addCat.addActionListener(this);
-		//add(addCat);
-		//Delete Category
-		delCat = new JMenuItem("View Category List");
-		delCat.setActionCommand("List");
-		delCat.addActionListener(this);
-		add(delCat);
+		catList = new JMenuItem("View Category List");
+		catList.setActionCommand("List");
+		catList.addActionListener(this);
+		add(catList);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("New")) {
-			//new CategoryFrame(model, -1);
-		} else if(e.getActionCommand().equals("List")) {
-			new CategoryTableFrame(model);
+		if(e.getActionCommand().equals("List")) {
+			new CategoryTableFrame();
 		}
 	}
 }
