@@ -16,7 +16,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String username;
-	private String password;
+	private String password;	
 	
 	public User(String u, String p) {
 		username = u;
@@ -70,49 +70,9 @@ public class User implements Serializable {
 		return true;
 	}
 	
-	/*
-	public void writeUser() {
-		String filename = null;
-		filename = String.valueOf(this.hashCode());
-		filename += ".txt";
-		
-		try {
-		    FileOutputStream f = new FileOutputStream(new File(filename));
-		    ObjectOutputStream o = new ObjectOutputStream(f);
-		    
-		    o.writeObject(this.tLog);
-
-		    o.close();
-		    f.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-    }
-	
-	public void readUser() throws FileNotFoundException {
-		String filename = null;
-		filename = String.valueOf(this.hashCode());
-		filename += ".txt";
-		
-		try {
-			FileInputStream fi = new FileInputStream(new File(filename));
-	    	ObjectInputStream oi = new ObjectInputStream(fi);
-	    
-	    	this.tLog = (TransactionLog) oi.readObject();
-
-	    	oi.close();
-	    	fi.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-	*/
-	
 	public String findFilename() {
 		String filename = null;
-		filename = "./src/main/resources/saves/" + String.valueOf(this.hashCode());
+		filename = String.valueOf(this.hashCode());
 		filename += ".txt";
 		return filename;
 	}
