@@ -81,7 +81,7 @@ public class AddTransactionToCategoryModel extends AbstractTableModel {
 			if(val) {
 				category.addTransaction(TransactionTable.model.getTransactionLog().getTransaction(row));
 			} else {
-				category.addTransaction(TransactionTable.model.getTransactionLog().getTransaction(row));
+				category.removeTransaction(TransactionTable.model.getTransactionLog().getTransaction(row));
 			}
 			fireTableCellUpdated(row, column);
 		}

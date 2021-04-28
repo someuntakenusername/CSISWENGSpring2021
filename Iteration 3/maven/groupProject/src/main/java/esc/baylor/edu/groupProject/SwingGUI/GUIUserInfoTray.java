@@ -35,7 +35,7 @@ public class GUIUserInfoTray extends JPanel{
         add(userSettingBtn,c);
         
         //user balance text display
-        balanceDisplay = new JTextField("Current Balance: ");
+        balanceDisplay = new JTextField("Current Balance: " + TransactionTable.getTransactionLog().getCurrentBalance());
         balanceDisplay.setEditable(false);
         c.weightx = 0.5;
         c.gridx = 1;
@@ -45,7 +45,7 @@ public class GUIUserInfoTray extends JPanel{
         add(balanceDisplay,c);
         
         //user net growth text display
-        netDisplay = new JTextField("Hello again");
+        netDisplay = new JTextField("");
         netDisplay.setEditable(false);
         c.weightx = 0.5;
         c.gridx = 1;
