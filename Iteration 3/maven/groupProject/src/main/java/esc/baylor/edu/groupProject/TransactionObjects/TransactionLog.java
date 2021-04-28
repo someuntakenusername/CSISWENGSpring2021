@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.logging.Logger;
 
 import esc.baylor.edu.groupProject.SwingGUI.Login;;
 
@@ -22,6 +23,7 @@ import esc.baylor.edu.groupProject.SwingGUI.Login;;
  *
  */
 public class TransactionLog implements Serializable {
+	private static final Logger log = Logger.getLogger(Transaction.class.getName());
 	ArrayList<Category> cList;
 	ArrayList<Transaction> tLog;
 	private int id;
@@ -34,16 +36,20 @@ public class TransactionLog implements Serializable {
 	 * Initializes the transaction log and calls for the program to load stored data
 	 */
 	public TransactionLog() {
+		log.entering(Transaction.class.getName(), "TransactionLog");
 		filename = Login.user.findFilename();
 		tLog = new ArrayList<Transaction>();
 		cList = new ArrayList<Category>();
 		load();
+		log.exiting(Transaction.class.getName(), "TransactionLog");
 	}
 	
 	/**
 	 * @return Returns the collection of transactions associated with this TransactionLog object
 	 */
 	public Collection<Transaction> getTransactionList(){
+		log.entering(Transaction.class.getName(), "getTransactionList");
+		log.exiting(Transaction.class.getName(), "getTransactionList", (Collection<Transaction>) tLog.clone());
 		return (Collection<Transaction>) tLog.clone();
 	}
 
@@ -51,9 +57,11 @@ public class TransactionLog implements Serializable {
 	 * @param amount New value of user savings
 	 */
 	public void setCurrentSavings(double amount, Date date) {
+		log.entering(Transaction.class.getName(), "getTransactionList", new Object[] {amount,date});
 		currDate = date;
 		savings = 0.00;
 		savings += amount;
+		log.exiting(Transaction.class.getName(), "getTransactionList");
 	}
 	
 	/**
@@ -64,6 +72,7 @@ public class TransactionLog implements Serializable {
 	 * the current balance
 	 */
 	public Double getCurrentBalance() {
+		log.entering(Transaction.class.getName(), "getCurrentBalance");
 		if(currDate != null) {
 			double tranSum = 0.00;
 			for(Transaction t: tLog) {
@@ -71,8 +80,10 @@ public class TransactionLog implements Serializable {
 					tranSum += t.getAmount();
 				}
 			}
+			log.exiting(Transaction.class.getName(), "getCurrentBalance", savings - tranSum);
 			return savings - tranSum;
 		}
+		log.exiting(Transaction.class.getName(), "getCurrentBalance", null);
 		return null;
 	}
 	
@@ -86,6 +97,7 @@ public class TransactionLog implements Serializable {
 	 * @param recur How often this transaction recurs. Null if it is not recurring
 	 */
 	public void addTransaction(Types type, String title, Date date, Double amount, Integer recur) {
+		log.entering(Transaction.class.getName(), "addTransaction", new Object[] {type,title,date,amount,recur});
 		Transaction t = new Transaction(type, recur);
 		t.setTitle(title);
 		t.setDate(date);
@@ -93,6 +105,7 @@ public class TransactionLog implements Serializable {
 		tLog.add(t);
 		sort();
 		save();
+		log.exiting(Transaction.class.getName(), "addTransaction");
 	}
 	
 	/**
@@ -103,6 +116,8 @@ public class TransactionLog implements Serializable {
 	 * @return The Transaction at the given index in the sorted list
 	 */
 	public Transaction getTransaction(int index) {
+		log.entering(Transaction.class.getName(), "getTransaction", index);
+		log.exiting(Transaction.class.getName(), "getTransaction", tLog.get(index));
 		return tLog.get(index);
 	}
 	
@@ -117,6 +132,7 @@ public class TransactionLog implements Serializable {
 	 * @param recur The recurrence of the Transaction in days
 	 */
 	public void editTransaction(int index, Types type, String title, Date date, Double amount, Integer recur) {
+		log.entering(Transaction.class.getName(), "editTransaction", new Object[] {index,type,title,date,amount,recur});
 		Transaction t = tLog.get(index);
 		t.setType(type);
 		t.setTitle(title);
@@ -124,6 +140,7 @@ public class TransactionLog implements Serializable {
 		t.setDate(date);
 		t.setRecur(recur);
 		save();
+		log.exiting(Transaction.class.getName(), "editTransaction");
 	}
 	
 	/**
@@ -132,6 +149,7 @@ public class TransactionLog implements Serializable {
 	 * @param t The transaction to be removed from the transaction list
 	 */
 	public void removeTransaction(Transaction t) {
+		log.entering(Transaction.class.getName(), "removeTransaction", t);
 		tLog.remove(t);
 		for(Category c : cList) {
 			if(c.contains(t)) {
@@ -139,6 +157,7 @@ public class TransactionLog implements Serializable {
 			}
 		}
 		save();
+		log.exiting(Transaction.class.getName(), "removeTransaction");
 	}
 	
 	/**
@@ -148,11 +167,13 @@ public class TransactionLog implements Serializable {
 	 * @param notes Notes for the category
 	 */
 	public void addCategory(String name, String notes) {
+		log.entering(Transaction.class.getName(), "addCategory", new Object[] {name,notes});
 		Category c = new Category();
 		c.setName(name);
 		c.setNotes(notes);
 		cList.add(c);
 		save();
+		log.exiting(Transaction.class.getName(), "addCategory");
 	}
 	
 	/**
@@ -163,9 +184,11 @@ public class TransactionLog implements Serializable {
 	 * @param notes The new set of notes for the Category
 	 */
 	public void editCategory(int index, String name, String notes) {
+		log.entering(Transaction.class.getName(), "editCategory", new Object[] {index,name,notes});
 		cList.get(index).setName(name);
 		cList.get(index).setNotes(notes);
 		save();
+		log.exiting(Transaction.class.getName(), "editCategory");
 	}
 	
 	/**
@@ -174,25 +197,34 @@ public class TransactionLog implements Serializable {
 	 * @param cat The category to remove from the list
 	 */
 	public void removeCategory(Category cat) {
+		log.entering(Transaction.class.getName(), "removeCategory", cat);
 		cList.remove(cat);
 		save();
+		log.exiting(Transaction.class.getName(), "removeCategory");
 	}
 	
 	/**
 	 * @return the category at the given index in the category list
 	 */
 	public Category getCategory(int index) {
+		log.entering(Transaction.class.getName(), "getCategory", index);
+		log.exiting(Transaction.class.getName(), "getCategory", cList.get(index));
 		return cList.get(index);
+		
 	}
 	
 	/**
 	 * @return The size of the Transaction Log
 	 */
 	public int size() {
+		log.entering(Transaction.class.getName(), "size");
+		log.exiting(Transaction.class.getName(), "size", tLog.size());
 		return tLog.size();
 	}
 	
 	public boolean isInCategory(int index, Category cat) {
+		log.entering(Transaction.class.getName(), "isInCategory", new Object[] {index,cat});
+		log.exiting(Transaction.class.getName(), "isInCategory", cat.contains(tLog.get(index)));
 		return cat.contains(tLog.get(index));
 	}
 	
@@ -200,11 +232,14 @@ public class TransactionLog implements Serializable {
 	 * Checks if a category exists with the given name
 	 */
 	public boolean categoryExists(String name) {
+		log.entering(Transaction.class.getName(), "categoryExists");
 		for(Category c : cList) {
 			if(c.getName().equalsIgnoreCase(name)) {
+				log.exiting(Transaction.class.getName(), "categoryExists", true);
 				return true;
 			}
 		}
+		log.exiting(Transaction.class.getName(), "categoryExists", false);
 		return false;
 	}
 	
@@ -212,6 +247,8 @@ public class TransactionLog implements Serializable {
 	 * @return The number of categories associated with the transaction log
 	 */
 	public int categoryCount() {
+		log.entering(Transaction.class.getName(), "categoryCount");
+		log.exiting(Transaction.class.getName(), "categoryExists", cList.size());
 		return cList.size();
 	}
 	
@@ -219,16 +256,20 @@ public class TransactionLog implements Serializable {
 	 * Loads the users saved transactions to the log
 	 */
 	private void load() {
+		log.entering(Transaction.class.getName(), "load");
 		File f = new File(filename);
 		if (!f.exists()) {
 			try {
 				f.createNewFile();
 			} catch (IOException e) {
+				log.throwing(Transaction.class.getName(), "load", e);
 				e.printStackTrace();
 			}
+			log.exiting(Transaction.class.getName(), "load");
 			return;
 		}
 		try {
+			log.info("Loading \"" + filename + "\"...");
 			FileInputStream fi = new FileInputStream(new File(filename));
 	    	ObjectInputStream oi = new ObjectInputStream(fi);
 	    
@@ -257,8 +298,10 @@ public class TransactionLog implements Serializable {
 			}
 	    	
 		} catch (IOException e) {
+			log.throwing(Transaction.class.getName(), "load", e);
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
+			log.throwing(Transaction.class.getName(), "load", e);
 			e.printStackTrace();
 		}
 		
