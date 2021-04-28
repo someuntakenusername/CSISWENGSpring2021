@@ -1,10 +1,15 @@
 package esc.baylor.edu.groupProject.System;
 
+import java.util.logging.Logger;
+
 import esc.baylor.edu.groupProject.SwingGUI.Login;
 
 public class Main {
-	public static void main(String[] args) {		
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+	private static Logger log = Logger.getLogger(Main.class.getName());
+	
+	public static void main(String[] args) {	
+		log.info("Starting BearBudget...");
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {			
             public void run() {            	
             	Login g = new Login();
         		g.login();
