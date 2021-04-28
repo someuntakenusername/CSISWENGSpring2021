@@ -6,12 +6,17 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Each transaction object represents the information for a single unique transaction
+ * @author Trae
+ *
+ */
 public class Transaction implements Serializable {
 	Types type;
 	Double amount;
 	Date date;
 	String title, comment;
-	int id, recur;
+	int recur;
 	private static final long serialVersionUID = 3L;
 	
 	public Transaction(Types type, int recur) {
@@ -59,14 +64,6 @@ public class Transaction implements Serializable {
 		this.comment = comment;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public int getRecur() {
 		return recur;
 	}
@@ -78,7 +75,7 @@ public class Transaction implements Serializable {
 	public boolean isRecurring() {
 		return recur != -1;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -86,12 +83,12 @@ public class Transaction implements Serializable {
 		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
 		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + id;
 		result = prime * result + recur;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -115,8 +112,6 @@ public class Transaction implements Serializable {
 			if (other.date != null)
 				return false;
 		} else if (!date.equals(other.date))
-			return false;
-		if (id != other.id)
 			return false;
 		if (recur != other.recur)
 			return false;

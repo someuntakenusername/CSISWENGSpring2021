@@ -15,6 +15,12 @@ import java.util.Date;
 
 import esc.baylor.edu.groupProject.SwingGUI.Login;;
 
+/**
+ * The TransactionLog object stores the data for all Transactions and Categories
+ * 
+ * @author Trae
+ *
+ */
 public class TransactionLog implements Serializable {
 	ArrayList<Category> cList;
 	ArrayList<Transaction> tLog;
@@ -24,7 +30,7 @@ public class TransactionLog implements Serializable {
 	private double savings;
 	private Date currDate;
 	
-	/*
+	/**
 	 * Initializes the transaction log and calls for the program to load stored data
 	 */
 	public TransactionLog() {
@@ -34,14 +40,14 @@ public class TransactionLog implements Serializable {
 		load();
 	}
 	
-	/*
+	/**
 	 * @return Returns the collection of transactions associated with this TransactionLog object
 	 */
 	public Collection<Transaction> getTransactionList(){
 		return (Collection<Transaction>) tLog.clone();
 	}
 
-	/*
+	/**
 	 * @param amount New value of user savings
 	 */
 	public void setCurrentSavings(double amount, Date date) {
@@ -50,7 +56,7 @@ public class TransactionLog implements Serializable {
 		savings += amount;
 	}
 	
-	/*
+	/**
 	 * Calculates the users current balance
 	 * 
 	 * @return A double representation of the users current balance calculated 
@@ -70,7 +76,7 @@ public class TransactionLog implements Serializable {
 		return null;
 	}
 	
-	/*
+	/**
 	 * Adds a transaction to the Transaction Log
 	 * 
 	 * @param type The enumerated type of the transaction, either Income or Expense
@@ -84,13 +90,12 @@ public class TransactionLog implements Serializable {
 		t.setTitle(title);
 		t.setDate(date);
 		t.setAmount(amount);
-		t.setId(id);
 		tLog.add(t);
 		sort();
 		save();
 	}
 	
-	/*
+	/**
 	 * Returns a transaction given its sorted index
 	 * 
 	 * @param index The index of a transaction in the sorted list
@@ -101,7 +106,7 @@ public class TransactionLog implements Serializable {
 		return tLog.get(index);
 	}
 	
-	/*
+	/**
 	 * Replaces the data of the transaction at the given index with the newly provided data
 	 * 
 	 * @param index The index of the transaction in the Transaction Sort list
@@ -121,17 +126,22 @@ public class TransactionLog implements Serializable {
 		save();
 	}
 	
-	/*
+	/**
 	 * Removes a transaction from the transaction list
 	 * 
 	 * @param t The transaction to be removed from the transaction list
 	 */
 	public void removeTransaction(Transaction t) {
 		tLog.remove(t);
+		for(Category c : cList) {
+			if(c.contains(t)) {
+				c.removeTransaction(t);
+			}
+		}
 		save();
 	}
 	
-	/*
+	/**
 	 * Adds a category to the category list
 	 * 
 	 * @param name The name of the category
@@ -145,7 +155,7 @@ public class TransactionLog implements Serializable {
 		save();
 	}
 	
-	/*
+	/**
 	 * Edits the category at the given index in the category list
 	 * 
 	 * @param index The index in the category list of the category being edited
@@ -158,7 +168,7 @@ public class TransactionLog implements Serializable {
 		save();
 	}
 	
-	/*
+	/**
 	 * Removes a category from the category list
 	 * 
 	 * @param cat The category to remove from the list
@@ -168,14 +178,14 @@ public class TransactionLog implements Serializable {
 		save();
 	}
 	
-	/*
+	/**
 	 * @return the category at the given index in the category list
 	 */
 	public Category getCategory(int index) {
 		return cList.get(index);
 	}
 	
-	/*
+	/**
 	 * @return The size of the Transaction Log
 	 */
 	public int size() {
@@ -186,7 +196,7 @@ public class TransactionLog implements Serializable {
 		return cat.contains(tLog.get(index));
 	}
 	
-	/*
+	/**
 	 * Checks if a category exists with the given name
 	 */
 	public boolean categoryExists(String name) {
@@ -233,14 +243,29 @@ public class TransactionLog implements Serializable {
 	    	oi.close();
 	    	fi.close();
 	    	
+	    	ArrayList<Transaction> newTrans = new ArrayList<Transaction>();
+	    	for(Transaction tr : tLog) {
+				if(tr.isRecurring()) {
+					Calendar next = Calendar.getInstance();
+					next.setTime(tr.getDate());
+					next.add(Calendar.DATE, tr.getRecur());
+					if(Calendar.getInstance().compareTo(next) >= 0) {
+						//Transaction n = new Transaction(tr.getType(), tr.getRecur());
+						
+					}
+				}
+			}
+	    	
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		
+		
 	}
 	
-	/*
+	/**
 	 * saves the users transactions when one is added or removed
 	 */
 	public void save() {
@@ -257,7 +282,7 @@ public class TransactionLog implements Serializable {
 		}
 	}
 	
-	/*
+	/**
 	 * Internal sort function for the transaction log. Sorts the transactions by date
 	 */
 	private void sort() {

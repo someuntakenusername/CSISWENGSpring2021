@@ -17,18 +17,19 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/*
+ * 
+ */
 public class SaveFrame extends JFrame implements ActionListener {
 	
-	private TransactionTableModel model;
 	private JTextField amount;
 	private JButton cancel, confirm;
 	private JComboBox<Object> date;
 	private Date selectedDate;
 	private static final SimpleDateFormat format = new SimpleDateFormat("MMMMM dd, yyyy");
 	
-	public SaveFrame(TransactionTableModel model) {
+	public SaveFrame() {
 		super("Set Current Savings");
-		this.model = model;
 		
 		JPanel panel = new JPanel(new GridLayout(3, 2));
 		
@@ -66,7 +67,7 @@ public class SaveFrame extends JFrame implements ActionListener {
 			if(amount.getText().equals(null) || selectedDate == null) {
 				JOptionPane.showMessageDialog(this, "Must put an amount", "Warning", JOptionPane.ERROR_MESSAGE);	
 			} else {
-				model.getTransactionLog().setCurrentSavings(Double.parseDouble(amount.getText()), selectedDate);
+				TransactionTable.model.getTransactionLog().setCurrentSavings(Double.parseDouble(amount.getText()), selectedDate);
 				quit();
 			}
 		} else if(e.getActionCommand().equals("Cancel")) {
