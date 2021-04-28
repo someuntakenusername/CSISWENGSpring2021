@@ -21,7 +21,7 @@ public class Category implements Serializable {
     	log.exiting(Category.class.getName(), "Category()");
     }
     public Category(String name, String notes) {
-    	log.entering(Category.class.getName(), "Category()", name, notes);
+    	log.entering(Category.class.getName(), "Category()", new Object[]{name,notes});
     	transactions = new ArrayList<Transaction>();
     	this.name = name;
     	this.notes = notes;
