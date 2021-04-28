@@ -229,7 +229,7 @@ public class TransactionLog implements Serializable {
 			return;
 		}
 		try {
-			FileInputStream fi = new FileInputStream(new File(filename));
+			FileInputStream fi = new FileInputStream(f);
 	    	ObjectInputStream oi = new ObjectInputStream(fi);
 	    
 	    	TransactionLog t = (TransactionLog) oi.readObject();

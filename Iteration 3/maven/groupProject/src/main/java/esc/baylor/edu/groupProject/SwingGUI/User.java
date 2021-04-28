@@ -17,13 +17,10 @@ public class User implements Serializable {
 	
 	private String username;
 	private String password;
-	private TransactionLog tLog;
-	
 	
 	public User(String u, String p) {
 		username = u;
 		password = p;
-		tLog = null;
 	}
 	
 	public String getUsername() {
@@ -115,7 +112,7 @@ public class User implements Serializable {
 	
 	public String findFilename() {
 		String filename = null;
-		filename = String.valueOf(this.hashCode());
+		filename = "./src/main/resources/saves/" + String.valueOf(this.hashCode());
 		filename += ".txt";
 		return filename;
 	}
