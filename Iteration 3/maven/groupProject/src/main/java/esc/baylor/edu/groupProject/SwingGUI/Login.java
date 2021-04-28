@@ -108,7 +108,7 @@ public class Login implements ActionListener {
 		} else if (e.getSource() == registerButton) {
 			//create file for this new person
 			if(fileExists(user)) {
-				JOptionPane.showMessageDialog(new JFrame("Error"), "Please choose a different username", "Warning", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(new JFrame("Error"), "User already exists", "Warning", JOptionPane.ERROR_MESSAGE);
 			} else {
 				Login.user = user;
 				frame.dispose();
