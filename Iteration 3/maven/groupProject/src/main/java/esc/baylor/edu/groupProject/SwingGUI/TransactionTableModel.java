@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.table.AbstractTableModel;
 
 import esc.baylor.edu.groupProject.TransactionObjects.Category;
+import esc.baylor.edu.groupProject.TransactionObjects.Transaction;
 import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
 import esc.baylor.edu.groupProject.TransactionObjects.Types;
 
@@ -32,6 +33,14 @@ public class TransactionTableModel extends AbstractTableModel {
 	public void filterTable(Category category) {
 		filter = category;
 		fireTableDataChanged();
+	}
+	
+	public Transaction getTransaction(int rowIndex) {
+		if(filter == null) {
+			return filter.getTransaction(rowIndex);
+		} else {
+			return tLog.getTransaction(rowIndex);
+		}
 	}
 
 	@Override
