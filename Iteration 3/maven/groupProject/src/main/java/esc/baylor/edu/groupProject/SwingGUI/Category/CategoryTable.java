@@ -9,7 +9,6 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
-import esc.baylor.edu.groupProject.Objects.TransactionLog;
 import esc.baylor.edu.groupProject.SwingGUI.Transactions.TransactionTable;
 
 /**
