@@ -1,0 +1,33 @@
+author: will henderson
+
+Calculate Expense Statistics
+
+Scope: Personal Budgeting App
+Level: user-goal
+Primary Actor: User
+Stakeholders:
+- User: wants spending statistics data per transaction category to identify problematic expenses.
+
+Preconditions:
+- Expenses are recorded in the app.
+Postconditions:
+- Graph with few highest-ranked expense catagories displayed.
+- Chart featuring varying stats per expense category displayed.
+- Lists compiled with every individual recored expense generated.
+
+Main flow:
+1. User opens "Expenses" tab of application.
+2. All recorded expenses are totaled per category.
+3. Graph generated displaying few categories with highest totals.
+4. Chart generated with totals, averages, medians, etc. per category generated.
+5. Expense transactions compiled into list and associated with respective catagory entry in chart.
+6. Stats displayed to user.
+
+Alternate flow:
+2-5a. No recorded expenses.
+	1. Notify user of inability to generate statistics.
+3a. Number of categories below display limit.
+	1. Display categories up to existing amount.
+4. User wants data sorted differently.
+	1. User selects label of data column to sort by.
+	2. Chart toggles between ascending/descending.
