@@ -67,7 +67,7 @@ public class User implements Serializable {
 	
 	public String findFilename() {
 		String filename = null;
-		filename = String.valueOf(this.hashCode());
+		filename = "./resources/saves/" + String.valueOf(this.hashCode());
 		filename += ".txt";
 		return filename;
 	}
