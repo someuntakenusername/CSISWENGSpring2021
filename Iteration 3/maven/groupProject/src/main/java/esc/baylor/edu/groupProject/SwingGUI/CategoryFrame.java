@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,6 +19,7 @@ import javax.swing.JTextField;
  * @author Trae
  */
 public class CategoryFrame extends JFrame implements ActionListener{
+	private static final Logger log = Logger.getLogger(CategoryFrame.class.getName());
 
 	private CategoryTable table;
 	private JButton confirm, cancel;
@@ -27,6 +29,7 @@ public class CategoryFrame extends JFrame implements ActionListener{
 
 	public CategoryFrame(CategoryTable table, int rowIndex) {
 		super("Add Category");
+		log.entering(CategoryFrame.class.getName(), "CategoryFrame", new Object[] {table,rowIndex});
 		this.table = table;
 		this.rowIndex = rowIndex;
 		
@@ -61,15 +64,19 @@ public class CategoryFrame extends JFrame implements ActionListener{
 		this.setSize(new Dimension(300, 150));
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		log.exiting(CategoryFrame.class.getName(), "CategoryFrame");
 	}
 
 	private void init() {
+		log.entering(CategoryFrame.class.getName(), "init");
 		name.setText(TransactionTable.model.getTransactionLog().getCategory(rowIndex).getName());
 		notes.setText(TransactionTable.model.getTransactionLog().getCategory(rowIndex).getNotes());
+		log.exiting(CategoryFrame.class.getName(), "init");
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		log.entering(CategoryFrame.class.getName(), "actionPerformed", e);
 		if(e.getActionCommand().equals("Confirm")) {
 			if(name.getText().equals(null)) {
 				JOptionPane.showMessageDialog(this, "Category must have a name", "Warning", JOptionPane.ERROR_MESSAGE);	
@@ -88,9 +95,12 @@ public class CategoryFrame extends JFrame implements ActionListener{
 		} else if(e.getActionCommand().equals("Cancel")) {
 			quit();
 		}
+		log.exiting(CategoryFrame.class.getName(), "actionPerformed");
 	}
 	
 	private void quit() {
+		log.entering(CategoryFrame.class.getName(), "quit");
+		log.exiting(CategoryFrame.class.getName(), "quit");
 		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	}
 }
