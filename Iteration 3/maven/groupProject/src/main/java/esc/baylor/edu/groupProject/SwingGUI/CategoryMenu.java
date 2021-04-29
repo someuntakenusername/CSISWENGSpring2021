@@ -7,15 +7,23 @@ import java.util.logging.Logger;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+/**
+ * Menu for displaying the Category List
+ * @author Trae
+ *
+ */
 public class CategoryMenu extends JMenu implements ActionListener{
 	private static final Logger log = Logger.getLogger(CategoryMenu.class.getName());
 	private JMenuItem catList;
 	
+	/**
+	 * Constructs the Category Menu with the name of "Category"
+	 * and a single item to display the CategoryTable
+	 */
 	public CategoryMenu() {
 		super("Category");
 		log.entering(CategoryMenu.class.getName(), "CategoryMenu");
-		//Initialize Menu Item
-		
+		//Category List Menu Item
 		catList = new JMenuItem("View Category List");
 		catList.setActionCommand("List");
 		catList.addActionListener(this);

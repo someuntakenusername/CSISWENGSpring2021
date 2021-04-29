@@ -67,7 +67,6 @@ public class TransactionFrame extends JFrame implements ActionListener {
 		//Date comboxbox
 		date = new JComboBox<Object>();
 		date.addItem("Select Date");
-		date.setActionCommand("Date");
 		date.addActionListener(this);
 
 		//Recurrence checkbox
@@ -84,6 +83,7 @@ public class TransactionFrame extends JFrame implements ActionListener {
 		cancel.addActionListener(this);
 		
 		if(this.transaction != null) init();
+		date.setActionCommand("Date");
 		
 		panel.add(new JLabel("Title"));
 		panel.add(title);
