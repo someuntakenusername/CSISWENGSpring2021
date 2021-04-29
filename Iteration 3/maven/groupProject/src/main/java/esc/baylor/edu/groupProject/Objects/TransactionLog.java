@@ -61,6 +61,7 @@ public class TransactionLog implements Serializable {
 		currDate = date;
 		savings = 0.00;
 		savings += amount;
+		GUIUserInfoTray.update();
 		log.exiting(Transaction.class.getName(), "getTransactionList");
 	}
 	

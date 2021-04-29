@@ -23,6 +23,12 @@ public class AddTransactionToCategory extends JFrame {
 	private JTable table;
 	private AddTransactionToCategoryModel model;
 
+	/**
+	 * Constructs a Table with all Transactions and check boxes to add or remove them from the
+	 * given Category
+	 * 
+	 * @param category A reference to a Category
+	 */
 	public AddTransactionToCategory(Category category) {
 
 		model = new AddTransactionToCategoryModel(category);
@@ -40,18 +46,19 @@ public class AddTransactionToCategory extends JFrame {
 
 	}
 
+	/**
+	 * 
+	 * @author LearnJavaByExample
+	 */
 	static class DecimalFormatRenderer extends DefaultTableCellRenderer {
-		private static final Logger log = Logger.getLogger(DecimalFormatRenderer.class.getName());
 		private static final DecimalFormat formatter = new DecimalFormat( "#.00" );
 
 		public Component getTableCellRendererComponent(
 				JTable table, Object value, boolean isSelected,
 				boolean hasFocus, int row, int column) {
 
-			// First format the cell value as required
 			value = formatter.format((Number)value);
 
-			// And pass it on to parent class
 			return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column );
 		}
 	}

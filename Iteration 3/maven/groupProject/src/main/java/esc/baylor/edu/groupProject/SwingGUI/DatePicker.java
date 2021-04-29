@@ -16,6 +16,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * A pop-up menu for selecting dates
+ * 
+ * @author Jyoti Jha, Trae
+ *
+ */
 public class DatePicker extends JPanel {
 	private static final Logger log = Logger.getLogger(DatePicker.class.getName());
 	private int month = Calendar.getInstance().get(Calendar.MONTH);

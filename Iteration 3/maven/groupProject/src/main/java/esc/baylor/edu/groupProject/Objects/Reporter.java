@@ -7,6 +7,12 @@ import java.util.List;
 
 import java.util.stream.Collectors;
 
+/**
+ * Generates and stores reports based on the Transactions in the TransactionLog
+ * 
+ * @author Will
+ *
+ */
 public class Reporter {
 	private ArrayList<Report> reports;
 	

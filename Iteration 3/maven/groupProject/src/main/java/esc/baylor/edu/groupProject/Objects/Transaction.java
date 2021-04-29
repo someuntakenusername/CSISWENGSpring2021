@@ -17,10 +17,16 @@ public class Transaction implements Serializable {
 	Types type;
 	Double amount;
 	Date date;
-	String title, comment;
+	String title;
 	int recur;
 	private static final long serialVersionUID = 3L;
 	
+	/**
+	 * Constructs a Transaction of the given type with the given recursion period
+	 * 
+	 * @param type A Transaction Type. Either expense or Income
+	 * @param recur Recursion period in days. -1 if no recursion
+	 */
 	public Transaction(Types type, int recur) {
 		log.entering(Transaction.class.getName(), "Transaction", new Object[]{type,recur});
 		this.type = type;
@@ -28,78 +34,116 @@ public class Transaction implements Serializable {
 		log.exiting(Transaction.class.getName(), "Transaction");
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return The Type of the Associated Transaction object
+	 */
 	public Types getType() {
 		log.entering(Transaction.class.getName(), "getType");
 		log.exiting(Transaction.class.getName(), "getType", type);
 		return type;
 	}
 
+	/**
+	 * Changes the Type of the Transaction to the given Type
+	 * 
+	 * @param type A Transaction Type. Either Expense or Income
+	 */
 	public void setType(Types type) {
 		log.entering(Transaction.class.getName(), "setType", type);
 		log.exiting(Transaction.class.getName(), "setType");
 		this.type = type;
 	}
 
+	/**
+	 * 
+	 * @return The amount of the Transaction
+	 */
 	public Double getAmount() {
 		log.entering(Transaction.class.getName(), "getAmount");
 		log.exiting(Transaction.class.getName(), "getAmount", amount);
 		return amount;
 	}
 
+	/**
+	 * 
+	 * @param amount An amount of money. Must be positive
+	 */
 	public void setAmount(Double amount) {
 		log.entering(Transaction.class.getName(), "setAmount", amount);
 		log.entering(Transaction.class.getName(), "setAmount");
 		this.amount = amount;
 	}
 
+	/**
+	 * 
+	 * @return The Date of the Transaction
+	 */
 	public Date getDate() {
 		log.entering(Transaction.class.getName(), "getDate");
 		log.exiting(Transaction.class.getName(), "getDate", date);
 		return date;
 	}
 
+	
+	/**
+	 * Changes the Date of the Transaction to the new given Date
+	 * 
+	 * @param date The new Date
+	 */
 	public void setDate(Date date) {
 		log.entering(Transaction.class.getName(), "setDate", date);
 		log.exiting(Transaction.class.getName(), "setDate");
 		this.date = date;
 	}
 
+	/**
+	 * 
+	 * @return The title of the Transaction
+	 */
 	public String getTitle() {
 		log.entering(Transaction.class.getName(), "getTitle");
 		log.exiting(Transaction.class.getName(), "getTitle", title);
 		return title;
 	}
 
+	/**
+	 * Changes the Title of a Transaction
+	 * 
+	 * @param title The new title
+	 */
 	public void setTitle(String title) {
 		log.entering(Transaction.class.getName(), "setTitle", title);
 		log.exiting(Transaction.class.getName(), "setTitle");
 		this.title = title;
 	}
-
-	public String getComment() {
-		log.entering(Transaction.class.getName(), "getComment");
-		log.exiting(Transaction.class.getName(), "getComment", comment);
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		log.entering(Transaction.class.getName(), "setComment", comment);
-		log.exiting(Transaction.class.getName(), "setComment");
-		this.comment = comment;
-	}
 	
+	/**
+	 * 
+	 * @return How often the Transaction recurs in days
+	 */
 	public int getRecur() {
 		log.entering(Transaction.class.getName(), "getRecur");
 		log.exiting(Transaction.class.getName(), "getRecur", recur);
 		return recur;
 	}
 
+	/**
+	 * Changes the recursion period to the newly given value
+	 * 
+	 * @param recur Recursion period in days
+	 */
 	public void setRecur(int recur) {
 		log.entering(Transaction.class.getName(), "setRecur", recur);
 		log.exiting(Transaction.class.getName(), "setRecur");
 		this.recur = recur;
 	}
 
+	/**
+	 * 
+	 * @return True if the Transaction recurs; false otherwise
+	 */
 	public boolean isRecurring() {
 		log.entering(Transaction.class.getName(), "isRecurring");
 		log.exiting(Transaction.class.getName(), "isRecurring", recur);
@@ -112,7 +156,6 @@ public class Transaction implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
-		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + recur;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
@@ -143,15 +186,6 @@ public class Transaction implements Serializable {
 				return false;
 			}
 		} else if (!amount.equals(other.amount)) {
-			log.exiting(Transaction.class.getName(), "equals", false);
-			return false;
-		}
-		if (comment == null) {
-			if (other.comment != null) {
-				log.exiting(Transaction.class.getName(), "equals", false);
-				return false;
-			}
-		} else if (!comment.equals(other.comment)) {
 			log.exiting(Transaction.class.getName(), "equals", false);
 			return false;
 		}
