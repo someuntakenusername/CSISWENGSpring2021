@@ -1,13 +1,10 @@
 package esc.baylor.edu.groupProject.Objects;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.TreeSet;
-import java.util.Vector;
+
 import java.util.stream.Collectors;
 
 public class Reporter {

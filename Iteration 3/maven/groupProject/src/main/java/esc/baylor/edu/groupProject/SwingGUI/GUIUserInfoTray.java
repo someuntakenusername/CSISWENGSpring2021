@@ -57,7 +57,13 @@ public class GUIUserInfoTray extends JPanel{
 		userSettingBtn.addActionListener(l);
 	}
 	
+	public static void update() {
+		if(balanceDisplay != null) {
+			balanceDisplay.setText("Current Balance: " + TransactionTable.getTransactionLog().getCurrentBalance());
+		}
+	}
+	
 	private JButton	userSettingBtn;
-	private JTextField balanceDisplay;
+	private static JTextField balanceDisplay;
 	private JTextField netDisplay;
 }

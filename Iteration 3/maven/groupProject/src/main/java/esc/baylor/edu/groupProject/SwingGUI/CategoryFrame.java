@@ -106,8 +106,6 @@ public class CategoryFrame extends JFrame implements ActionListener{
 	}
 	
 	private void quit() {
-		log.entering(CategoryFrame.class.getName(), "quit");
-		log.exiting(CategoryFrame.class.getName(), "quit");
 		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	}
 }

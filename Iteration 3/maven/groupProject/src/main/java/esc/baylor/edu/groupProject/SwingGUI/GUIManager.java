@@ -2,21 +2,14 @@ package esc.baylor.edu.groupProject.SwingGUI;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.logging.Logger;
 
 import javax.swing.*;
 
-import esc.baylor.edu.groupProject.Objects.Transaction;
-
 public class GUIManager {
 	private static final Logger log = Logger.getLogger(GUIManager.class.getName());
 
-	/*
+	/**
 	 *	startGUI
 	 *
 	 *	Builds & displays the main window. Should be called only once on start-up
@@ -35,7 +28,7 @@ public class GUIManager {
                 //add content panels here
                 JTabbedPane tabs = new JTabbedPane();
                 tabs.addTab("Overview", new OverviewPanel());
-                tabs.addTab("Expenses", expensePane = new ExpensesPanel());
+                tabs.addTab("Expenses", new ExpensesPanel());
                 
                 userTray = new GUIUserInfoTray();
                 content.add(userTray,BorderLayout.PAGE_START);
@@ -55,16 +48,12 @@ public class GUIManager {
 		log.exiting(GUIManager.class.getName(), "startGUI");
 	}
 	
-	/*
-	 * 	tester
-	 */
 	public static void main(String args[]) {
 		//GUIManager mgr = new GUIManager();
 		//mgr.startGUI();
 	}
 	
 	private JMenuBar menuBar;
-	private ExpensesPanel expensePane;
 	private GUIUserInfoTray userTray;
 	private JFrame baseWindow;
 }

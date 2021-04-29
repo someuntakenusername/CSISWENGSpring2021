@@ -8,7 +8,6 @@ import java.util.Date;
  *
  */
 public class Report{
-	//transaciton ids used to generate this report
 	public int[] transactionIds = null;
 	public Date from = null, to = null;
 	public double savingAvg = Double.NaN,

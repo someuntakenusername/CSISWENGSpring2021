@@ -34,10 +34,16 @@ public class Category implements Serializable {
     		while(sc.hasNext()) {
     			this.notes.add(sc.next());
     		}
+    		sc.close();
     	}
     	log.exiting(Category.class.getName(), "Category");
     }
     
+    /**
+     * Adds a Transaction to a Category object
+     * 
+     * @param t The transaction to be added to the Category
+     */
     public void addTransaction(Transaction t) {
     	log.entering(Category.class.getName(), "addTransaction", t);
     	transactions.add(t);
@@ -49,24 +55,44 @@ public class Category implements Serializable {
     	log.exiting(Category.class.getName(), "addTransaction");
     }
     
+    /**
+     * Removes a Transaction from a Category object
+     * 
+     * @param t The Transaction object to be removed from the Category
+     */
     public void removeTransaction(Transaction t) {
     	log.entering(Category.class.getName(), "removeTransaction", t);
     	transactions.remove(t);
     	log.exiting(Category.class.getName(), "removeTransaction");
     }
     
+    /**
+     * 
+     * @param index The index of a Transaction in the Categories Transaction list
+     * 
+     * @return The Transaction object at the index in the list
+     */
     public Transaction getTransaction(int index) {
     	log.entering(Category.class.getName(), "getTransaction", index);
     	log.exiting(Category.class.getName(), "getTransaction", transactions.get(index));
     	return transactions.get(index);
     }
     
+    /**
+     * 
+     * @return The number of Transactions in the Category
+     */
     public int size() {
     	log.entering(Category.class.getName(), "size");
     	log.exiting(Category.class.getName(), "size", transactions.size());
     	return transactions.size();
     }
     
+    /**
+     * 
+     * @param t A Transaction object
+     * @return True if the Category contains the Transaction; false otherwise
+     */
     public boolean contains(Transaction t) {
     	log.entering(Category.class.getName(), "contains", t);
     	log.exiting(Category.class.getName(), "contains", transactions.contains(t));
@@ -78,11 +104,20 @@ public class Category implements Serializable {
 		log.exiting(Category.class.getName(), "getName", name);
 		return name;
 	}
+	/**
+	 * 
+	 * @param name The new name of the Category object
+	 */
 	public void setName(String name) {
 		log.entering(Category.class.getName(), "setName", name);
 		log.exiting(Category.class.getName(), "setName");
 		this.name = name;
 	}
+	
+	/**
+	 * 
+	 * @return The notes of a Category. Will be returned as a semi-colon separated string
+	 */
 	public String getNotes() {
 		log.entering(Category.class.getName(), "getNotes");
 		String ret = notes.get(0);
@@ -93,6 +128,11 @@ public class Category implements Serializable {
 		log.exiting(Category.class.getName(), "getNotes", notes);
 		return ret;
 	}
+	
+	/**
+	 * 
+	 * @param notes The string to set as the notes of the Category
+	 */
 	public void setNotes(String notes) {
 		log.entering(Category.class.getName(), "setNotes", notes);
 		this.notes.clear();
@@ -103,6 +143,7 @@ public class Category implements Serializable {
     		while(sc.hasNext()) {
     			this.notes.add(sc.next());
     		}
+    		sc.close();
     	}
 		log.exiting(Category.class.getName(), "setNotes");
 	}
