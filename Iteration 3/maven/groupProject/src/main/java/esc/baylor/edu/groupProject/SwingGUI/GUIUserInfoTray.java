@@ -11,6 +11,11 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * Setups the information displayed at the top of the overall GUI
+ * @author Will
+ *
+ */
 public class GUIUserInfoTray extends JPanel{
 	private static final Logger log = Logger.getLogger(GUIUserInfoTray.class.getName());
 	public void updateBalanceDisplay(String str) {

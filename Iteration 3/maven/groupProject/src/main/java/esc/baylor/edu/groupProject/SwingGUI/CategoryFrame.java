@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 
 /*
  * Frame used for adding or editing categories
+ * 
  * @author Trae
  */
 public class CategoryFrame extends JFrame implements ActionListener{

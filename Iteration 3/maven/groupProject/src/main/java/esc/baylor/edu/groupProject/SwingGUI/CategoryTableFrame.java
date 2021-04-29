@@ -13,9 +13,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.sun.tools.sjavac.Log;
+
 /*
- * Displays the list of categories for making a selection when editing
- * or removing a category
+ * Displays a list of Categories for adding, removing, or editing Categories. In addition
+ * allows the user to add Transactions to a Category
+ * 
  * @author Trae
  */
 public class CategoryTableFrame extends JFrame implements ActionListener {
@@ -24,6 +27,9 @@ public class CategoryTableFrame extends JFrame implements ActionListener {
 	private CategoryTable cats;
 	private JButton cancel, edit, delete, add, addTran;
 
+	/**
+	 * Constructs the Frame in which the Category Table and Buttons are displayed
+	 */
 	public CategoryTableFrame() {
 		super("Category List");
 		log.entering(CategoryTableFrame.class.getName(), "CategoryTableFrame");

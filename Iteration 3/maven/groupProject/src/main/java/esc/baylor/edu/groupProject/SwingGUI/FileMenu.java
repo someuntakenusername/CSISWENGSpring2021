@@ -7,6 +7,12 @@ import java.util.logging.Logger;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+/**
+ * The File Menu of the MenuBar. Allows the user to manually save their TransactionLog
+ * 
+ * @author xxtub
+ *
+ */
 public class FileMenu extends JMenu implements ActionListener{
 	private final static Logger log = Logger.getLogger(FileMenu.class.getName());
 

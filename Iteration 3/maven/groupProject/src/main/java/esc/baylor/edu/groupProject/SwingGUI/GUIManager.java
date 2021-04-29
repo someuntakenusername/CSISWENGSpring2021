@@ -6,12 +6,15 @@ import java.util.logging.Logger;
 
 import javax.swing.*;
 
+/**
+ * 
+ * @author Will
+ *
+ */
 public class GUIManager {
 	private static final Logger log = Logger.getLogger(GUIManager.class.getName());
 
 	/**
-	 *	startGUI
-	 *
 	 *	Builds & displays the main window. Should be called only once on start-up
 	 */
 	public void startGUI() {
