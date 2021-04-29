@@ -2,87 +2,123 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2021-04-29T04:15:40.096327900Z</date>
-  <millis>1619669740096</millis>
-  <nanos>327900</nanos>
+  <date>2021-04-29T04:33:17.438669800Z</date>
+  <millis>1619670797438</millis>
+  <nanos>669800</nanos>
   <sequence>0</sequence>
   <logger>esc.baylor.edu.groupProject.SwingGUI.General.Login</logger>
   <level>INFO</level>
   <class>esc.baylor.edu.groupProject.SwingGUI.General.Login</class>
   <method>actionPerformed</method>
   <thread>18</thread>
-  <message>esc.baylor.edu.groupProject.Objects.User@b0c06da1 authenticated</message>
+  <message>esc.baylor.edu.groupProject.Objects.User@6ce6801 failed to authenticate</message>
 </record>
 <record>
-  <date>2021-04-29T04:15:40.272402500Z</date>
-  <millis>1619669740272</millis>
-  <nanos>402500</nanos>
+  <date>2021-04-29T04:33:18.426193600Z</date>
+  <millis>1619670798426</millis>
+  <nanos>193600</nanos>
   <sequence>1</sequence>
-  <logger>esc.baylor.edu.groupProject.Objects.Transaction</logger>
+  <logger>esc.baylor.edu.groupProject.SwingGUI.General.Login</logger>
   <level>INFO</level>
-  <class>esc.baylor.edu.groupProject.Objects.TransactionLog</class>
-  <method>load</method>
+  <class>esc.baylor.edu.groupProject.SwingGUI.General.Login</class>
+  <method>actionPerformed</method>
   <thread>18</thread>
-  <message>Loading "./resources/saves/-1329566303.txt"...</message>
+  <message>Registered new user: esc.baylor.edu.groupProject.Objects.User@6ce6801</message>
 </record>
 <record>
-  <date>2021-04-29T04:15:40.304558900Z</date>
-  <millis>1619669740304</millis>
-  <nanos>558900</nanos>
+  <date>2021-04-29T04:33:42.907820600Z</date>
+  <millis>1619670822907</millis>
+  <nanos>820600</nanos>
   <sequence>2</sequence>
   <logger>esc.baylor.edu.groupProject.Objects.Transaction</logger>
   <level>INFO</level>
   <class>esc.baylor.edu.groupProject.Objects.TransactionLog</class>
-  <method>load</method>
+  <method>save</method>
   <thread>18</thread>
-  <message>Successfully loaded "./resources/saves/-1329566303.txt"</message>
+  <message>Saving "./resources/saves/114190337.txt"...</message>
 </record>
 <record>
-  <date>2021-04-29T04:15:40.305559600Z</date>
-  <millis>1619669740305</millis>
-  <nanos>559600</nanos>
+  <date>2021-04-29T04:33:42.927822600Z</date>
+  <millis>1619670822927</millis>
+  <nanos>822600</nanos>
   <sequence>3</sequence>
   <logger>esc.baylor.edu.groupProject.Objects.Transaction</logger>
   <level>INFO</level>
   <class>esc.baylor.edu.groupProject.Objects.TransactionLog</class>
-  <method>load</method>
+  <method>save</method>
   <thread>18</thread>
-  <message>Parsing log for recursive Transactions...</message>
+  <message>Successfully saved "./resources/saves/114190337.txt"</message>
 </record>
 <record>
-  <date>2021-04-29T04:15:40.309559Z</date>
-  <millis>1619669740309</millis>
-  <nanos>559000</nanos>
+  <date>2021-04-29T04:33:56.980079700Z</date>
+  <millis>1619670836980</millis>
+  <nanos>79700</nanos>
   <sequence>4</sequence>
   <logger>esc.baylor.edu.groupProject.Objects.Transaction</logger>
   <level>INFO</level>
   <class>esc.baylor.edu.groupProject.Objects.TransactionLog</class>
-  <method>load</method>
+  <method>save</method>
   <thread>18</thread>
-  <message>Successfully parsed all loaded Transactions</message>
+  <message>Saving "./resources/saves/114190337.txt"...</message>
 </record>
 <record>
-  <date>2021-04-29T04:25:46.214377100Z</date>
-  <millis>1619670346214</millis>
-  <nanos>377100</nanos>
+  <date>2021-04-29T04:33:56.986082600Z</date>
+  <millis>1619670836986</millis>
+  <nanos>82600</nanos>
   <sequence>5</sequence>
   <logger>esc.baylor.edu.groupProject.Objects.Transaction</logger>
   <level>INFO</level>
   <class>esc.baylor.edu.groupProject.Objects.TransactionLog</class>
   <method>save</method>
   <thread>18</thread>
-  <message>Saving "./resources/saves/-1329566303.txt"...</message>
+  <message>Successfully saved "./resources/saves/114190337.txt"</message>
 </record>
 <record>
-  <date>2021-04-29T04:25:46.222377500Z</date>
-  <millis>1619670346222</millis>
-  <nanos>377500</nanos>
+  <date>2021-04-29T04:34:00.420688200Z</date>
+  <millis>1619670840420</millis>
+  <nanos>688200</nanos>
   <sequence>6</sequence>
   <logger>esc.baylor.edu.groupProject.Objects.Transaction</logger>
   <level>INFO</level>
   <class>esc.baylor.edu.groupProject.Objects.TransactionLog</class>
   <method>save</method>
   <thread>18</thread>
-  <message>Successfully saved "./resources/saves/-1329566303.txt"</message>
+  <message>Saving "./resources/saves/114190337.txt"...</message>
+</record>
+<record>
+  <date>2021-04-29T04:34:00.426688600Z</date>
+  <millis>1619670840426</millis>
+  <nanos>688600</nanos>
+  <sequence>7</sequence>
+  <logger>esc.baylor.edu.groupProject.Objects.Transaction</logger>
+  <level>INFO</level>
+  <class>esc.baylor.edu.groupProject.Objects.TransactionLog</class>
+  <method>save</method>
+  <thread>18</thread>
+  <message>Successfully saved "./resources/saves/114190337.txt"</message>
+</record>
+<record>
+  <date>2021-04-29T04:34:01.771129200Z</date>
+  <millis>1619670841771</millis>
+  <nanos>129200</nanos>
+  <sequence>8</sequence>
+  <logger>esc.baylor.edu.groupProject.Objects.Transaction</logger>
+  <level>INFO</level>
+  <class>esc.baylor.edu.groupProject.Objects.TransactionLog</class>
+  <method>save</method>
+  <thread>18</thread>
+  <message>Saving "./resources/saves/114190337.txt"...</message>
+</record>
+<record>
+  <date>2021-04-29T04:34:01.776128500Z</date>
+  <millis>1619670841776</millis>
+  <nanos>128500</nanos>
+  <sequence>9</sequence>
+  <logger>esc.baylor.edu.groupProject.Objects.Transaction</logger>
+  <level>INFO</level>
+  <class>esc.baylor.edu.groupProject.Objects.TransactionLog</class>
+  <method>save</method>
+  <thread>18</thread>
+  <message>Successfully saved "./resources/saves/114190337.txt"</message>
 </record>
 </log>
