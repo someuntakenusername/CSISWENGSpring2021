@@ -3,9 +3,8 @@ package esc.baylor.edu.groupProject.Objects;
 import java.util.Date;
 
 /**
- * 
- * @author Will
- *
+ * 	@author will
+ *	@deprecated
  */
 public class Report{
 	//transaciton ids used to generate this report

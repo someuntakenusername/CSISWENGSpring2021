@@ -13,13 +13,22 @@ import javax.swing.*;
 
 import esc.baylor.edu.groupProject.Objects.Transaction;
 
+/**
+ * <b>GUIManager</b>
+ * 
+ * The base of a GUI layer. Responsible for building the main window and coordinating elements.
+ * 
+ * @author will
+ */
 public class GUIManager {
 	private static final Logger log = Logger.getLogger(GUIManager.class.getName());
 
-	/*
-	 *	startGUI
+	/**
+	 *	<b>startGUI</b>
 	 *
 	 *	Builds & displays the main window. Should be called only once on start-up
+	 *
+	 *	@author will
 	 */
 	public void startGUI() {
 		log.entering(GUIManager.class.getName(), "startGUI");

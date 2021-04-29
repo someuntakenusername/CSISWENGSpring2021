@@ -10,6 +10,10 @@ import java.util.TreeSet;
 import java.util.Vector;
 import java.util.stream.Collectors;
 
+/**
+ * 	@author will
+ * 	@deprecated
+ */
 public class Reporter {
 	private ArrayList<Report> reports;
 	
