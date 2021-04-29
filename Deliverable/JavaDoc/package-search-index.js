@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"esc.baylor.edu.groupProject.Objects"},{"l":"esc.baylor.edu.groupProject.SwingGUI.Category"},{"l":"esc.baylor.edu.groupProject.SwingGUI.General"},{"l":"esc.baylor.edu.groupProject.SwingGUI.Transactions"},{"l":"esc.baylor.edu.groupProject.System"}]
