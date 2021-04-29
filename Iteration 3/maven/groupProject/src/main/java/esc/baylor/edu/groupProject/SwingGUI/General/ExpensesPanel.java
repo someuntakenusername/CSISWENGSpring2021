@@ -40,17 +40,17 @@ public class ExpensesPanel extends JPanel{
 		setSave.addActionListener(list);
 		subpanel.add(setSave);
 		
-		addBtn = new JButton("Add Expense");
+		addBtn = new JButton("Add Transaction");
 		addBtn.setActionCommand(CMD_ADD_EXPENSE);
 		addBtn.addActionListener(list);
 		subpanel.add(addBtn);
 		
-		editBtn = new JButton("Edit Expense");
+		editBtn = new JButton("Edit Transaction");
 		editBtn.setActionCommand(CMD_EDIT_EXPENSE);
 		editBtn.addActionListener(list);
 		subpanel.add(editBtn);
 		
-		deleteBtn = new JButton("Delete Expense");
+		deleteBtn = new JButton("Delete Transaction");
 		deleteBtn.addActionListener(list);
 		deleteBtn.setActionCommand(CMD_DELETE_EXPENSE);
 		subpanel.add(deleteBtn);		
