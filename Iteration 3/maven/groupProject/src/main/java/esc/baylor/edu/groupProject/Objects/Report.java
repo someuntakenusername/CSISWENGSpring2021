@@ -2,7 +2,11 @@ package esc.baylor.edu.groupProject.Objects;
 
 import java.util.Date;
 
-//basically just a struct
+/**
+ * 
+ * @author Will
+ *
+ */
 public class Report{
 	//transaciton ids used to generate this report
 	public int[] transactionIds = null;
