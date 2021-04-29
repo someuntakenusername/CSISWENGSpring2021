@@ -6,7 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-import esc.baylor.edu.groupProject.TransactionObjects.Category;
+import esc.baylor.edu.groupProject.Objects.Category;
 
 public class ExpensesPanel extends JPanel{
 	public ExpensesPanel() {
@@ -46,7 +46,7 @@ public class ExpensesPanel extends JPanel{
 		
 		add(subpanel, BorderLayout.PAGE_END);
 	}
-	public TransactionTable list;
+	private TransactionTable list;
 	private JComboBox filter;
 	private JButton setSave, addBtn, editBtn, deleteBtn;
 	//action commands

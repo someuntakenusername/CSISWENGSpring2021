@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,6 +36,13 @@ public class SaveFrame extends JFrame implements ActionListener {
 		JPanel panel = new JPanel(new GridLayout(3, 2));
 		
 		amount = new JTextField(20);
+		amount.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent ke) {
+				if((ke.getKeyChar() < '0' || ke.getKeyChar() > '9') && ke.getKeyChar() != KeyEvent.VK_BACK_SPACE && ke.getKeyChar() != '.') {
+					amount.setText(amount.getText().substring(0, amount.getText().length()));
+				}
+			}
+		});
 		panel.add(new JLabel("Current Savings:"));
 		panel.add(amount);
 		
@@ -65,7 +74,7 @@ public class SaveFrame extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("Confirm")) {
 			if(amount.getText().equals(null) || selectedDate == null) {
-				JOptionPane.showMessageDialog(this, "Must put an amount", "Warning", JOptionPane.ERROR_MESSAGE);	
+				JOptionPane.showMessageDialog(this, "Must have a valid amount and select the date", "Warning", JOptionPane.ERROR_MESSAGE);	
 			} else {
 				TransactionTable.model.getTransactionLog().setCurrentSavings(Double.parseDouble(amount.getText()), selectedDate);
 				quit();

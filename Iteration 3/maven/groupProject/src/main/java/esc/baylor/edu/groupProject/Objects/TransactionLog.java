@@ -1,4 +1,4 @@
-package esc.baylor.edu.groupProject.TransactionObjects;
+package esc.baylor.edu.groupProject.Objects;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,13 +19,13 @@ import esc.baylor.edu.groupProject.SwingGUI.Login;;
 /**
  * The TransactionLog object stores the data for all Transactions and Categories
  * 
- * @author Trae
+ * @author Trae, Timmy
  *
  */
 public class TransactionLog implements Serializable {
 	private static final Logger log = Logger.getLogger(Transaction.class.getName());
-	ArrayList<Category> cList;
-	ArrayList<Transaction> tLog;
+	private ArrayList<Category> cList;
+	private ArrayList<Transaction> tLog;
 	private int id;
 	private String filename;
 	private static final long serialVersionUID = 2L;
@@ -45,7 +45,7 @@ public class TransactionLog implements Serializable {
 	}
 	
 	/**
-	 * @return Returns the collection of transactions associated with this TransactionLog object
+	 * @return Returns a clone of the collection of transactions associated with this TransactionLog object
 	 */
 	public Collection<Transaction> getTransactionList(){
 		log.entering(Transaction.class.getName(), "getTransactionList");
@@ -76,19 +76,24 @@ public class TransactionLog implements Serializable {
 		if(currDate != null) {
 			double tranSum = 0.00;
 			for(Transaction t: tLog) {
-				if(t.getDate().compareTo(currDate) < 0) {
-					tranSum += t.getAmount();
+				if(t.getDate().compareTo(currDate) >= 0) {
+					if(t.getType() == Types.Expense) {
+						tranSum -= t.getAmount();
+					} else {
+						tranSum += t.getAmount();
+					}
 				}
 			}
 			log.exiting(Transaction.class.getName(), "getCurrentBalance", savings - tranSum);
-			return savings - tranSum;
+			return savings + tranSum;
 		}
 		log.exiting(Transaction.class.getName(), "getCurrentBalance", null);
 		return null;
 	}
 	
 	/**
-	 * Adds a transaction to the Transaction Log
+	 * Creates and new transaction and adds it to the Transaction Log given the Transactions information.
+	 * Checks for recurring dates and adds them to the transaction list as well if necessary
 	 * 
 	 * @param type The enumerated type of the transaction, either Income or Expense
 	 * @param title The name of the transaction
@@ -102,9 +107,19 @@ public class TransactionLog implements Serializable {
 		t.setTitle(title);
 		t.setDate(date);
 		t.setAmount(amount);
-		tLog.add(t);
+		if(!tLog.contains(t)) tLog.add(t);
+		
+		if(t.isRecurring()) {
+			Calendar next = Calendar.getInstance();
+			next.setTime(t.getDate());
+			next.add(Calendar.DATE, t.getRecur());
+			if(Calendar.getInstance().compareTo(next) >= 0) {
+				addTransaction(t.getType(), t.getTitle(), next.getTime(), t.getAmount(), t.getRecur());
+				next.add(Calendar.DATE, t.getRecur());
+			}
+		}
+		
 		sort();
-		save();
 		log.exiting(Transaction.class.getName(), "addTransaction");
 	}
 	
@@ -122,7 +137,8 @@ public class TransactionLog implements Serializable {
 	}
 	
 	/**
-	 * Replaces the data of the transaction at the given index with the newly provided data
+	 * Replaces the data of the transaction at the given index with the newly provided data. If the transaction is recurring
+	 * it will check for recursive dates and add those to the transaction list as well
 	 * 
 	 * @param index The index of the transaction in the Transaction Sort list
 	 * @param type The type of the transaction
@@ -139,7 +155,17 @@ public class TransactionLog implements Serializable {
 		t.setAmount(amount);
 		t.setDate(date);
 		t.setRecur(recur);
-		save();
+		
+		if(t.isRecurring()) {
+			Calendar next = Calendar.getInstance();
+			next.setTime(t.getDate());
+			next.add(Calendar.DATE, t.getRecur());
+			if(Calendar.getInstance().compareTo(next) >= 0) {
+				addTransaction(t.getType(), t.getTitle(), next.getTime(), t.getAmount(), t.getRecur());
+				next.add(Calendar.DATE, t.getRecur());
+			}
+		}
+		
 		log.exiting(Transaction.class.getName(), "editTransaction");
 	}
 	
@@ -156,7 +182,6 @@ public class TransactionLog implements Serializable {
 				c.removeTransaction(t);
 			}
 		}
-		save();
 		log.exiting(Transaction.class.getName(), "removeTransaction");
 	}
 	
@@ -172,7 +197,6 @@ public class TransactionLog implements Serializable {
 		c.setName(name);
 		c.setNotes(notes);
 		cList.add(c);
-		save();
 		log.exiting(Transaction.class.getName(), "addCategory");
 	}
 	
@@ -187,7 +211,6 @@ public class TransactionLog implements Serializable {
 		log.entering(Transaction.class.getName(), "editCategory", new Object[] {index,name,notes});
 		cList.get(index).setName(name);
 		cList.get(index).setNotes(notes);
-		save();
 		log.exiting(Transaction.class.getName(), "editCategory");
 	}
 	
@@ -199,7 +222,6 @@ public class TransactionLog implements Serializable {
 	public void removeCategory(Category cat) {
 		log.entering(Transaction.class.getName(), "removeCategory", cat);
 		cList.remove(cat);
-		save();
 		log.exiting(Transaction.class.getName(), "removeCategory");
 	}
 	
@@ -269,8 +291,10 @@ public class TransactionLog implements Serializable {
 			return;
 		}
 		try {
+
 			log.info("Loading \"" + filename + "\"...");
-			FileInputStream fi = new FileInputStream(new File(filename));
+			
+			FileInputStream fi = new FileInputStream(f);
 	    	ObjectInputStream oi = new ObjectInputStream(fi);
 	    
 	    	TransactionLog t = (TransactionLog) oi.readObject();
@@ -285,16 +309,18 @@ public class TransactionLog implements Serializable {
 	    	fi.close();
 	    	log.info("Successfully loaded \"" + filename + "\"");
 	    	
+
 	    	log.info("Parsing loaded Transactions...");
-	    	ArrayList<Transaction> newTrans = new ArrayList<Transaction>();
-	    	for(Transaction tr : tLog) {
+
+	    	ArrayList<Transaction> trans = (ArrayList<Transaction>) tLog.clone();
+	    	for(Transaction tr : trans) {
 				if(tr.isRecurring()) {
 					Calendar next = Calendar.getInstance();
 					next.setTime(tr.getDate());
 					next.add(Calendar.DATE, tr.getRecur());
-					if(Calendar.getInstance().compareTo(next) >= 0) {
-						//Transaction n = new Transaction(tr.getType(), tr.getRecur());
-						
+					while(Calendar.getInstance().compareTo(next) >= 0) {
+						addTransaction(tr.getType(), tr.getTitle(), next.getTime(), tr.getAmount(), tr.getRecur());
+						next.add(Calendar.DATE, tr.getRecur());
 					}
 				}
 			}
@@ -307,8 +333,8 @@ public class TransactionLog implements Serializable {
 			log.throwing(Transaction.class.getName(), "load", e);
 			e.printStackTrace();
 		}
+
 		log.exiting(Transaction.class.getName(), "load");
-		
 	}
 	
 	/**

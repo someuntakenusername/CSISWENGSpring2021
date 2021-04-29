@@ -20,9 +20,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import esc.baylor.edu.groupProject.TransactionObjects.Transaction;
-import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
-import esc.baylor.edu.groupProject.TransactionObjects.Types;
+import esc.baylor.edu.groupProject.Objects.Transaction;
+import esc.baylor.edu.groupProject.Objects.TransactionLog;
+import esc.baylor.edu.groupProject.Objects.Types;
 
 public class TransactionFrame extends JFrame implements ActionListener {
 	private JPanel panel;
@@ -52,7 +52,7 @@ public class TransactionFrame extends JFrame implements ActionListener {
 		amount = new JTextField(20);
 		recurrence = new JTextField(5);
 		recurrence.setEditable(false);
-		//Limit amount to numbers
+		//Limit recurrence to numbers
 		recurrence.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent ke) {
 				if((ke.getKeyChar() < '0' || ke.getKeyChar() > '9') && ke.getKeyChar() != KeyEvent.VK_BACK_SPACE) {
@@ -125,8 +125,8 @@ public class TransactionFrame extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("Confirm")) {
-			if(type.getSelectedIndex() == 0 || title.getText().equals(null) || selectedDate == null 
-					|| amount.getText().equals(null) || (recur && recurrence.getText().equals(null))) {
+			if(type.getSelectedIndex() == 0 || title.getText().equals("") || selectedDate == null 
+					|| amount.getText().equals(null) || (recur && recurrence.getText().equals(""))) {
 				JOptionPane.showMessageDialog(this, "Missing Information", "Warning", JOptionPane.ERROR_MESSAGE);
 			} else {
 				int rec = -1;
@@ -145,6 +145,7 @@ public class TransactionFrame extends JFrame implements ActionListener {
 						transaction.setAmount(am);
 						transaction.setRecur(rec);
 					}
+					TransactionTable.model.getTransactionLog().save();
 					TransactionTable.model.fireTableDataChanged();
 					this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 				} catch (NumberFormatException ex){

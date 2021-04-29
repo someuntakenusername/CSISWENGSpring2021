@@ -1,4 +1,4 @@
-package esc.baylor.edu.groupProject.TransactionObjects;
+package esc.baylor.edu.groupProject.Objects;
 
 import java.util.ArrayList;
 import java.util.Calendar;

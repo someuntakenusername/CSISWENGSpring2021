@@ -1,42 +1,29 @@
-package esc.baylor.edu.groupProject.SwingGUI;
+package esc.baylor.edu.groupProject.Objects;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
 
-
+/**
+ * 
+ * Each user object contains the username and password for the user
+ * which are used to generate the filename for the users saved data
+ * 
+ * @author Timmy
+ */
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String username;
 	private String password;	
 	
+	/**
+	 * 
+	 * @param u The users username
+	 * @param p The users password
+	 */
 	public User(String u, String p) {
 		username = u;
 		password = p;
-	}
-	
-	public String getUsername() {
-		return username;
-	}
-	
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	
-	public String getPassword() {
-		return password;
-	}
-	
-	public void setPassword(String password) {
-		this.password = password;
 	}
 	
 	@Override

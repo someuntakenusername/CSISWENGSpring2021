@@ -83,13 +83,16 @@ public class CategoryFrame extends JFrame implements ActionListener{
 			} else if(rowIndex == -1) {
 				if(TransactionTable.model.getTransactionLog().categoryExists(name.getText())) {
 					JOptionPane.showMessageDialog(this, "Category with this name already exists", "Warning", JOptionPane.ERROR_MESSAGE);
+				} else {
+					TransactionTable.model.getTransactionLog().addCategory(name.getText(), notes.getText());
+					table.update();
+					TransactionTable.model.getTransactionLog().save();
+					quit();
 				}
-				TransactionTable.model.getTransactionLog().addCategory(name.getText(), notes.getText());
-				table.update();
-				quit();
 			} else {
 				TransactionTable.model.getTransactionLog().editCategory(rowIndex, name.getText(), notes.getText());
 				table.update();
+				TransactionTable.model.getTransactionLog().save();
 				quit();
 			}
 		} else if(e.getActionCommand().equals("Cancel")) {
