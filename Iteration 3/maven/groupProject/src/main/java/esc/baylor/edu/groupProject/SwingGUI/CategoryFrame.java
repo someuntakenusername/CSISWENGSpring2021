@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /*
@@ -22,7 +24,8 @@ public class CategoryFrame extends JFrame implements ActionListener{
 	private CategoryTable table;
 	private JButton confirm, cancel;
 	private JPanel panel;
-	private JTextField name, notes;
+	private JTextField name;
+	private JTextArea notes;
 	private int rowIndex;
 
 	public CategoryFrame(CategoryTable table, int rowIndex) {
@@ -34,12 +37,13 @@ public class CategoryFrame extends JFrame implements ActionListener{
 
 		//Initialize confirm/cancel buttons
 		name = new JTextField(20);
-		notes = new JTextField(20);
-
+		notes = new JTextArea(25, name.getWidth());
+		JScrollPane pane = new JScrollPane(notes);
+		
 		panel.add(new JLabel("Category Name:"));
 		panel.add(name);
 		panel.add(new JLabel("Notes:"));
-		panel.add(notes);
+		panel.add(pane);
 
 		cancel = new JButton("Cancel");
 		cancel .setActionCommand("Cancel");

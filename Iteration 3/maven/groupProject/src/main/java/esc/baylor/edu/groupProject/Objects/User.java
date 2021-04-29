@@ -26,6 +26,14 @@ public class User implements Serializable {
 		password = p;
 	}
 	
+	/**
+	 * 
+	 * @return The associated users username
+	 */
+	public String getUsername() {
+		return username;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

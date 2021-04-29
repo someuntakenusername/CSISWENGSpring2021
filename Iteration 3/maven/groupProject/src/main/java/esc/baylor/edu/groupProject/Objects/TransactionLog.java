@@ -26,9 +26,8 @@ public class TransactionLog implements Serializable {
 	private static final Logger log = Logger.getLogger(Transaction.class.getName());
 	private ArrayList<Category> cList;
 	private ArrayList<Transaction> tLog;
-	private int id;
 	private String filename;
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 3L;
 	private double savings;
 	private Date currDate;
 	
@@ -193,9 +192,7 @@ public class TransactionLog implements Serializable {
 	 */
 	public void addCategory(String name, String notes) {
 		log.entering(Transaction.class.getName(), "addCategory", new Object[] {name,notes});
-		Category c = new Category();
-		c.setName(name);
-		c.setNotes(notes);
+		Category c = new Category(name, notes);
 		cList.add(c);
 		log.exiting(Transaction.class.getName(), "addCategory");
 	}
@@ -244,6 +241,12 @@ public class TransactionLog implements Serializable {
 		return tLog.size();
 	}
 	
+	/**
+	 * 
+	 * @param index The index of a Transaction in the list of Transactions
+	 * @param cat A Category from the Transaction Log
+	 * @return True if the Transaction is in the given Category; false otherwise
+	 */
 	public boolean isInCategory(int index, Category cat) {
 		log.entering(Transaction.class.getName(), "isInCategory", new Object[] {index,cat});
 		log.exiting(Transaction.class.getName(), "isInCategory", cat.contains(tLog.get(index)));
@@ -251,7 +254,9 @@ public class TransactionLog implements Serializable {
 	}
 	
 	/**
-	 * Checks if a category exists with the given name
+	 * 
+	 * @param name The name of the category to check for.
+	 * @return True if a Category with the given name exists; false if not
 	 */
 	public boolean categoryExists(String name) {
 		log.entering(Transaction.class.getName(), "categoryExists");
@@ -265,7 +270,7 @@ public class TransactionLog implements Serializable {
 		return false;
 	}
 	
-	/*
+	/**
 	 * @return The number of categories associated with the transaction log
 	 */
 	public int categoryCount() {
@@ -274,7 +279,7 @@ public class TransactionLog implements Serializable {
 		return cList.size();
 	}
 	
-	/*
+	/**
 	 * Loads the users saved transactions to the log
 	 */
 	private void load() {
@@ -299,7 +304,6 @@ public class TransactionLog implements Serializable {
 	    
 	    	TransactionLog t = (TransactionLog) oi.readObject();
 	    	this.cList = t.cList;
-	    	this.id = t.id;
 	    	this.tLog = t.tLog;
 	    	this.filename = t.filename;
 	    	this.currDate = t.currDate;
@@ -310,9 +314,9 @@ public class TransactionLog implements Serializable {
 	    	log.info("Successfully loaded \"" + filename + "\"");
 	    	
 
-	    	log.info("Parsing loaded Transactions...");
+	    	log.info("Parsing log for recursive Transactions...");
 
-	    	ArrayList<Transaction> trans = (ArrayList<Transaction>) tLog.clone();
+			ArrayList<Transaction> trans = (ArrayList<Transaction>) tLog.clone();
 	    	for(Transaction tr : trans) {
 				if(tr.isRecurring()) {
 					Calendar next = Calendar.getInstance();
