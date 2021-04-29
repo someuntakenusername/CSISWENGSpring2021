@@ -11,12 +11,6 @@ import java.util.logging.Logger;
  */
 import esc.baylor.edu.groupProject.SwingGUI.General.Login;
 
-/**
- * 
- * Initializes the software
- * 
- * @author BearBudget Team
- */
 public class Main {
 	private static final Logger log = Logger.getLogger(Main.class.getName());
 	
