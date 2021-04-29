@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 
 /**
- * 
  * Each user object contains the username and password for the user
  * which are used to generate the filename for the users saved data
  * 
@@ -67,7 +66,7 @@ public class User implements Serializable {
 	
 	public String findFilename() {
 		String filename = null;
-		filename = String.valueOf(this.hashCode());
+		filename = "./resources/saves/" + String.valueOf(this.hashCode());
 		filename += ".txt";
 		return filename;
 	}

@@ -35,9 +35,9 @@ public class Transaction implements Serializable {
 	}
 
 	/**
+	 * Gets the type of Transaction
 	 * 
-	 * 
-	 * @return The Type of the Associated Transaction object
+	 * @return The Type of the Associated Transaction. Either Expense or Income
 	 */
 	public Types getType() {
 		log.entering(Transaction.class.getName(), "getType");
@@ -57,6 +57,7 @@ public class Transaction implements Serializable {
 	}
 
 	/**
+	 * Gets the amount of the Transaction
 	 * 
 	 * @return The amount of the Transaction
 	 */
@@ -67,6 +68,7 @@ public class Transaction implements Serializable {
 	}
 
 	/**
+	 * Sets the amount of the Transaction
 	 * 
 	 * @param amount An amount of money. Must be positive
 	 */
@@ -77,6 +79,7 @@ public class Transaction implements Serializable {
 	}
 
 	/**
+	 * Sets the Date of the Transaction
 	 * 
 	 * @return The Date of the Transaction
 	 */
@@ -99,7 +102,7 @@ public class Transaction implements Serializable {
 	}
 
 	/**
-	 * 
+	 * Gets the Title of the Transaction
 	 * @return The title of the Transaction
 	 */
 	public String getTitle() {
@@ -120,6 +123,7 @@ public class Transaction implements Serializable {
 	}
 	
 	/**
+	 * Gets the rate of recurrence for a Transactions
 	 * 
 	 * @return How often the Transaction recurs in days
 	 */
@@ -141,6 +145,7 @@ public class Transaction implements Serializable {
 	}
 
 	/**
+	 * Checks if a Transaction recurs
 	 * 
 	 * @return True if the Transaction recurs; false otherwise
 	 */
@@ -150,6 +155,9 @@ public class Transaction implements Serializable {
 		return recur != -1;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int hashCode() {
 		log.entering(Transaction.class.getName(), "hashCode");
@@ -164,6 +172,9 @@ public class Transaction implements Serializable {
 		return result;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		log.entering(Transaction.class.getName(), "equals");

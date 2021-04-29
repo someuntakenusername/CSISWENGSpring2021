@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 	@deprecated
+ * 
  * Generates and stores reports based on the Transactions in the TransactionLog
  * 
  * @author Will
@@ -17,8 +17,13 @@ import java.util.stream.Collectors;
 public class Reporter {
 	private ArrayList<Report> reports;
 	
-	/*
-	 * Generates a report with all transaction object within the date range
+	/**
+	 * Generates reports on Transactions over a period of time
+	 * 
+	 * @param from The starting date for the report
+	 * @param to The ending date for the report
+	 * @param t The collection of Transactions to generate the report from
+	 * @return The generated report based on the list of Transactions over the period of time
 	 */
 	public Report generateReport(Date from, Date to, Collection<Transaction> t) {
 		Report report = new Report();
