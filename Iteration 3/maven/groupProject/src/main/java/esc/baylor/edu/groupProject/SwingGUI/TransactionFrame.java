@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -20,11 +21,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import esc.baylor.edu.groupProject.TransactionObjects.Transaction;
-import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
-import esc.baylor.edu.groupProject.TransactionObjects.Types;
+import esc.baylor.edu.groupProject.Objects.Transaction;
+import esc.baylor.edu.groupProject.Objects.TransactionLog;
+import esc.baylor.edu.groupProject.Objects.Types;
 
 public class TransactionFrame extends JFrame implements ActionListener {
+	private static final Logger log = Logger.getLogger(TransactionFrame.class.getName());
 	private JPanel panel;
 	private JTextField title, amount, recurrence;
 	private JCheckBox recurring;
@@ -38,6 +40,7 @@ public class TransactionFrame extends JFrame implements ActionListener {
 	
 	public TransactionFrame(Transaction transaction) {
 		super("Add New Transaction");
+		log.entering(TransactionFrame.class.getName(), "TransactionFrame");
 		this.transaction = transaction;
 		//Setup 4x2 panel
 		panel = new JPanel(new GridLayout(7, 2));
@@ -52,7 +55,7 @@ public class TransactionFrame extends JFrame implements ActionListener {
 		amount = new JTextField(20);
 		recurrence = new JTextField(5);
 		recurrence.setEditable(false);
-		//Limit amount to numbers
+		//Limit recurrence to numbers
 		recurrence.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent ke) {
 				if((ke.getKeyChar() < '0' || ke.getKeyChar() > '9') && ke.getKeyChar() != KeyEvent.VK_BACK_SPACE) {
@@ -64,7 +67,6 @@ public class TransactionFrame extends JFrame implements ActionListener {
 		//Date comboxbox
 		date = new JComboBox<Object>();
 		date.addItem("Select Date");
-		date.setActionCommand("Date");
 		date.addActionListener(this);
 
 		//Recurrence checkbox
@@ -81,6 +83,7 @@ public class TransactionFrame extends JFrame implements ActionListener {
 		cancel.addActionListener(this);
 		
 		if(this.transaction != null) init();
+		date.setActionCommand("Date");
 		
 		panel.add(new JLabel("Title"));
 		panel.add(title);
@@ -99,12 +102,14 @@ public class TransactionFrame extends JFrame implements ActionListener {
 		this.setSize(new Dimension(300, 200));
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		log.exiting(TransactionFrame.class.getName(), "TransactionFrame");
 	}
 	
 	/*
 	 * Initializes field values if editing an existing transaction
 	 */
 	private void init() {
+		log.entering(TransactionFrame.class.getName(), "init");
 		type.setSelectedItem(transaction.getType());
 		title.setText(transaction.getTitle());
 		amount.setText(transaction.getAmount().toString());
@@ -120,13 +125,15 @@ public class TransactionFrame extends JFrame implements ActionListener {
 			recurrence.setText(null);
 			recurrence.setEditable(false);
 		}
+		log.exiting(TransactionFrame.class.getName(), "init");
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		log.entering(TransactionFrame.class.getName(), "actionPerformed", e);
 		if(e.getActionCommand().equals("Confirm")) {
-			if(type.getSelectedIndex() == 0 || title.getText().equals(null) || selectedDate == null 
-					|| amount.getText().equals(null) || (recur && recurrence.getText().equals(null))) {
+			if(type.getSelectedIndex() == 0 || title.getText().equals("") || selectedDate == null 
+					|| amount.getText().equals(null) || (recur && recurrence.getText().equals(""))) {
 				JOptionPane.showMessageDialog(this, "Missing Information", "Warning", JOptionPane.ERROR_MESSAGE);
 			} else {
 				int rec = -1;
@@ -145,9 +152,11 @@ public class TransactionFrame extends JFrame implements ActionListener {
 						transaction.setAmount(am);
 						transaction.setRecur(rec);
 					}
+					TransactionTable.model.getTransactionLog().save();
 					TransactionTable.model.fireTableDataChanged();
 					this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 				} catch (NumberFormatException ex){
+					log.throwing(TransactionFrame.class.getName(), "actionPerformed", ex);
 					JOptionPane.showMessageDialog(this, "Double Formatted Incorrectly", "Warning", JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -176,5 +185,6 @@ public class TransactionFrame extends JFrame implements ActionListener {
 				date.addItem(d);
 			}
 		}
+		log.exiting(TransactionFrame.class.getName(), "actionPerformed");
 	}
 }

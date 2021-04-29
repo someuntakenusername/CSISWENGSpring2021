@@ -4,22 +4,34 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * Setups the information displayed at the top of the overall GUI
+ * @author Will
+ *
+ */
 public class GUIUserInfoTray extends JPanel{
+	private static final Logger log = Logger.getLogger(GUIUserInfoTray.class.getName());
 	public void updateBalanceDisplay(String str) {
+		log.entering(GUIUserInfoTray.class.getName(), "updateBalanceDisplay", str);
 		balanceDisplay.setText(str);
+		log.exiting(GUIUserInfoTray.class.getName(), "updateBalanceDisplay");
 	}
 	
 	public void updateNetDisplay(String str) {
+		log.entering(GUIUserInfoTray.class.getName(), "updateNetDisplay", str);
 		netDisplay.setText(str);
+		log.exiting(GUIUserInfoTray.class.getName(), "updateNetDisplay");
 	}
 	
 	public GUIUserInfoTray() {
+		log.entering(GUIUserInfoTray.class.getName(), "GUIUserInfoTray");
 		setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         
@@ -51,13 +63,22 @@ public class GUIUserInfoTray extends JPanel{
         c.gridx = 1;
         c.gridy = 1;
         add(netDisplay,c);
+        log.exiting(GUIUserInfoTray.class.getName(), "GUIUserInfoTray");
 	}
 	
 	public void addActionListener(ActionListener l) {
+		log.entering(GUIUserInfoTray.class.getName(), "addActionListener", l);
 		userSettingBtn.addActionListener(l);
+		log.exiting(GUIUserInfoTray.class.getName(), "addActionListener");
+	}
+	
+	public static void update() {
+		if(balanceDisplay != null) {
+			balanceDisplay.setText("Current Balance: " + TransactionTable.getTransactionLog().getCurrentBalance());
+		}
 	}
 	
 	private JButton	userSettingBtn;
-	private JTextField balanceDisplay;
+	private static JTextField balanceDisplay;
 	private JTextField netDisplay;
 }

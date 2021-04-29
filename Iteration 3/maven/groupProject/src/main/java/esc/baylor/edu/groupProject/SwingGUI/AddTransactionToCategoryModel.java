@@ -4,8 +4,7 @@ import java.text.SimpleDateFormat;
 
 import javax.swing.table.AbstractTableModel;
 
-import esc.baylor.edu.groupProject.TransactionObjects.Category;
-import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
+import esc.baylor.edu.groupProject.Objects.Category;
 
 
 /*
@@ -15,6 +14,7 @@ import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
  */
 public class AddTransactionToCategoryModel extends AbstractTableModel {
 
+	private static final long serialVersionUID = -3799754474000376148L;
 	private final String [] columns = {"Title", "Amount", "Date", ""};
 	private final SimpleDateFormat format = new SimpleDateFormat("MMMMM dd, yyyy");
 	private Category category;
@@ -55,7 +55,8 @@ public class AddTransactionToCategoryModel extends AbstractTableModel {
 			return new String(format.format(TransactionTable.model.getTransactionLog().getTransaction(rowIndex).getDate()));
 		case 3:
 			return TransactionTable.model.getTransactionLog().isInCategory(rowIndex, category);
-		default: return "Error";
+		default:
+			return "Error";
 		}
 	}
 

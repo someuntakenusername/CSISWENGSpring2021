@@ -2,22 +2,31 @@ package esc.baylor.edu.groupProject.SwingGUI;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 import javax.swing.*;
 
-public class GUIManager {
+import esc.baylor.edu.groupProject.Objects.Transaction;
 
-	/*
-	 *	startGUI
+/**
+ * <b>GUIManager</b>
+ * 
+ * The base of a GUI layer. Responsible for building the main window and coordinating elements.
+ * 
+ * @author will
+ */
+public class GUIManager {
+	private static final Logger log = Logger.getLogger(GUIManager.class.getName());
+
+	/**
+	 *	<b>startGUI</b>
 	 *
 	 *	Builds & displays the main window. Should be called only once on start-up
+	 *
+	 *	@author will
 	 */
 	public void startGUI() {
+		log.entering(GUIManager.class.getName(), "startGUI");
 		//create new thread
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {            	
@@ -30,7 +39,7 @@ public class GUIManager {
                 //add content panels here
                 JTabbedPane tabs = new JTabbedPane();
                 tabs.addTab("Overview", new OverviewPanel());
-                tabs.addTab("Expenses", expensePane = new ExpensesPanel());
+                tabs.addTab("Expenses", new ExpensesPanel());
                 
                 userTray = new GUIUserInfoTray();
                 content.add(userTray,BorderLayout.PAGE_START);
@@ -47,18 +56,15 @@ public class GUIManager {
             	baseWindow.setVisible(true);
             }
         });
+		log.exiting(GUIManager.class.getName(), "startGUI");
 	}
 	
-	/*
-	 * 	tester
-	 */
 	public static void main(String args[]) {
 		//GUIManager mgr = new GUIManager();
 		//mgr.startGUI();
 	}
 	
 	private JMenuBar menuBar;
-	private ExpensesPanel expensePane;
 	private GUIUserInfoTray userTray;
 	private JFrame baseWindow;
 }

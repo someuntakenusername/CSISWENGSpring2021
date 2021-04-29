@@ -1,15 +1,28 @@
 package esc.baylor.edu.groupProject.SwingGUI;
 
 import java.awt.BorderLayout;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-import esc.baylor.edu.groupProject.TransactionObjects.Category;
+import esc.baylor.edu.groupProject.Objects.Category;
 
+/**
+ * Constructs the Expenses panel of the GUI
+ * 
+ * @author Will, Trae
+ *
+ */
 public class ExpensesPanel extends JPanel{
+	private static final Logger log = Logger.getLogger(ExpensesPanel.class.getName());
+	
+	/**
+	 * Constructs the expenses panel with the TransactionTable and buttons to modify the Transactions
+	 */
 	public ExpensesPanel() {
+		log.entering(ExpensesPanel.class.getName(), "ExpensesPanel");
 		setLayout(new BorderLayout());
 		
 		filter = new JComboBox<Object>();
@@ -45,9 +58,10 @@ public class ExpensesPanel extends JPanel{
 		subpanel.add(filter);
 		
 		add(subpanel, BorderLayout.PAGE_END);
+		log.exiting(ExpensesPanel.class.getName(), "ExpensesPanel");
 	}
-	public TransactionTable list;
-	private JComboBox filter;
+	private TransactionTable list;
+	private JComboBox<Object> filter;
 	private JButton setSave, addBtn, editBtn, deleteBtn;
 	//action commands
 	public static final String CMD_ADD_EXPENSE = "CMD_ADD_EXPENSE",

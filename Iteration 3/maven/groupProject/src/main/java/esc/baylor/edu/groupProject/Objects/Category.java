@@ -1,33 +1,49 @@
-package esc.baylor.edu.groupProject.TransactionObjects;
+package esc.baylor.edu.groupProject.Objects;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
-/*
+/**
  * Storage object for the information of each category
+ * 
  * @author Trae
  */
 public class Category implements Serializable {
 	private static final Logger log = Logger.getLogger(Category.class.getName());
 	private static final long serialVersionUID = 4L;
     ArrayList<Transaction> transactions;
-    String name, notes;
-    
-    public Category() {
-    	log.entering(Category.class.getName(), "Category");
-    	transactions = new ArrayList<Transaction>();
-    	log.exiting(Category.class.getName(), "Category");
-    }
+    String name;
+    ArrayList<String> notes;
+    /**
+     * Constructs a Category
+     * @param name The name of the new Category
+     * @param notes Any of the notes for the Category
+     */
     public Category(String name, String notes) {
     	log.entering(Category.class.getName(), "Category", new Object[]{name,notes});
     	transactions = new ArrayList<Transaction>();
     	this.name = name;
-    	this.notes = notes;
+    	this.notes = new ArrayList<String>();
+    	if(!notes.contains("\n")) this.notes.add(notes);
+    	else {
+    		Scanner sc = new Scanner(notes);
+    		sc.useDelimiter("\n");
+    		while(sc.hasNext()) {
+    			this.notes.add(sc.next());
+    		}
+    		sc.close();
+    	}
     	log.exiting(Category.class.getName(), "Category");
     }
     
+    /**
+     * Adds a Transaction to a Category object
+     * 
+     * @param t The transaction to be added to the Category
+     */
     public void addTransaction(Transaction t) {
     	log.entering(Category.class.getName(), "addTransaction", t);
     	transactions.add(t);
@@ -39,24 +55,44 @@ public class Category implements Serializable {
     	log.exiting(Category.class.getName(), "addTransaction");
     }
     
+    /**
+     * Removes a Transaction from a Category object
+     * 
+     * @param t The Transaction object to be removed from the Category
+     */
     public void removeTransaction(Transaction t) {
     	log.entering(Category.class.getName(), "removeTransaction", t);
     	transactions.remove(t);
     	log.exiting(Category.class.getName(), "removeTransaction");
     }
     
+    /**
+     * 
+     * @param index The index of a Transaction in the Categories Transaction list
+     * 
+     * @return The Transaction object at the index in the list
+     */
     public Transaction getTransaction(int index) {
     	log.entering(Category.class.getName(), "getTransaction", index);
     	log.exiting(Category.class.getName(), "getTransaction", transactions.get(index));
     	return transactions.get(index);
     }
     
+    /**
+     * 
+     * @return The number of Transactions in the Category
+     */
     public int size() {
     	log.entering(Category.class.getName(), "size");
     	log.exiting(Category.class.getName(), "size", transactions.size());
     	return transactions.size();
     }
     
+    /**
+     * 
+     * @param t A Transaction object
+     * @return True if the Category contains the Transaction; false otherwise
+     */
     public boolean contains(Transaction t) {
     	log.entering(Category.class.getName(), "contains", t);
     	log.exiting(Category.class.getName(), "contains", transactions.contains(t));
@@ -68,20 +104,48 @@ public class Category implements Serializable {
 		log.exiting(Category.class.getName(), "getName", name);
 		return name;
 	}
+	/**
+	 * 
+	 * @param name The new name of the Category object
+	 */
 	public void setName(String name) {
 		log.entering(Category.class.getName(), "setName", name);
 		log.exiting(Category.class.getName(), "setName");
 		this.name = name;
 	}
+	
+	/**
+	 * 
+	 * @return The notes of a Category. Will be returned as a semi-colon separated string
+	 */
 	public String getNotes() {
 		log.entering(Category.class.getName(), "getNotes");
+		String ret = notes.get(0);
+		for(int i = 1; i < notes.size(); ++i) {
+			ret+= "; ";
+			ret+= notes.get(i);
+		}
 		log.exiting(Category.class.getName(), "getNotes", notes);
-		return notes;
+		return ret;
 	}
+	
+	/**
+	 * 
+	 * @param notes The string to set as the notes of the Category
+	 */
 	public void setNotes(String notes) {
 		log.entering(Category.class.getName(), "setNotes", notes);
+		this.notes.clear();
+		if(!notes.contains("\n")) this.notes.add(notes);
+    	else {
+    		Scanner sc = new Scanner(notes);
+    		sc.useDelimiter("\n");
+    		while(sc.hasNext()) {
+    			this.notes.add(sc.next());
+    		}
+    		sc.close();
+    	}
 		log.exiting(Category.class.getName(), "setNotes");
-		this.notes = notes;
 	}
 	
 	@Override

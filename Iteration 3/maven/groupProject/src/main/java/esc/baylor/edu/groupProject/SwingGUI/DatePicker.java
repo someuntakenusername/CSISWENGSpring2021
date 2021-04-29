@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -15,7 +16,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * A pop-up menu for selecting dates
+ * 
+ * @author Jyoti Jha, Trae
+ *
+ */
 public class DatePicker extends JPanel {
+	private static final Logger log = Logger.getLogger(DatePicker.class.getName());
 	private int month = Calendar.getInstance().get(Calendar.MONTH);
 	private int year = Calendar.getInstance().get(Calendar.YEAR);;
 	private JLabel l = new JLabel("", JLabel.CENTER);
@@ -24,6 +32,7 @@ public class DatePicker extends JPanel {
 	private JButton[] button = new JButton[49];
 
 	public DatePicker(JFrame parent) {
+		log.entering(DatePicker.class.getName(), "DatePicker", parent);
 		d = new JDialog();
 		d.setModal(true);
 		String[] header = { "Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat" };
@@ -72,9 +81,11 @@ public class DatePicker extends JPanel {
 		d.setLocationRelativeTo(parent);
 		displayDate();
 		d.setVisible(true);
+		log.exiting(DatePicker.class.getName(), "DatePicker");
 	}
 
 	public void displayDate() {
+		log.entering(DatePicker.class.getName(), "displayDate");
 		for (int x = 7; x < button.length; x++)
 			button[x].setText("");
 		SimpleDateFormat sdf = new SimpleDateFormat(
@@ -87,14 +98,17 @@ public class DatePicker extends JPanel {
 			button[x].setText("" + day);
 		l.setText(sdf.format(cal.getTime()));
 		d.setTitle("Date Picker");
+		log.exiting(DatePicker.class.getName(), "displayDate");
 	}
 
 	public String setPickedDate() {
+		log.entering(DatePicker.class.getName(), "setPickedDate");
 		if (day.equals(""))
 			return day;
 		SimpleDateFormat sdf = new SimpleDateFormat("MMMMM dd, yyyy");
 		Calendar cal = Calendar.getInstance();
 		cal.set(year, month, Integer.parseInt(day));
-		return sdf.format(cal.getTime());
+		log.exiting(DatePicker.class.getName(), "setPickedDate", sdf.format(cal.getTime()));
+		return sdf.format(cal.getTime());		
 	}
 }
