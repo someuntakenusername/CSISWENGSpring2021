@@ -3,28 +3,38 @@ package esc.baylor.edu.groupProject.Objects;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
-/*
+/**
  * Storage object for the information of each category
+ * 
  * @author Trae
  */
 public class Category implements Serializable {
 	private static final Logger log = Logger.getLogger(Category.class.getName());
 	private static final long serialVersionUID = 4L;
     ArrayList<Transaction> transactions;
-    String name, notes;
-    
-    public Category() {
-    	log.entering(Category.class.getName(), "Category");
-    	transactions = new ArrayList<Transaction>();
-    	log.exiting(Category.class.getName(), "Category");
-    }
+    String name;
+    ArrayList<String> notes;
+    /**
+     * Constructs a Category
+     * @param name The name of the new Category
+     * @param notes Any of the notes for the Category
+     */
     public Category(String name, String notes) {
     	log.entering(Category.class.getName(), "Category", new Object[]{name,notes});
     	transactions = new ArrayList<Transaction>();
     	this.name = name;
-    	this.notes = notes;
+    	this.notes = new ArrayList<String>();
+    	if(!notes.contains("\n")) this.notes.add(notes);
+    	else {
+    		Scanner sc = new Scanner(notes);
+    		sc.useDelimiter("\n");
+    		while(sc.hasNext()) {
+    			this.notes.add(sc.next());
+    		}
+    	}
     	log.exiting(Category.class.getName(), "Category");
     }
     
@@ -75,13 +85,26 @@ public class Category implements Serializable {
 	}
 	public String getNotes() {
 		log.entering(Category.class.getName(), "getNotes");
+		String ret = notes.get(0);
+		for(int i = 1; i < notes.size(); ++i) {
+			ret+= "; ";
+			ret+= notes.get(i);
+		}
 		log.exiting(Category.class.getName(), "getNotes", notes);
-		return notes;
+		return ret;
 	}
 	public void setNotes(String notes) {
 		log.entering(Category.class.getName(), "setNotes", notes);
+		this.notes.clear();
+		if(!notes.contains("\n")) this.notes.add(notes);
+    	else {
+    		Scanner sc = new Scanner(notes);
+    		sc.useDelimiter("\n");
+    		while(sc.hasNext()) {
+    			this.notes.add(sc.next());
+    		}
+    	}
 		log.exiting(Category.class.getName(), "setNotes");
-		this.notes = notes;
 	}
 	
 	@Override
