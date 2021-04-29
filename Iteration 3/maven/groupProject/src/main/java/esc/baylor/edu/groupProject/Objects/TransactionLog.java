@@ -1,4 +1,4 @@
-package esc.baylor.edu.groupProject.TransactionObjects;
+package esc.baylor.edu.groupProject.Objects;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,13 +19,13 @@ import esc.baylor.edu.groupProject.SwingGUI.Login;;
 /**
  * The TransactionLog object stores the data for all Transactions and Categories
  * 
- * @author Trae
+ * @author Trae, Timmy
  *
  */
 public class TransactionLog implements Serializable {
 	private static final Logger log = Logger.getLogger(Transaction.class.getName());
-	ArrayList<Category> cList;
-	ArrayList<Transaction> tLog;
+	private ArrayList<Category> cList;
+	private ArrayList<Transaction> tLog;
 	private int id;
 	private String filename;
 	private static final long serialVersionUID = 2L;
@@ -45,7 +45,7 @@ public class TransactionLog implements Serializable {
 	}
 	
 	/**
-	 * @return Returns the collection of transactions associated with this TransactionLog object
+	 * @return Returns a clone of the collection of transactions associated with this TransactionLog object
 	 */
 	public Collection<Transaction> getTransactionList(){
 		log.entering(Transaction.class.getName(), "getTransactionList");
@@ -76,12 +76,16 @@ public class TransactionLog implements Serializable {
 		if(currDate != null) {
 			double tranSum = 0.00;
 			for(Transaction t: tLog) {
-				if(t.getDate().compareTo(currDate) < 0) {
-					tranSum += t.getAmount();
+				if(t.getDate().compareTo(currDate) >= 0) {
+					if(t.getType() == Types.Expense) {
+						tranSum -= t.getAmount();
+					} else {
+						tranSum += t.getAmount();
+					}
 				}
 			}
 			log.exiting(Transaction.class.getName(), "getCurrentBalance", savings - tranSum);
-			return savings - tranSum;
+			return savings + tranSum;
 		}
 		log.exiting(Transaction.class.getName(), "getCurrentBalance", null);
 		return null;
@@ -116,7 +120,6 @@ public class TransactionLog implements Serializable {
 		}
 		
 		sort();
-		save();
 		log.exiting(Transaction.class.getName(), "addTransaction");
 	}
 	
@@ -163,7 +166,6 @@ public class TransactionLog implements Serializable {
 			}
 		}
 		
-		save();
 		log.exiting(Transaction.class.getName(), "editTransaction");
 	}
 	
@@ -180,7 +182,6 @@ public class TransactionLog implements Serializable {
 				c.removeTransaction(t);
 			}
 		}
-		save();
 		log.exiting(Transaction.class.getName(), "removeTransaction");
 	}
 	
@@ -196,7 +197,6 @@ public class TransactionLog implements Serializable {
 		c.setName(name);
 		c.setNotes(notes);
 		cList.add(c);
-		save();
 		log.exiting(Transaction.class.getName(), "addCategory");
 	}
 	
@@ -211,7 +211,6 @@ public class TransactionLog implements Serializable {
 		log.entering(Transaction.class.getName(), "editCategory", new Object[] {index,name,notes});
 		cList.get(index).setName(name);
 		cList.get(index).setNotes(notes);
-		save();
 		log.exiting(Transaction.class.getName(), "editCategory");
 	}
 	
@@ -223,7 +222,6 @@ public class TransactionLog implements Serializable {
 	public void removeCategory(Category cat) {
 		log.entering(Transaction.class.getName(), "removeCategory", cat);
 		cList.remove(cat);
-		save();
 		log.exiting(Transaction.class.getName(), "removeCategory");
 	}
 	

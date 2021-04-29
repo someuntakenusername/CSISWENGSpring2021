@@ -4,10 +4,10 @@ import java.text.SimpleDateFormat;
 
 import javax.swing.table.AbstractTableModel;
 
-import esc.baylor.edu.groupProject.TransactionObjects.Category;
-import esc.baylor.edu.groupProject.TransactionObjects.Transaction;
-import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
-import esc.baylor.edu.groupProject.TransactionObjects.Types;
+import esc.baylor.edu.groupProject.Objects.Category;
+import esc.baylor.edu.groupProject.Objects.Transaction;
+import esc.baylor.edu.groupProject.Objects.TransactionLog;
+import esc.baylor.edu.groupProject.Objects.Types;
 
 /*
  * Table model for the Transaction display table

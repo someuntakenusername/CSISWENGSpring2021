@@ -14,8 +14,8 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import esc.baylor.edu.groupProject.TransactionObjects.Category;
-import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
+import esc.baylor.edu.groupProject.Objects.Category;
+import esc.baylor.edu.groupProject.Objects.TransactionLog;
 
 public class TransactionTable extends JPanel implements ActionListener {
 	private JTable table;
@@ -77,6 +77,7 @@ public class TransactionTable extends JPanel implements ActionListener {
 			if(i == JOptionPane.YES_OPTION) {
 				model.getTransactionLog().removeTransaction(model.getTransaction(table.getSelectedRow()));
 				model.fireTableDataChanged();
+				TransactionTable.model.getTransactionLog().save();
 			}
 		} else if(e.getActionCommand().equals("CMD_EDIT_EXPENSE") && table.getSelectedRow() != -1) {
 			new TransactionFrame(model.getTransaction(table.getSelectedRow()));

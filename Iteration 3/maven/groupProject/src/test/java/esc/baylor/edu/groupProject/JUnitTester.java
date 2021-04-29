@@ -1,12 +1,13 @@
 package esc.baylor.edu.groupProject;
 
-import esc.baylor.edu.groupProject.TransactionObjects.Category;
-import esc.baylor.edu.groupProject.TransactionObjects.Transaction;
-import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
-import esc.baylor.edu.groupProject.TransactionObjects.Types;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import esc.baylor.edu.groupProject.Objects.Category;
+import esc.baylor.edu.groupProject.Objects.Transaction;
+import esc.baylor.edu.groupProject.Objects.TransactionLog;
+import esc.baylor.edu.groupProject.Objects.Types;
+
 import org.junit.jupiter.api.Assertions;
 
 public class JUnitTester {

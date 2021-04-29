@@ -4,8 +4,8 @@ import java.text.SimpleDateFormat;
 
 import javax.swing.table.AbstractTableModel;
 
-import esc.baylor.edu.groupProject.TransactionObjects.Category;
-import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
+import esc.baylor.edu.groupProject.Objects.Category;
+import esc.baylor.edu.groupProject.Objects.TransactionLog;
 
 
 /*

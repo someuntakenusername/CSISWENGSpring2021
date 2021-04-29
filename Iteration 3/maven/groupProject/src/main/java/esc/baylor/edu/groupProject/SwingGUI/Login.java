@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import esc.baylor.edu.groupProject.Objects.User;
+
 public class Login implements ActionListener {
 
 	private JFrame frame;

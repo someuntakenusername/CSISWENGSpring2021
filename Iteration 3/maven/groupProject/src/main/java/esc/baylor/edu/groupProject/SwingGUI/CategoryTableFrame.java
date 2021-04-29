@@ -78,6 +78,7 @@ public class CategoryTableFrame extends JFrame implements ActionListener {
 			if(i == JOptionPane.YES_OPTION) {
 				TransactionTable.model.getTransactionLog().
 				removeCategory(TransactionTable.model.getTransactionLog().getCategory(cats.getTable().getSelectedRow()));
+				TransactionTable.model.getTransactionLog().save();
 			}
 			cats.update();
 		} else if(e.getActionCommand().equals("Edit") && cats.getTable().getSelectedRow() != -1) {

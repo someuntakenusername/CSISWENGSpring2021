@@ -9,8 +9,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
-import esc.baylor.edu.groupProject.TransactionObjects.Category;
-import esc.baylor.edu.groupProject.TransactionObjects.TransactionLog;
+
+import esc.baylor.edu.groupProject.Objects.Category;
+import esc.baylor.edu.groupProject.Objects.TransactionLog;
 
 /*
  * Table used to add Transactions to a Category
