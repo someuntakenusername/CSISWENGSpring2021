@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 import javax.swing.*;
 
-import esc.baylor.edu.groupProject.TransactionObjects.Transaction;
+import esc.baylor.edu.groupProject.Objects.Transaction;
 
 public class GUIManager {
 	private static final Logger log = Logger.getLogger(GUIManager.class.getName());
