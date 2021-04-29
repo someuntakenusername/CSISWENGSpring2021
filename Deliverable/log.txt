@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2021-04-29T04:12:07.922588900Z</date>
-  <millis>1619669527922</millis>
-  <nanos>588900</nanos>
+  <date>2021-04-29T04:15:40.096327900Z</date>
+  <millis>1619669740096</millis>
+  <nanos>327900</nanos>
   <sequence>0</sequence>
   <logger>esc.baylor.edu.groupProject.SwingGUI.General.Login</logger>
   <level>INFO</level>
@@ -14,9 +14,9 @@
   <message>esc.baylor.edu.groupProject.Objects.User@b0c06da1 authenticated</message>
 </record>
 <record>
-  <date>2021-04-29T04:12:08.089606800Z</date>
-  <millis>1619669528089</millis>
-  <nanos>606800</nanos>
+  <date>2021-04-29T04:15:40.272402500Z</date>
+  <millis>1619669740272</millis>
+  <nanos>402500</nanos>
   <sequence>1</sequence>
   <logger>esc.baylor.edu.groupProject.Objects.Transaction</logger>
   <level>INFO</level>
@@ -26,9 +26,9 @@
   <message>Loading "./resources/saves/-1329566303.txt"...</message>
 </record>
 <record>
-  <date>2021-04-29T04:12:08.117605400Z</date>
-  <millis>1619669528117</millis>
-  <nanos>605400</nanos>
+  <date>2021-04-29T04:15:40.304558900Z</date>
+  <millis>1619669740304</millis>
+  <nanos>558900</nanos>
   <sequence>2</sequence>
   <logger>esc.baylor.edu.groupProject.Objects.Transaction</logger>
   <level>INFO</level>
@@ -38,9 +38,9 @@
   <message>Successfully loaded "./resources/saves/-1329566303.txt"</message>
 </record>
 <record>
-  <date>2021-04-29T04:12:08.118603Z</date>
-  <millis>1619669528118</millis>
-  <nanos>603000</nanos>
+  <date>2021-04-29T04:15:40.305559600Z</date>
+  <millis>1619669740305</millis>
+  <nanos>559600</nanos>
   <sequence>3</sequence>
   <logger>esc.baylor.edu.groupProject.Objects.Transaction</logger>
   <level>INFO</level>
@@ -50,9 +50,9 @@
   <message>Parsing log for recursive Transactions...</message>
 </record>
 <record>
-  <date>2021-04-29T04:12:08.124605900Z</date>
-  <millis>1619669528124</millis>
-  <nanos>605900</nanos>
+  <date>2021-04-29T04:15:40.309559Z</date>
+  <millis>1619669740309</millis>
+  <nanos>559000</nanos>
   <sequence>4</sequence>
   <logger>esc.baylor.edu.groupProject.Objects.Transaction</logger>
   <level>INFO</level>
@@ -62,9 +62,9 @@
   <message>Successfully parsed all loaded Transactions</message>
 </record>
 <record>
-  <date>2021-04-29T04:12:47.565812200Z</date>
-  <millis>1619669567565</millis>
-  <nanos>812200</nanos>
+  <date>2021-04-29T04:25:46.214377100Z</date>
+  <millis>1619670346214</millis>
+  <nanos>377100</nanos>
   <sequence>5</sequence>
   <logger>esc.baylor.edu.groupProject.Objects.Transaction</logger>
   <level>INFO</level>
@@ -74,9 +74,9 @@
   <message>Saving "./resources/saves/-1329566303.txt"...</message>
 </record>
 <record>
-  <date>2021-04-29T04:12:47.575811700Z</date>
-  <millis>1619669567575</millis>
-  <nanos>811700</nanos>
+  <date>2021-04-29T04:25:46.222377500Z</date>
+  <millis>1619670346222</millis>
+  <nanos>377500</nanos>
   <sequence>6</sequence>
   <logger>esc.baylor.edu.groupProject.Objects.Transaction</logger>
   <level>INFO</level>
