@@ -3,7 +3,6 @@ package esc.baylor.edu.groupProject.SwingGUI.Category;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.text.DecimalFormat;
-import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;

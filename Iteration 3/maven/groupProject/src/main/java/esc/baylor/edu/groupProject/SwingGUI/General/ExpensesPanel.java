@@ -7,7 +7,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-import esc.baylor.edu.groupProject.Objects.Category;
 import esc.baylor.edu.groupProject.SwingGUI.Transactions.TransactionTable;
 
 /**
