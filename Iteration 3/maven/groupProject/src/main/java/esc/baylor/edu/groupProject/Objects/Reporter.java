@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 	@deprecated
+ * 
  * Generates and stores reports based on the Transactions in the TransactionLog
  * 
  * @author Will

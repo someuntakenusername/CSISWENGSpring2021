@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 
 /**
- * 
  * Each user object contains the username and password for the user
  * which are used to generate the filename for the users saved data
  * 
