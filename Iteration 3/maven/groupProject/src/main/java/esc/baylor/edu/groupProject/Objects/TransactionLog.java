@@ -14,8 +14,8 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.logging.Logger;
 
-import esc.baylor.edu.groupProject.SwingGUI.GUIUserInfoTray;
-import esc.baylor.edu.groupProject.SwingGUI.Login;;
+import esc.baylor.edu.groupProject.SwingGUI.General.GUIUserInfoTray;
+import esc.baylor.edu.groupProject.SwingGUI.General.Login;;
 
 /**
  * The TransactionLog object stores the data for all Transactions and Categories
@@ -45,6 +45,8 @@ public class TransactionLog implements Serializable {
 	}
 	
 	/**
+	 * Gets the collection of Transactions in the TransactionLog
+	 * 
 	 * @return Returns a clone of the collection of transactions associated with this TransactionLog object
 	 */
 	public Collection<Transaction> getTransactionList(){
@@ -54,7 +56,10 @@ public class TransactionLog implements Serializable {
 	}
 
 	/**
+	 * Sets the current savings and associated date in the TransactionLog
+	 * 
 	 * @param amount New value of user savings
+	 * @param date The date at which the user had those savings
 	 */
 	public void setCurrentSavings(double amount, Date date) {
 		log.entering(Transaction.class.getName(), "getTransactionList", new Object[] {amount,date});
@@ -226,6 +231,9 @@ public class TransactionLog implements Serializable {
 	}
 	
 	/**
+	 * Gets a Category from the TransactionLog
+	 * 
+	 * @param index The index of a Category
 	 * @return the category at the given index in the category list
 	 */
 	public Category getCategory(int index) {
@@ -236,7 +244,9 @@ public class TransactionLog implements Serializable {
 	}
 	
 	/**
-	 * @return The size of the Transaction Log
+	 * Gets the size of the TransactionLog
+	 * 
+	 * @return The number of Transactions in the TransactionLog
 	 */
 	public int size() {
 		log.entering(Transaction.class.getName(), "size");
@@ -245,6 +255,7 @@ public class TransactionLog implements Serializable {
 	}
 	
 	/**
+	 * Determines if a Transaction is in a Category
 	 * 
 	 * @param index The index of a Transaction in the list of Transactions
 	 * @param cat A Category from the Transaction Log
@@ -257,6 +268,7 @@ public class TransactionLog implements Serializable {
 	}
 	
 	/**
+	 * Checks if a Category exists
 	 * 
 	 * @param name The name of the category to check for.
 	 * @return True if a Category with the given name exists; false if not
@@ -274,6 +286,8 @@ public class TransactionLog implements Serializable {
 	}
 	
 	/**
+	 * Counts the number of Categories for the TransactionLog
+	 * 
 	 * @return The number of categories associated with the transaction log
 	 */
 	public int categoryCount() {

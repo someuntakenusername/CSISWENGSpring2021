@@ -67,6 +67,7 @@ public class Category implements Serializable {
     }
     
     /**
+     * Gets a Transaction from the Category
      * 
      * @param index The index of a Transaction in the Categories Transaction list
      * 
@@ -79,6 +80,7 @@ public class Category implements Serializable {
     }
     
     /**
+     * Gives the size of the Category
      * 
      * @return The number of Transactions in the Category
      */
@@ -89,6 +91,7 @@ public class Category implements Serializable {
     }
     
     /**
+     * Determines if a Transaction is contained in a Category
      * 
      * @param t A Transaction object
      * @return True if the Category contains the Transaction; false otherwise
@@ -99,12 +102,18 @@ public class Category implements Serializable {
     	return transactions.contains(t);
     }
     
+    /**
+     * Gets the name of the Category
+     * @return The name of the Category
+     */
 	public String getName() {
 		log.entering(Category.class.getName(), "getName");
 		log.exiting(Category.class.getName(), "getName", name);
 		return name;
 	}
+	
 	/**
+	 * Sets the name of the Category
 	 * 
 	 * @param name The new name of the Category object
 	 */
@@ -115,6 +124,7 @@ public class Category implements Serializable {
 	}
 	
 	/**
+	 * Gets the notes of a Category
 	 * 
 	 * @return The notes of a Category. Will be returned as a semi-colon separated string
 	 */
@@ -130,6 +140,7 @@ public class Category implements Serializable {
 	}
 	
 	/**
+	 * Sets the notes of a Category
 	 * 
 	 * @param notes The string to set as the notes of the Category
 	 */
@@ -148,12 +159,19 @@ public class Category implements Serializable {
 		log.exiting(Category.class.getName(), "setNotes");
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
 		log.entering(Category.class.getName(), "toString");
 		log.exiting(Category.class.getName(), "toString", name);
 		return name;
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int hashCode() {
 		log.entering(Category.class.getName(), "hashCode");
@@ -163,6 +181,10 @@ public class Category implements Serializable {
 		log.exiting(Category.class.getName(), "hashCode", result);
 		return result;
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		log.entering(Category.class.getName(), "equals", obj);
