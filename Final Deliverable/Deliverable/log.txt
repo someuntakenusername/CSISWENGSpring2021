@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2021-04-29T04:46:50.160199700Z</date>
+  <millis>1619671610160</millis>
+  <nanos>199700</nanos>
+  <sequence>0</sequence>
+  <logger>esc.baylor.edu.groupProject.SwingGUI.General.Login</logger>
+  <level>INFO</level>
+  <class>esc.baylor.edu.groupProject.SwingGUI.General.Login</class>
+  <method>actionPerformed</method>
+  <thread>19</thread>
+  <message>esc.baylor.edu.groupProject.Objects.User@ccb03fec authenticated</message>
+</record>
+<record>
+  <date>2021-04-29T04:46:50.228216300Z</date>
+  <millis>1619671610228</millis>
+  <nanos>216300</nanos>
+  <sequence>1</sequence>
+  <logger>esc.baylor.edu.groupProject.Objects.Transaction</logger>
+  <level>INFO</level>
+  <class>esc.baylor.edu.groupProject.Objects.TransactionLog</class>
+  <method>load</method>
+  <thread>19</thread>
+  <message>Loading "./resources/saves/-860864532.txt"...</message>
+</record>
+<record>
+  <date>2021-04-29T04:46:50.240218400Z</date>
+  <millis>1619671610240</millis>
+  <nanos>218400</nanos>
+  <sequence>2</sequence>
+  <logger>esc.baylor.edu.groupProject.Objects.Transaction</logger>
+  <level>INFO</level>
+  <class>esc.baylor.edu.groupProject.Objects.TransactionLog</class>
+  <method>load</method>
+  <thread>19</thread>
+  <message>Successfully loaded "./resources/saves/-860864532.txt"</message>
+</record>
+<record>
+  <date>2021-04-29T04:46:50.240218400Z</date>
+  <millis>1619671610240</millis>
+  <nanos>218400</nanos>
+  <sequence>3</sequence>
+  <logger>esc.baylor.edu.groupProject.Objects.Transaction</logger>
+  <level>INFO</level>
+  <class>esc.baylor.edu.groupProject.Objects.TransactionLog</class>
+  <method>load</method>
+  <thread>19</thread>
+  <message>Parsing log for recursive Transactions...</message>
+</record>
+<record>
+  <date>2021-04-29T04:46:50.241218400Z</date>
+  <millis>1619671610241</millis>
+  <nanos>218400</nanos>
+  <sequence>4</sequence>
+  <logger>esc.baylor.edu.groupProject.Objects.Transaction</logger>
+  <level>INFO</level>
+  <class>esc.baylor.edu.groupProject.Objects.TransactionLog</class>
+  <method>load</method>
+  <thread>19</thread>
+  <message>Successfully parsed all loaded Transactions</message>
+</record>
+</log>
