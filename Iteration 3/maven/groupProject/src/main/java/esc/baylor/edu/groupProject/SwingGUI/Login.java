@@ -17,6 +17,13 @@ import javax.swing.JTextField;
 
 import esc.baylor.edu.groupProject.Objects.User;
 
+/**
+ * Creates and opens the Login frame for the user to login to 
+ * BearBudget
+ * 
+ * @author Timmy
+ *
+ */
 public class Login implements ActionListener {
 	private static final Logger log = Logger.getLogger(Login.class.getName());
 

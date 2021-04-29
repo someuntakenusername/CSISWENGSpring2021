@@ -14,6 +14,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.logging.Logger;
 
+import esc.baylor.edu.groupProject.SwingGUI.GUIUserInfoTray;
 import esc.baylor.edu.groupProject.SwingGUI.Login;;
 
 /**
@@ -60,6 +61,7 @@ public class TransactionLog implements Serializable {
 		currDate = date;
 		savings = 0.00;
 		savings += amount;
+		GUIUserInfoTray.update();
 		log.exiting(Transaction.class.getName(), "getTransactionList");
 	}
 	
@@ -117,7 +119,7 @@ public class TransactionLog implements Serializable {
 				next.add(Calendar.DATE, t.getRecur());
 			}
 		}
-		
+		GUIUserInfoTray.update();
 		sort();
 		log.exiting(Transaction.class.getName(), "addTransaction");
 	}
@@ -164,7 +166,7 @@ public class TransactionLog implements Serializable {
 				next.add(Calendar.DATE, t.getRecur());
 			}
 		}
-		
+		GUIUserInfoTray.update();
 		log.exiting(Transaction.class.getName(), "editTransaction");
 	}
 	
@@ -181,6 +183,7 @@ public class TransactionLog implements Serializable {
 				c.removeTransaction(t);
 			}
 		}
+		GUIUserInfoTray.update();
 		log.exiting(Transaction.class.getName(), "removeTransaction");
 	}
 	
