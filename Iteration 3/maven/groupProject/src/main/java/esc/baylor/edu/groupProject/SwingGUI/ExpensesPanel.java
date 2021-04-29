@@ -1,6 +1,7 @@
 package esc.baylor.edu.groupProject.SwingGUI;
 
 import java.awt.BorderLayout;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -9,7 +10,9 @@ import javax.swing.JPanel;
 import esc.baylor.edu.groupProject.Objects.Category;
 
 public class ExpensesPanel extends JPanel{
+	private static final Logger log = Logger.getLogger(ExpensesPanel.class.getName());
 	public ExpensesPanel() {
+		log.entering(ExpensesPanel.class.getName(), "ExpensesPanel");
 		setLayout(new BorderLayout());
 		
 		filter = new JComboBox<Object>();
@@ -45,6 +48,7 @@ public class ExpensesPanel extends JPanel{
 		subpanel.add(filter);
 		
 		add(subpanel, BorderLayout.PAGE_END);
+		log.exiting(ExpensesPanel.class.getName(), "ExpensesPanel");
 	}
 	private TransactionTable list;
 	private JComboBox filter;

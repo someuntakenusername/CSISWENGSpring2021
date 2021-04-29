@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.util.logging.Logger;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -18,13 +19,14 @@ import javax.swing.JPanel;
  * @author Trae
  */
 public class CategoryTableFrame extends JFrame implements ActionListener {
+	private static final Logger log = Logger.getLogger(CategoryTableFrame.class.getName());
 	private JPanel top, panel;
 	private CategoryTable cats;
 	private JButton cancel, edit, delete, add, addTran;
 
 	public CategoryTableFrame() {
 		super("Category List");
-		
+		log.entering(CategoryTableFrame.class.getName(), "CategoryTableFrame");
 		top = new JPanel();
 		cats = new CategoryTable();
 		top.add(cats, BorderLayout.PAGE_START);
@@ -67,10 +69,12 @@ public class CategoryTableFrame extends JFrame implements ActionListener {
 		this.setSize(new Dimension(cats.getWidth(), cats.getHeight()+100));
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		log.exiting(CategoryTableFrame.class.getName(), "CategoryTableFrame");
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		log.entering(CategoryTableFrame.class.getName(), "actionPerformed", e);
 		if(e.getActionCommand().equals("Add")) {
 			new CategoryFrame(cats, -1);
 		} else if(e.getActionCommand().equals("Delete") && cats.getTable().getSelectedRow() != -1) {
@@ -88,6 +92,7 @@ public class CategoryTableFrame extends JFrame implements ActionListener {
 		} else if(e.getActionCommand().equals("Tran") && cats.getTable().getSelectedRow() != -1) {
 			new AddTransactionToCategory(TransactionTable.model.getTransactionLog().getCategory(cats.getTable().getSelectedRow()));
 		}
+		log.exiting(CategoryTableFrame.class.getName(), "actionPerformed");
 	}
 	
 }

@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -23,7 +24,7 @@ import javax.swing.JTextField;
  * 
  */
 public class SaveFrame extends JFrame implements ActionListener {
-	
+	private static final Logger log = Logger.getLogger(SaveFrame.class.getName());
 	private JTextField amount;
 	private JButton cancel, confirm;
 	private JComboBox<Object> date;
@@ -32,6 +33,7 @@ public class SaveFrame extends JFrame implements ActionListener {
 	
 	public SaveFrame() {
 		super("Set Current Savings");
+		log.entering(SaveFrame.class.getName(), "SaveFrame");
 		
 		JPanel panel = new JPanel(new GridLayout(3, 2));
 		
@@ -68,10 +70,12 @@ public class SaveFrame extends JFrame implements ActionListener {
 		this.setSize(new Dimension(300, 150));
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		log.exiting(SaveFrame.class.getName(), "SaveFrame");
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		log.entering(SaveFrame.class.getName(), "actionPerformed", e);
 		if(e.getActionCommand().equals("Confirm")) {
 			if(amount.getText().equals(null) || selectedDate == null) {
 				JOptionPane.showMessageDialog(this, "Must have a valid amount and select the date", "Warning", JOptionPane.ERROR_MESSAGE);	
@@ -93,9 +97,12 @@ public class SaveFrame extends JFrame implements ActionListener {
 				date.addItem(d);
 			}
 		}
+		log.exiting(SaveFrame.class.getName(), "actionPerformed");
 	}
 	
 	private void quit() {
+		log.entering(SaveFrame.class.getName(), "quit");
 		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+		log.exiting(SaveFrame.class.getName(), "quit");
 	}
 }
