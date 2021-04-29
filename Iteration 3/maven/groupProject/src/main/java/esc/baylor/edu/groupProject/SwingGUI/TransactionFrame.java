@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -25,6 +26,7 @@ import esc.baylor.edu.groupProject.Objects.TransactionLog;
 import esc.baylor.edu.groupProject.Objects.Types;
 
 public class TransactionFrame extends JFrame implements ActionListener {
+	private static final Logger log = Logger.getLogger(TransactionFrame.class.getName());
 	private JPanel panel;
 	private JTextField title, amount, recurrence;
 	private JCheckBox recurring;
@@ -38,6 +40,7 @@ public class TransactionFrame extends JFrame implements ActionListener {
 	
 	public TransactionFrame(Transaction transaction) {
 		super("Add New Transaction");
+		log.entering(TransactionFrame.class.getName(), "TransactionFrame");
 		this.transaction = transaction;
 		//Setup 4x2 panel
 		panel = new JPanel(new GridLayout(7, 2));
@@ -99,12 +102,14 @@ public class TransactionFrame extends JFrame implements ActionListener {
 		this.setSize(new Dimension(300, 200));
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		log.exiting(TransactionFrame.class.getName(), "TransactionFrame");
 	}
 	
 	/*
 	 * Initializes field values if editing an existing transaction
 	 */
 	private void init() {
+		log.entering(TransactionFrame.class.getName(), "init");
 		type.setSelectedItem(transaction.getType());
 		title.setText(transaction.getTitle());
 		amount.setText(transaction.getAmount().toString());
@@ -120,10 +125,12 @@ public class TransactionFrame extends JFrame implements ActionListener {
 			recurrence.setText(null);
 			recurrence.setEditable(false);
 		}
+		log.exiting(TransactionFrame.class.getName(), "init");
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		log.entering(TransactionFrame.class.getName(), "actionPerformed", e);
 		if(e.getActionCommand().equals("Confirm")) {
 			if(type.getSelectedIndex() == 0 || title.getText().equals("") || selectedDate == null 
 					|| amount.getText().equals(null) || (recur && recurrence.getText().equals(""))) {
@@ -149,6 +156,7 @@ public class TransactionFrame extends JFrame implements ActionListener {
 					TransactionTable.model.fireTableDataChanged();
 					this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 				} catch (NumberFormatException ex){
+					log.throwing(TransactionFrame.class.getName(), "actionPerformed", ex);
 					JOptionPane.showMessageDialog(this, "Double Formatted Incorrectly", "Warning", JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -177,5 +185,6 @@ public class TransactionFrame extends JFrame implements ActionListener {
 				date.addItem(d);
 			}
 		}
+		log.exiting(TransactionFrame.class.getName(), "actionPerformed");
 	}
 }
